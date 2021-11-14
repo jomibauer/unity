@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName ="New Unit", menuName ="Unit")]
 public class UnitData : ScriptableObject
 {
-    public int HP;
+    public int maxHP;
     public string unit_class;
     public int damage;
     public int move;
@@ -14,9 +15,10 @@ public class UnitData : ScriptableObject
     // Start is called before the first frame update
     public void Load(string line)
     {
+        Debug.Log(line);
         string[] stats = line.Split(',');
         unit_class = stats[0];
-        HP = Convert.ToInt32(stats[1]);
+        maxHP = Convert.ToInt32(stats[1]);
         damage = Convert.ToInt32(stats[2]);
         move = Convert.ToInt32(stats[3]);
         defense = Convert.ToInt32(stats[4]);
@@ -25,6 +27,6 @@ public class UnitData : ScriptableObject
 
     public override string ToString()
    {
-      return $"Class:{unit_class},HP:{HP},Damage:{damage},Move:{move},Defense:{defense}";
+      return $"Class:{unit_class},HP:{maxHP},Damage:{damage},Move:{move},Defense:{defense}";
    }
 }

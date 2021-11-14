@@ -12,6 +12,7 @@ public class Unit : MonoBehaviour
     [SerializeField] Tilemap tilemap;
     [SerializeField] public string unitClass;
     public UnitData data;
+    public int HP;
     public bool hasUnitMoved = false;
     public bool hasUnitActed = false;
     bool isActive;
@@ -20,8 +21,7 @@ public class Unit : MonoBehaviour
     List<Tile> path;
     public int moveSpeed = 5;
     public Transform movePoint;
- 
-    
+
     void Start()
     {
         movePoint.parent = null;
@@ -29,6 +29,7 @@ public class Unit : MonoBehaviour
         isActive = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
         data = Resources.Load<UnitData>($"Units/{unitClass}");
+        HP = data.maxHP;
     }
 
     void Update()
@@ -104,7 +105,10 @@ public class Unit : MonoBehaviour
         RefreshPath(tilePath);
     }
 
-
+    public int GetMoveRange()
+    {
+        return data.move;
+    }
 
     public Tile GetCurrentTile()
     {

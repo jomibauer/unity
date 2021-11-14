@@ -41,13 +41,13 @@ public class CategorySelectionState : BaseAbilityMenuState
   }
   void Attack ()
   {
-        turn.hasUnitActed = true;
+        /* turn.hasUnitActed = true;
         turn.actor.hasUnitActed = true;
         if (turn.hasUnitMoved)
         {
             turn.lockMove = true;
-        }
-        owner.ChangeState<CommandSelectionState>();
+        } */
+        owner.ChangeState<WeaponSelectionState>();
   }
   void SetCategory (int index)
   {

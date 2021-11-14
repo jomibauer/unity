@@ -30,6 +30,8 @@ public class CommandSelectionState : BaseAbilityMenuState
                 owner.ChangeState<ItemSelectionState>();
                 break;
             case 2: // Wait
+                turn.actor.hasUnitActed = true;
+                turn.actor.hasUnitMoved = true;
                 owner.ChangeState<MoveTargetState>();
                 break;
         }
@@ -40,8 +42,8 @@ public class CommandSelectionState : BaseAbilityMenuState
       if (turn.hasUnitMoved && !turn.lockMove)
       {
         turn.UndoMove();
-        TeleportSelectTile(turn.actor.currentTile);
-        owner.ChangeState<MoveTargetState>();
+        //TeleportSelectTile(turn.actor.currentTile);
+        owner.ChangeState<PathfindingState>();
       }
       else
       {

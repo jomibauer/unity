@@ -47,27 +47,27 @@ public class InputController : MonoBehaviour
         int y = _ver.Update();
         if(x != 0 || y!= 0)
         {
-            this.PostNotification("MOVE", new Tile(x, y));
+            this.PostNotification(NotificationBook.MOVE, new Tile(x, y));
         }
         if(Input.GetButtonUp("Confirm"))
         {
             //Debug.Log("confirm");
-            this.PostNotification("CONFIRM", new Tile(x, y));
+            this.PostNotification(NotificationBook.CONFIRM, new Tile(x, y));
         }
 
         if(Input.GetButtonUp("Info"))
         {
-           this.PostNotification("INFO", new Tile(x, y));
+           this.PostNotification(NotificationBook.INFO, new Tile(x, y));
         }
 
         if(Input.GetButtonUp("Cancel"))
         {
-            this.PostNotification("CANCEL", new Tile(x, y));
+            this.PostNotification(NotificationBook.CANCEL, new Tile(x, y));
         }
 
         if(Input.GetButtonUp("Pause"))
         {
-            this.PostNotification("PAUSE", new Tile(x, y));
+            this.PostNotification(NotificationBook.PAUSE, new Tile(x, y));
         }
     }
 }

@@ -7,16 +7,20 @@ using UnityEngine.Tilemaps;
 public class UnitController : MonoBehaviour
 {
     public Dictionary<Tile, Unit> unitMap;
+    [SerializeField]
     List<Unit> units;
     Unit selectedUnit;
     //just adding this field to make it easier for units to get the tilemap from one place... might be a simpler way.
     public Tilemap tilemap;
     // Start is called before the first frame update
+    void Awake()
+    {
+        
+    }
     void Start()
     {
         units = new List<Unit>(FindObjectsOfType<Unit>());
         unitMap = new Dictionary<Tile, Unit>();
-
     }
 
     internal void InitUnitPositions()
@@ -24,6 +28,7 @@ public class UnitController : MonoBehaviour
         foreach(var unit in units)
         {
             UpdateUnitMap(unit.GetCurrentTile(), unit);
+            Debug.Log(unitMap[unit.GetCurrentTile()]);
         }
     }
 
@@ -59,10 +64,26 @@ public class UnitController : MonoBehaviour
     public Unit SelectUnitAt(Tile tile)
     {
         Unit toBeSelected;
+        
         if (unitMap.TryGetValue(tile, out toBeSelected))
         {
             selectedUnit = toBeSelected.IsActive()? toBeSelected: null;
             return selectedUnit;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+
+    //Gets without selecting!
+    public Unit GetUnitAt(Tile tile)
+    {
+        Unit toBeReturned;
+        
+        if (unitMap.TryGetValue(tile, out toBeReturned))
+        {
+            return toBeReturned.IsActive()? toBeReturned: null;
         }
         else 
         {

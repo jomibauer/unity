@@ -36,6 +36,6 @@ public class BattleController : StateMachine
         ls.Add(unit.ToString());
         ls.Add($"TurnInfo: moved:{turn.hasUnitMoved}, acted:{turn.hasUnitActed}");
         ls.Add($"UnitInfo: moved:{unit.hasUnitMoved}, acted:{unit.hasUnitActed}");
-        this.PostNotification("UNIT_MOVEMENT", ls);
+        this.PostNotification(NotificationBook.DEBUG_ARRAY, ls);
     }
 }

@@ -12,12 +12,15 @@ public class Turn
 
     public void Change (Unit current)
     {
-        actor = current;
-        hasUnitMoved = current.hasUnitMoved;
-        hasUnitActed = current.hasUnitActed;
-        if(hasUnitActed) { lockMove = true; }
-        else{ lockMove = false; }
-        startTile = actor.currentTile;
+        //I think its a good idea to check that we're changing units before resetting this class.
+        if(actor != current){
+            actor = current;
+            hasUnitMoved = current.hasUnitMoved;
+            hasUnitActed = current.hasUnitActed;
+            if(hasUnitActed) { lockMove = true; }
+            else{ lockMove = false; }
+            startTile = actor.currentTile;
+        }
     }
     public void UndoMove ()
     {

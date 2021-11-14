@@ -6,6 +6,8 @@ public class PanelTests : MonoBehaviour
 {
     UIPanel panel;
     const string Show = "Show";
+    const string ShowRight = "ShowRight";
+    const string ShowLeft = "ShowLeft";
     const string Hide = "Hide";
     const string Center = "Center";
     // Start is called before the first frame update
@@ -18,9 +20,10 @@ public class PanelTests : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 10, 100, 30), Show))
+        if (GUI.Button(new Rect(10, 10, 100, 30), ShowLeft))
         {
-            panel.SetPosition(Show, true);
+            Tweener t = panel.SetPosition(ShowLeft, true);
+            t.easingControl.equation = EasingEquations.EaseInOutBack;
         }
 
         if (GUI.Button(new Rect(10, 50, 100, 30), Hide))
@@ -28,9 +31,9 @@ public class PanelTests : MonoBehaviour
             panel.SetPosition(Hide, true);
         }
         
-        if (GUI.Button(new Rect(10, 90, 100, 30), Center))
+        if (GUI.Button(new Rect(10, 90, 100, 30), ShowRight))
         {
-            Tweener t = panel.SetPosition(Center, true);
+            Tweener t = panel.SetPosition(ShowRight, true);
             t.easingControl.equation = EasingEquations.EaseInOutBack;
         }
     }

@@ -11,7 +11,7 @@ public class Observer : MonoBehaviour
     }
     public virtual void Enable ()
     {
-        this.PostNotification("STATE_CHANGE", this.GetType());
+        this.PostNotification(NotificationBook.STATE_CHANGE, this.GetType());
         AddObservers();
     }
     

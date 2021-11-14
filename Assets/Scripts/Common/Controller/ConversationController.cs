@@ -14,7 +14,6 @@ public class ConversationController : MonoBehaviour
     const string ShowBottom = "Show Bottom";
     const string HideTop = "Hide Top";
     const string HideBottom = "Hide Bottom";
-    public static event EventHandler completeEvent;
     //Uses an event, but I want to try posting a notification when I finish a conversation.
 
     void Start()
@@ -83,7 +82,7 @@ public class ConversationController : MonoBehaviour
         }
 
         canvas.gameObject.SetActive(false);
-        this.PostNotification("COMPLETE");
+        this.PostNotification(NotificationBook.CONVERSATION_COMPLETE);
     }
 
     void MovePanel(ConversationPanel obj, string pos)

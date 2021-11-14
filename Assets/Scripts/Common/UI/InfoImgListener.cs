@@ -13,8 +13,8 @@ public class InfoImgListener : MonoBehaviour
     {
         image = GetComponent<Image>();
         image.enabled = false;
-        this.AddObserver(OnUnitInfo, "UNIT_INFO");
-        this.AddObserver(OnTileInfo, "TILE_INFO");
+        this.AddObserver(OnUnitInfo, NotificationBook.UNIT_INFO);
+        this.AddObserver(OnTileInfo, NotificationBook.TILE_INFO);
     }
 
     private void OnTileInfo(object sender, object t)

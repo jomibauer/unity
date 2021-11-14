@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class SelectedUnitListener : MonoBehaviour
 {
     Text text;
-    // Start is called before the first frame update
+    //This is a leftover class that is kinda useful for general debugging.  Should rename this class, but I am not doing that rn.
     void Start()
     {
         text = GetComponent<Text>();
-        this.AddObserver(OnUnitSelect, "UNIT_MOVEMENT");
+        this.AddObserver(OnUnitSelect, NotificationBook.DEBUG_ARRAY);
 
     }
 

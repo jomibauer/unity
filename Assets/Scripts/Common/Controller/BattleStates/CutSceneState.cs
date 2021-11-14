@@ -28,12 +28,12 @@ public class CutSceneState : BattleState
     protected override void AddObservers ()
     {
         base.AddObservers ();
-        conversationController.AddObserver(OnCompleteConversation, "COMPLETE");
+        conversationController.AddObserver(OnCompleteConversation, NotificationBook.CONVERSATION_COMPLETE);
     }
     protected override void RemoveObservers ()
     {
         base.RemoveObservers ();
-        conversationController.RemoveObserver(OnCompleteConversation, "COMPLETE");
+        conversationController.RemoveObserver(OnCompleteConversation, NotificationBook.CONVERSATION_COMPLETE);
     }
     protected override void OnConfirm (object sender, object e)
     {

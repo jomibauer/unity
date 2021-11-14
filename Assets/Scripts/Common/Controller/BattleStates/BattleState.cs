@@ -25,20 +25,20 @@ public abstract class BattleState : GameState
 
     protected override void AddObservers()
     {
-        this.AddObserver(OnMove, "MOVE");
-        this.AddObserver(OnConfirm, "CONFIRM");
-        this.AddObserver(OnCancel, "CANCEL");
-        this.AddObserver(OnInfo, "INFO");
-        this.AddObserver(OnPause, "PAUSE");
+        this.AddObserver(OnMove, NotificationBook.MOVE);
+        this.AddObserver(OnConfirm, NotificationBook.CONFIRM);
+        this.AddObserver(OnCancel, NotificationBook.CANCEL);
+        this.AddObserver(OnInfo, NotificationBook.INFO);
+        this.AddObserver(OnPause, NotificationBook.PAUSE);
     }
 
     protected override void RemoveObservers()
     {
-        this.RemoveObserver(OnMove, "MOVE");
-        this.RemoveObserver(OnConfirm, "CONFIRM");
-        this.RemoveObserver(OnCancel, "CANCEL");
-        this.RemoveObserver(OnInfo, "INFO");
-        this.RemoveObserver(OnPause, "PAUSE");
+        this.RemoveObserver(OnMove, NotificationBook.MOVE);
+        this.RemoveObserver(OnConfirm, NotificationBook.CONFIRM);
+        this.RemoveObserver(OnCancel, NotificationBook.CANCEL);
+        this.RemoveObserver(OnInfo, NotificationBook.INFO);
+        this.RemoveObserver(OnPause, NotificationBook.PAUSE);
     }
 
     protected virtual void OnMove(object sender, object arg)

@@ -55,4 +55,6 @@ public struct Tile
     {
       return !(a == b);
     }
+
+    public static explicit operator PathNode(Tile t) => new PathNode(t.x, t.y);
 }

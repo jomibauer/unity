@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemSelectionState : BaseAbilityMenuState
 {
     protected override void LoadMenu ()
-  {
+    {
         if (menuOptions == null)
         {
             menuTitle = "Items";
@@ -16,7 +16,7 @@ public class ItemSelectionState : BaseAbilityMenuState
         }
         
         abilityMenuPanelController.Show(menuTitle, menuOptions);
-  }
+    }
     protected override void Cancel()
     {
         owner.ChangeState<CommandSelectionState>();
@@ -25,7 +25,7 @@ public class ItemSelectionState : BaseAbilityMenuState
     protected override void Confirm()
     {
         turn.hasUnitActed = true;
-        turn.hasUnitActed = true;
+        turn.actor.hasUnitActed = true;
         if (turn.hasUnitMoved)
         {
             turn.lockMove = true;

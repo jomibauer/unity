@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ffd4826d3f3c545976bc2e823845b8, type: 3}
   m_Name: B_slime
   m_EditorClassIdentifier: 
-  HP: 10
+  maxHP: 20
   unit_class: B_slime
   damage: 6
   move: 5
-  defense: 2
+  defense: 3

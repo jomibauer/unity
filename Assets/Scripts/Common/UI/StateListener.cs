@@ -11,7 +11,7 @@ public class StateListener : MonoBehaviour
     void Start()
     {
         text = GetComponent<Text>();
-        this.AddObserver(OnStateChange, "STATE_CHANGE");
+        this.AddObserver(OnStateChange, NotificationBook.STATE_CHANGE);
 
     }
 
