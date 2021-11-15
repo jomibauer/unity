@@ -52,6 +52,17 @@ public class UnitController : MonoBehaviour
         }
     }
 
+    public void RefreshUnits()
+    {
+        foreach (var unit in units)
+        {
+            unit.hasUnitActed = false;
+            unit.hasUnitMoved = false;
+            //might be unnecessary, but it's good to refresh I think.
+            UpdateUnitMap(unit.currentTile, unit);
+        }
+    }
+
     public void UpdateUnitMap(Tile tile, Unit unit)
     {
         Unit toBeSelected;
@@ -134,6 +145,14 @@ public class UnitController : MonoBehaviour
         selectedUnit.RefreshPath(tilePath);
         //could change this to some boolean flag in Unit that starts checking for isFinished.  Think the Unit is getting rammed with bool flags though, I probably need to look more closely at events.
         selectedUnit.DeactivateUnit();
+    }
+
+    public void KillUnit(Unit toBeKilled)
+    {
+        
+        toBeKilled.TeleportTo(new Tile(-10,-10));
+        unitMap[toBeKilled.GetCurrentTile()] = null;
+        toBeKilled.Kill(); 
     }
 
 }

@@ -134,4 +134,9 @@ public class Unit : MonoBehaviour
         hasUnitActed = false;
     }
 
+    public void Kill()
+    {
+        Destroy(this);
+    }
+
 }

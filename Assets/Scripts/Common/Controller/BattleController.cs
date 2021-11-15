@@ -6,6 +6,7 @@ public class BattleController : StateMachine
 {
     public UnitController unitController;
     public GridController gridController;
+    public SkirmishController skirmishController;
     public CameraRig cameraRig;
     public Tile pos;
     public GridCursor gridCursor;
@@ -13,7 +14,6 @@ public class BattleController : StateMachine
     public AbilityMenuPanelController abilityMenuPanelController;
     public Turn turn = new Turn();
     public List<Unit> units;
-    
 
     void Start()
     {

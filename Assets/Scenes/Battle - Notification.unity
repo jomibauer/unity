@@ -128,6 +128,23 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 512464102599637407, guid: d8b7711ff9b9841459feb62279ff94ee, type: 3}
   m_PrefabInstance: {fileID: 6410555117205065714}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &88478032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2431373574604830222, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
+  m_PrefabInstance: {fileID: 2431373574790846692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &88478037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88478032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a134bbc57fb5564cbbc86b7039decc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &196532150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1051,6 +1068,10 @@ PrefabInstance:
       propertyPath: unitController
       value: 
       objectReference: {fileID: 1075740698}
+    - target: {fileID: 9114775373242374453, guid: fd67dfe6b55c1854cbf9f307c605593f, type: 3}
+      propertyPath: skirmishController
+      value: 
+      objectReference: {fileID: 88478037}
     - target: {fileID: 9114775373242374453, guid: fd67dfe6b55c1854cbf9f307c605593f, type: 3}
       propertyPath: abilityMenuPanelController
       value: 

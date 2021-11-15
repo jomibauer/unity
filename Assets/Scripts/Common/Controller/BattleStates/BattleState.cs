@@ -9,6 +9,7 @@ public abstract class BattleState : GameState
     protected BattleController owner;
     public UnitController unitController {get { return owner.unitController; }}
     public GridController gridController {get { return owner.gridController; }}
+    public SkirmishController skirmishController {get { return owner.skirmishController;}}
     public CameraRig cameraRig {get { return owner.cameraRig; }}
     public LevelData levelData {get { return owner.levelData; }}
     public GridCursor gridCursor {get { return owner.gridCursor; }}
