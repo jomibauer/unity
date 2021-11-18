@@ -48,6 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Editor\SettingsAutoConverter.cs" />
+     <Compile Include="Assets\Scripts\Editor\UnitParser.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/UnityEditors/2020.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

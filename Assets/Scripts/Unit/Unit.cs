@@ -6,12 +6,12 @@ using UnityEngine.Tilemaps;
 public class Unit : MonoBehaviour
 {
     [SerializeField] UnitController unitController;
-    [SerializeField] Sprite activeSprite;
     SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite inactiveSprite;
     [SerializeField] Tilemap tilemap;
     [SerializeField] public string unitClass;
-    public UnitData data;
+    public Stats stats;
+    public UnitStats unitStats;
+    public LevelComponent levelComponent;
     public int HP;
     public bool hasUnitMoved = false;
     public bool hasUnitActed = false;
@@ -28,8 +28,11 @@ public class Unit : MonoBehaviour
         path = new List<Tile>();
         isActive = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        data = Resources.Load<UnitData>($"Units/{unitClass}");
-        HP = data.maxHP;
+        //data = Resources.Load<UnitData>($"Units/{unitClass}");
+        stats = GetComponent<Stats>();
+        unitStats.LoadStats();
+        levelComponent = GetComponent<LevelComponent>();
+        HP = stats[StatTypes.MHP];
     }
 
     void Update()
@@ -107,7 +110,7 @@ public class Unit : MonoBehaviour
 
     public int GetMoveRange()
     {
-        return data.move;
+        return stats[StatTypes.MOV];
     }
 
     public Tile GetCurrentTile()
@@ -123,13 +126,15 @@ public class Unit : MonoBehaviour
     public void DeactivateUnit()
     {
         isActive = false;
-        spriteRenderer.sprite = inactiveSprite;
+        spriteRenderer.color = new Color(0.25f, 0.25f, 0.25f);
+        hasUnitMoved = true;
+        hasUnitActed = true;
     }
 
     public void ActivateUnit()
     {
         isActive = true;
-        spriteRenderer.sprite = activeSprite;
+        spriteRenderer.color = new Color(1f, 1f, 1f);
         hasUnitMoved = false;
         hasUnitActed = false;
     }

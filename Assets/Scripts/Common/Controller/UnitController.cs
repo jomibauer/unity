@@ -78,7 +78,7 @@ public class UnitController : MonoBehaviour
         
         if (unitMap.TryGetValue(tile, out toBeSelected))
         {
-            selectedUnit = toBeSelected.IsActive()? toBeSelected: null;
+            selectedUnit = toBeSelected.IsActive() ? toBeSelected: null;
             return selectedUnit;
         }
         else 
@@ -135,17 +135,10 @@ public class UnitController : MonoBehaviour
         return selectedUnit.GetCurrentTile();
     }
 
-    public void SetSelectedUnitPath(List<PathNode> pathNodes)
-    {
-        List<Tile> tilePath = new List<Tile>();
-        for (int i = 0; i < pathNodes.Count; i++)
-        {
-            tilePath.Add(new Tile(pathNodes[i].xPos, pathNodes[i].yPos));
-        }
-        selectedUnit.RefreshPath(tilePath);
-        //could change this to some boolean flag in Unit that starts checking for isFinished.  Think the Unit is getting rammed with bool flags though, I probably need to look more closely at events.
-        selectedUnit.DeactivateUnit();
-    }
+   public void DeactivateUnit(Unit unit)
+   {
+       unit.DeactivateUnit();
+   }
 
     public void KillUnit(Unit toBeKilled)
     {

@@ -13,7 +13,7 @@ public class Turn
     public void Change (Unit current)
     {
         //I think its a good idea to check that we're changing units before resetting this class.
-        if(actor != current){
+        if(actor != current && current.IsActive()){
             actor = current;
             hasUnitMoved = current.hasUnitMoved;
             hasUnitActed = current.hasUnitActed;
@@ -27,6 +27,15 @@ public class Turn
         actor.hasUnitMoved = false;
         hasUnitMoved = false;
         actor.TeleportTo(startTile);
+    }
+
+    public void Clear()
+    {
+        actor = null;
+        startTile = new Tile();
+        hasUnitMoved = false;
+        hasUnitActed = false;
+        lockMove = false;
     }
     
 }
