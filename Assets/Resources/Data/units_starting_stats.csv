@@ -1,0 +1,5 @@
+Name,class,MHP,STR,DEF,SKL,SPD,INT,RES,LCK,CON,MOV,
+Blobby,B_slime,21,6,4,6,4,3,3,5,7,5,31
+Norridge,R_slime,18,3,1,7,6,7,5,1,4,4,30
+Slimelda,G_slime,30,10,5,5,3,1,2,3,10,3,29
+Gooanne,P_slime,15,4,2,6,10,3,1,7,3,5,33
