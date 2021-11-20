@@ -78,24 +78,26 @@ public class Skirmish
             , CalcTurns(receiver, initiator)
             , receiver);
     }
-
-    public int CalcHit(Unit initiator, Unit receiver)
-    {
-        return (initiator.stats[StatTypes.SKL] * 10) + initiator.stats[StatTypes.LCK];
-    }
     public int CalcDam(Unit initiator, Unit receiver)
     {
-        var calculatedDamage = initiator.stats[StatTypes.STR] - receiver.stats[StatTypes.DEF];
+        var calculatedDamage = (initiator.stats[StatTypes.STR] + initiator.GetWeaponDamage()) - receiver.stats[StatTypes.DEF];
         return  calculatedDamage >= 0 ? calculatedDamage : 0;
     }
+    public int CalcHit(Unit initiator, Unit receiver)
+    {
+        var weaponWeightPenalty = initiator.stats[StatTypes.CON] - initiator.GetWeaponWeight() >= 0 ? 0 : initiator.stats[StatTypes.CON] - initiator.GetWeaponWeight() * -1;
+        return (initiator.stats[StatTypes.SKL] * 10) + initiator.stats[StatTypes.LCK] - weaponWeightPenalty;
+    }
+    
     public int CalcCrit(Unit initiator, Unit receiver)
     {
-        return initiator.stats[StatTypes.LCK] * 2;
+        return initiator.stats[StatTypes.LCK] + initiator.GetWeaponCrit();
     }
 
     public int CalcTurns(Unit initiator, Unit receiver)
     {
-        var calculatedSpeed = initiator.stats[StatTypes.SPD] - receiver.stats[StatTypes.SPD]/2;
+        var weaponWeightPenalty = initiator.stats[StatTypes.CON] - initiator.GetWeaponWeight() >= 0 ? 0 : initiator.stats[StatTypes.CON] - initiator.GetWeaponWeight() * -1;
+        var calculatedSpeed = (initiator.stats[StatTypes.SPD] - weaponWeightPenalty) - receiver.stats[StatTypes.SPD]/2;
         if(calculatedSpeed <= 1.7)
         {
             return 1;

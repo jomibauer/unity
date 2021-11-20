@@ -32,6 +32,11 @@ public class UnitController : MonoBehaviour
         }
     }
 
+    internal void EquipSelectedUnit(string weapon)
+    {
+        selectedUnit.EquipWeapon(weapon);
+    }
+
     public List<Unit> GetUnits()
     {
         return units;

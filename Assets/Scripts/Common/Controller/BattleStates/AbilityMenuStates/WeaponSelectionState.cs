@@ -10,8 +10,8 @@ public class WeaponSelectionState : BaseAbilityMenuState
         {
             menuTitle = "Items";
             menuOptions = new List<string>(3);
-            menuOptions.Add("Sword");
-            menuOptions.Add("Bow");
+            menuOptions.Add("Iron_sword");
+            menuOptions.Add("Iron_axe");
             menuOptions.Add("Magic");
         }
         
@@ -24,13 +24,8 @@ public class WeaponSelectionState : BaseAbilityMenuState
 
     protected override void Confirm()
     {
-        /* turn.hasUnitActed = true;
-        turn.actor.hasUnitActed = true;
-        if (turn.hasUnitMoved)
-        {
-            turn.lockMove = true;
-        } */
-        //set unit weapon here.
+        unitController.EquipSelectedUnit(menuOptions[abilityMenuPanelController.selection]);
+        Debug.Log($"WeaponSelectionState: {menuOptions[abilityMenuPanelController.selection]}");
         owner.ChangeState<TargetSelectionState>();
     }
 }

@@ -9,6 +9,9 @@ public class Unit : MonoBehaviour
     SpriteRenderer spriteRenderer;
     [SerializeField] Tilemap tilemap;
     [SerializeField] public string unitClass;
+    Weapon weapon;
+    //inventory might need to be an array of structs or something so we can keep track of item types before loading them for use.\
+    string[] inventory = new string[5];
     public Stats stats;
     public UnitStats unitStats;
     public LevelComponent levelComponent;
@@ -33,6 +36,7 @@ public class Unit : MonoBehaviour
         unitStats.LoadStats();
         levelComponent = GetComponent<LevelComponent>();
         HP = stats[StatTypes.MHP];
+        weapon = GetComponentInChildren<Weapon>();
     }
 
     void Update()
@@ -142,6 +146,29 @@ public class Unit : MonoBehaviour
     public void Kill()
     {
         Destroy(this);
+    }
+
+    public void EquipWeapon(string weapon)
+    {
+        this.weapon.Equip(weapon);
+    }
+
+    public int GetWeaponDamage()
+    {
+        return weapon.stats[WeaponStatTypes.DAM];
+    }
+
+    public int GetWeaponHit()
+    {
+        return weapon.stats[WeaponStatTypes.HIT];
+    }
+    public int GetWeaponCrit()
+    {
+        return weapon.stats[WeaponStatTypes.CRT];
+    }
+    public int GetWeaponWeight()
+    {
+        return weapon.stats[WeaponStatTypes.WGT];
     }
 
 }

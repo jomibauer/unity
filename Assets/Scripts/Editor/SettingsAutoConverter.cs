@@ -11,7 +11,7 @@
       {
         parsers = new Dictionary<string, Action>();
         //parsers.Add("units.csv", ParseUnits); // obsolete really
-        parsers.Add("weapons.csv", ParseWeapons);
+        parsers.Add("weapons.csv", ItemParser.ParseWeapons);
         parsers.Add("units_starting_stats.csv", UnitParser.ParseStartingStats);
         parsers.Add("unit_growths.csv", UnitParser.ParseGrowthStats);
       }

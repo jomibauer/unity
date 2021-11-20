@@ -13,6 +13,13 @@ public class WeaponStats : MonoBehaviour
     public void SetValue (WeaponStatTypes type, int value)
     {
         _data[(int)type] = value;
-        
+    }
+
+    public void Clear()
+    {
+      foreach(var statType in WeaponStatTypes.GetValues(typeof(WeaponStatTypes)))
+      {
+        SetValue((WeaponStatTypes)statType, 0);
+      }
     }
 }
