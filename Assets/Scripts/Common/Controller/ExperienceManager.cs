@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperienceManager
+public static class ExperienceManager
 {
 
   //I think I can do all the calculations with the valueChangeException.  Here's the formula we'll try using first:
@@ -44,15 +45,7 @@ public class ExperienceManager
     rank 1: promoted.  exp level = 20 + ListedLevel.
 
   */
-
-  #region battleStats
-  Skirmish skirmish;
-  #endregion
-  void Start()
-  {
-  }
-
-  public void AwardExp(Unit player, Unit opponent)
+  public static void AwardExp(Skirmish skirmish, Unit player, Unit opponent)
   {
     if (skirmish == null) { throw new System.Exception("Tried to award exp, but there was no skirmish available in the ExperienceManager."); }
     //only implemented weapon attack so far.
@@ -90,11 +83,6 @@ public class ExperienceManager
     }
 
     player.levelComponent.EXP += exp;
-  }
-
-  private void Reset()
-  {
-    skirmish = null;
   }
 
 }

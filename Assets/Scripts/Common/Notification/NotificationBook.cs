@@ -5,7 +5,7 @@ using UnityEngine;
 public struct NotificationBook
 {
     //Remember to note the listener and poster of the notifications when you add one to the book.
-
+    //public static string AWARD_EXP = "AWARD_EXP"; // listener: ExperienceManager, poster: AwardExpState
     public static string CANCEL = "CANCEL"; // listener: InputController, poster: base BattleState class
     public static string CONFIRM = "CONFIRM"; // listener: InputController, poster: base BattleState class
     public static string CONVERSATION_COMPLETE = "CONVERSATION_COMPLETE"; // listener: ConversationController, observers managed by CutSceneState, poster: ConversationController
