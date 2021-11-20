@@ -153,4 +153,19 @@ public class UnitController : MonoBehaviour
         toBeKilled.Kill(); 
     }
 
+    public List<InventoryItem> GetSelectedUnitInventory()
+    {
+        List<InventoryItem> ls = selectedUnit.GetInventoryItems();
+        ls.Print();
+        return selectedUnit.GetInventoryItems();
+    }
+
+    public List<InventoryItem> GetUnitInventoryAt(Tile unitLocation)
+    {
+        Unit unit = unitMap[unitLocation];
+        if(unit == null) { return null; }
+
+        return unit.GetInventoryItems();
+    }
+
 }

@@ -302,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3691088593335914037, guid: b0285705bca0b444da263cce05d40036, type: 3}
       propertyPath: m_Name
-      value: Norridge
+      value: Norridge_stats
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0285705bca0b444da263cce05d40036, type: 3}

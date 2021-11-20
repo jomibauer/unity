@@ -258,7 +258,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3299634151970888032, guid: 92b0cc3abb469934db2c69255f2e5b54, type: 3}
       propertyPath: m_Name
-      value: Slimelda
+      value: Slimelda_stats
       objectReference: {fileID: 0}
     - target: {fileID: 3817301968114323201, guid: 92b0cc3abb469934db2c69255f2e5b54, type: 3}
       propertyPath: m_RootOrder

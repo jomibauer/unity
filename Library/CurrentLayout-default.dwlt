@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1904
     height: 981
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 10}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 585
     width: 1029
     height: 346
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 342}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 139
+  controlID: 146
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_MinSize: {x: 478, y: 342}
   m_MaxSize: {x: 8003, y: 8042}
   vertical: 0
-  controlID: 138
+  controlID: 145
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_MinSize: {x: 231, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 164
+  controlID: 58
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 137
+  controlID: 144
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -505,7 +505,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -16074
+  m_LastSelectedObjectID: -9670
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -575,22 +575,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Unit
+    - Assets/Resources/Items/Inventories
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Prefabs/Unit
+  - Assets/Resources/Items/Inventories
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\JonathanBauer\Documents\unity\gregdev_tut
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9c480000
-    m_LastClickedID: 18588
-    m_ExpandedIDs: 0000000084480000884800008a4800008c480000ae480000de480000ec4800005249000000ca9a3b
+    m_SelectedIDs: c04d0000
+    m_LastClickedID: 19904
+    m_ExpandedIDs: 00000000c24c0000c44c0000c64c0000c84c0000ca4c0000ce4c0000d04c00003c4d0000584d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -618,7 +618,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008448000086480000884800008a4800008c480000
+    m_ExpandedIDs: 00000000c24c0000c44c0000c64c0000c84c0000ca4c0000cc4c0000ce4c0000d04c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -649,15 +649,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c6230000084300004e5a00005a5a0000f2420000424300007e4300004e430000fa430000b4430000ec700000e870000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Gooanne
-      m_OriginalName: Gooanne
+      m_Name: Blobby
+      m_OriginalName: Blobby
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 17436
+      m_UserData: 19698
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -739,9 +739,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: c0c4ffff
       m_LastClickedID: 0
-      m_ExpandedIDs: e89fffffc8a0ffff22a1ffff6ea2ffffeabcffff4ec1ffff42d9ffff98d9ffff84daffffdedaffff48fbffff
+      m_ExpandedIDs: 5adaffff54f7ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -803,7 +803,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 2.4901628, y: 2.6002498, z: -0.6550821}
     speed: 2
-    m_Value: {x: 5.381824, y: 1.3136045, z: -1.2849715}
+    m_Value: {x: 2.4901628, y: 2.6002498, z: -0.6550821}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 3.2675679
     speed: 2
-    m_Value: 3.0071633
+    m_Value: 3.2675679
   m_Ortho:
     m_Target: 1
     speed: 2

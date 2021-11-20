@@ -258,7 +258,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4139805849837538383, guid: 9ac9c26cc1665664394f19902c7dc069, type: 3}
       propertyPath: m_Name
-      value: Gooanne
+      value: Gooanne_stats
       objectReference: {fileID: 0}
     - target: {fileID: 4753825055762003337, guid: 9ac9c26cc1665664394f19902c7dc069, type: 3}
       propertyPath: m_RootOrder

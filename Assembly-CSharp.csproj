@@ -104,6 +104,7 @@
      <Compile Include="Assets\Scripts\Common\Animation\Tweener.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Skirmish\Skirmish.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Turn.cs" />
+     <Compile Include="Assets\Scripts\Enums\StatTypeBook.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\TransformAnimationExtensions.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishInitState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattleState.cs" />
@@ -136,7 +137,10 @@
      <Compile Include="Assets\Scripts\Camera\CameraRig.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\AwardExpState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\Vector3Tweener.cs" />
-     <Compile Include="Assets\Scripts\Enums\StatTypeBook.cs" />
+     <Compile Include="Assets\Scripts\View Model Component\Item\Inventory\Inventory.cs" />
+     <Compile Include="Assets\Scripts\View Model Component\Item\Inventory\InventoryItem.cs" />
+     <Compile Include="Assets\Scripts\Common\Extensions\ListExtensions.cs" />
+     <Compile Include="Assets\Scripts\Common\Model\Items\InventoryData.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\UnityEditors\2020.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
