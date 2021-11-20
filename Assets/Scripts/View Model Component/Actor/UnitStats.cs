@@ -22,7 +22,7 @@ public class UnitStats : MonoBehaviour
     public int[] growths = new int[ statOrder.Length ];
     public string unit_name;
     public string unit_class;
-    Stats stats;
+    public Stats stats;
     #endregion
 
     #region Monobehaviour
@@ -69,6 +69,7 @@ public class UnitStats : MonoBehaviour
     //I should change this to load from two places.  One if its the first time we've seen the unit, then from a player save file for everything subsequent    
     public void LoadStats ()
     {
+        stats = GetComponentInParent<Stats>();
         for (int i = 0; i < statOrder.Length; ++i)
         {
             StatTypes type = statOrder[i];

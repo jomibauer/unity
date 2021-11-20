@@ -6,21 +6,12 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public int openSlots = 5;
-    [SerializeField] List<InventoryItem> items;
+    [SerializeField] List<InventoryItem> items = new List<InventoryItem>();
     [SerializeField] Weapon equippedWeapon;
-
-    void Start()
-    {
-        Unit unit = GetComponentInParent<Unit>();
-        items = new List<InventoryItem>();
-        this.Load(unit.unit_name);
-
-    }
 
     public void Load(string name)
     {
         InventoryData _data = Resources.Load<InventoryData>("Items/Inventories/" + name);
-  
         foreach(var item in _data.InventoryItemStrings)
         {
             if(item == null){

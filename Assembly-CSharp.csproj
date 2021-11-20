@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\View Model Component\Item\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\ValueModifier.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleController.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\MinValueModifier.cs" />
@@ -58,6 +59,7 @@
      <Compile Include="Assets\Scripts\Enums\StatTypes.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\AbilityMenuStates\ItemSelectionState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\TransformPositionTweener.cs" />
+     <Compile Include="Assets\Scripts\View Model Component\Item\Inventory\InventoryItem.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\Modifier.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishUnitDiedState.cs" />
      <Compile Include="Assets\Scripts\Common\UI\UIPanel.cs" />
@@ -119,8 +121,9 @@
      <Compile Include="Assets\Scripts\View Model Component\Actor\LevelComponent.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\RectTransformAnchorPositionTweener.cs" />
      <Compile Include="Assets\Scripts\Common\State Machine\GameState.cs" />
+     <Compile Include="Assets\Scripts\Common\Extensions\ListExtensions.cs" />
      <Compile Include="Assets\Scripts\Common\UI\SkirmishPreviewPane.cs" />
-     <Compile Include="Assets\Animations\Extra\AnimatedTile.cs" />
+     <Compile Include="Assets\Resources\Animations\Extra\AnimatedTile.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Item\Equippable\Weapon.cs" />
      <Compile Include="Assets\Scripts\Common\UI\LayoutAnchor.cs" />
      <Compile Include="Assets\Scripts\Common\UI\DebugPanel\InfoImgListener.cs" />
@@ -129,6 +132,7 @@
      <Compile Include="Assets\Scripts\Enums\WeaponStatTypes.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SelectActionState.cs" />
      <Compile Include="Assets\Scripts\Common\Notification\InfoEventArgs.cs" />
+     <Compile Include="Assets\Scripts\Common\Model\Items\InventoryData.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\UnitController.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\AbilityMenuStates\BaseAbilityMenuState.cs" />
      <Compile Include="Assets\Scripts\Common\UI\DebugPanel\StateListener.cs" />
@@ -137,10 +141,7 @@
      <Compile Include="Assets\Scripts\Camera\CameraRig.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\AwardExpState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\Vector3Tweener.cs" />
-     <Compile Include="Assets\Scripts\View Model Component\Item\Inventory\Inventory.cs" />
-     <Compile Include="Assets\Scripts\View Model Component\Item\Inventory\InventoryItem.cs" />
-     <Compile Include="Assets\Scripts\Common\Extensions\ListExtensions.cs" />
-     <Compile Include="Assets\Scripts\Common\Model\Items\InventoryData.cs" />
+     <Compile Include="Assets\Scripts\Unit\UnitFactory.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\UnityEditors\2020.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
