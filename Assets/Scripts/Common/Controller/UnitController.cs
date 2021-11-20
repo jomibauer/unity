@@ -92,14 +92,22 @@ public class UnitController : MonoBehaviour
         }
     }
 
+    public bool CheckForUnit(Tile tile)
+    {
+        Unit toBeSelected;
+        unitMap.TryGetValue(tile, out toBeSelected);
+        return toBeSelected != null? true: false;
+    }
+
     //Gets without selecting!
+    //Modified this to not check if the unit is active, which makes sense.  We should be able to be attacked even if we aren't active.  Although I guess it'll never happen? IDK this is fine
     public Unit GetUnitAt(Tile tile)
     {
         Unit toBeReturned;
         
         if (unitMap.TryGetValue(tile, out toBeReturned))
         {
-            return toBeReturned.IsActive()? toBeReturned: null;
+            return toBeReturned;
         }
         else 
         {
