@@ -14,7 +14,7 @@ public class MoveTargetState : BattleState
     {
         Tile t = (Tile)e + pos;
         SelectTile(t);
-        Unit selectedUnit = SelectUnitAt(t);
+        Unit selectedUnit = GetUnitAt(t);
         if(selectedUnit)
         {
             this.PostNotification(NotificationBook.UNIT_INFO, selectedUnit);
@@ -67,5 +67,10 @@ public class MoveTargetState : BattleState
         Unit unit = unitController.SelectUnitAt(tile);
         this.PostNotification(NotificationBook.SELECTED_UNIT, unitController.GetSelectedUnit());
         return unit;
+    }
+
+    protected Unit GetUnitAt(Tile tile)
+    {
+        return unitController.GetUnitAt(tile);
     }
 }

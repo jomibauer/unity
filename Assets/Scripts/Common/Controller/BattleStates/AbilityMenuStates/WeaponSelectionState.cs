@@ -32,7 +32,8 @@ public class WeaponSelectionState : BaseAbilityMenuState
 
     protected override void Confirm()
     {
-        unitController.EquipSelectedUnit(menuOptions[abilityMenuPanelController.selection]);
+        List<InventoryItem> inventory = unitController.GetSelectedUnitInventory();
+        unitController.EquipSelectedUnit(inventory[abilityMenuPanelController.selection].name);
         Debug.Log($"WeaponSelectionState: {menuOptions[abilityMenuPanelController.selection]}");
         owner.ChangeState<TargetSelectionState>();
     }
