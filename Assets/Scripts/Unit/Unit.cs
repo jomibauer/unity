@@ -7,40 +7,28 @@ public class Unit : MonoBehaviour
 {
     [SerializeField] public string unit_name;
     [SerializeField] UnitController unitController;
-    SpriteRenderer spriteRenderer;
-    [SerializeField] Tilemap tilemap;
+    public SpriteRenderer spriteRenderer;
+    [SerializeField] public Tilemap tilemap;
     [SerializeField] public string unitClass;
-    Weapon weapon;
-    Inventory inventory;
+    public Weapon weapon;
+    public Inventory inventory;
     public Stats stats;
     public UnitStats unitStats;
     public LevelComponent levelComponent;
     public int HP;
     public bool hasUnitMoved = false;
     public bool hasUnitActed = false;
-    bool isActive;
+    public bool isActive;
     public Tile currentTile;
     public Tile targetTile;
-    List<Tile> path;
+    public List<Tile> path;
     public int moveSpeed = 5;
     public Transform movePoint;
 
     void Start()
     {
-        movePoint.parent = null;
-        path = new List<Tile>();
-
-        isActive = true;
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        levelComponent = GetComponent<LevelComponent>();
-        weapon = GetComponentInChildren<Weapon>();
-        inventory = GetComponentInChildren<Inventory>();
-        stats = GetComponent<Stats>();
-
-        unitStats.LoadStats();
-        HP = stats[StatTypes.MHP];
+        UnitFactory factory = FindObjectOfType<UnitFactory>();
+        factory.InitUnit(this);
     }
 
     void Update()

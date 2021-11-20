@@ -46,6 +46,7 @@ public static class UnitParser
         {
             u_stats.startingStats[i-2] = Convert.ToInt32(elements[i]);
         }
+        EditorUtility.SetDirty(u_stats);
     }
 
     public static void ParseGrowthStats()
@@ -69,6 +70,7 @@ public static class UnitParser
         {
             u_stats.growths[i-1] = Convert.ToInt32(elements[i]);
         }
+        EditorUtility.SetDirty(u_stats);
     }
 
     static StatModifierFeature GetFeature (GameObject obj, StatTypes type)
@@ -87,7 +89,7 @@ public static class UnitParser
     }
     static GameObject GetOrCreate (string unitName)
     {
-        string fullPath = $"Assets/Resources/Units/{unitName}.prefab";
+        string fullPath = $"Assets/Resources/Units/{unitName}_stats.prefab";
         GameObject obj = AssetDatabase.LoadAssetAtPath<GameObject>(fullPath);
         if (obj == null)
         {

@@ -40,10 +40,6 @@ public class GridMap : MonoBehaviour
         this.height = levelData.height;
         this.length = levelData.length;
         this.tileSet = levelData.tileSet;
-        //this.tilemap = levelData.tilemap;
-        
-        Debug.Log("loaded");
-       //Dump();
     }
 
     public void DrawSelf()

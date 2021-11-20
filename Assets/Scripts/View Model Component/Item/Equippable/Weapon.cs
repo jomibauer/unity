@@ -15,7 +15,7 @@ public class Weapon : Equippable
     void Start()
     {
         defaultSlot = EquipSlots.Weapon;
-        Debug.Log(stats);
+        Debug.Log($"WeaponStats are loaded into weapon:{stats != null}");
         Equip("Iron_lance");
     }
     
@@ -52,7 +52,9 @@ public class Weapon : Equippable
 
     public void Equip(string weapon)
     {
+        Debug.Log(weapon);
         WeaponData _data = Resources.Load<WeaponData>("Items/Weapons/" + weapon);
+        Debug.Log($"Weapon weapondata: {_data}");
         this.Load(_data);
         //IDK if this is the best way.  An optimization might be to copy the pattern in Equippable.  Rather than adding and destroying the features every time, I could add only once, 
         // then activate and deactivate whenever necessary. this makes sense because it's likely we'll be switching up weapons on the same unit, so keeping the features on but deactivating
