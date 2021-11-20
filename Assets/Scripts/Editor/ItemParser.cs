@@ -11,12 +11,15 @@ public static class ItemParser
     public static void Parse()
     {
         CreateDirectories();
+        ParseInventories();
         ParseWeapons();
         //ParseAccessories();
         //ParseConsumables();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
+
+
     static void CreateDirectories()
     {
         if (!AssetDatabase.IsValidFolder("Assets/Resources/Items"))
@@ -35,10 +38,18 @@ public static class ItemParser
         {
             AssetDatabase.CreateFolder("Assets/Resources/Items", "Accessories");
         }
+        if (!AssetDatabase.IsValidFolder("Assets/Resources/Items/Inventories"))
+        {
+            AssetDatabase.CreateFolder("Assets/Resources/Items", "Inventories");
+        }
     }
 
     public static void ParseWeapons()
     {
+        if (!AssetDatabase.IsValidFolder("Assets/Resources/Items/Weapons"))
+        {
+            AssetDatabase.CreateFolder("Assets/Resources/Items", "Weapons");
+        }
         string readPath = $"{Application.dataPath}/Resources/Data/Weapons.csv";
         string[] readText = File.ReadAllLines(readPath);
         for (int i = 1; i<readText.Length; i++)
@@ -56,6 +67,32 @@ public static class ItemParser
         string fileName = $"{filePath}{weapon.wpnName}.asset";
 
         AssetDatabase.CreateAsset(weapon, fileName);
+    }
+
+    
+    public static void ParseInventories()
+    {
+        if (!AssetDatabase.IsValidFolder("Assets/Resources/Items/Inventories"))
+        {
+            AssetDatabase.CreateFolder("Assets/Resources/Items", "Inventories");
+        }
+        string readPath = $"{Application.dataPath}/Resources/Data/inventories.csv";
+        string[] readText = File.ReadAllLines(readPath);
+        for (int i = 1; i<readText.Length; i++)
+        {
+            ParseInventory(readText[i]);
+        }
+    }
+
+    static void ParseInventory(string line)
+    {
+        InventoryData inventory = ScriptableObject.CreateInstance<InventoryData>();
+        inventory.Load(line);
+
+        string filePath = "Assets/Resources/Items/Inventories/";
+        string fileName = $"{filePath}{inventory.inventoryOwner}.asset";
+
+        AssetDatabase.CreateAsset(inventory, fileName);
     }
 
     static GameObject GetOrCreate (string itemType, string unitName)

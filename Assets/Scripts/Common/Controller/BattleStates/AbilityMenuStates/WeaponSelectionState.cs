@@ -9,13 +9,21 @@ public class WeaponSelectionState : BaseAbilityMenuState
         if (menuOptions == null)
         {
             menuTitle = "Items";
-            menuOptions = new List<string>(3);
-            menuOptions.Add("Iron_sword");
-            menuOptions.Add("Iron_axe");
-            menuOptions.Add("Magic");
+            menuOptions = new List<string>();
+            List<InventoryItem> items = unitController.GetSelectedUnitInventory();
+            items.ForEach(i => menuOptions.Add(i.displayName));
+            for(int i = 0; i < menuOptions.Count; i++)
+            {
+                if(items[i].type != "weapon")
+                {
+                    abilityMenuPanelController.SetLocked(i, true);
+                }
+            }
         }
         
         abilityMenuPanelController.Show(menuTitle, menuOptions);
+        
+        
     }
     protected override void Cancel()
     {

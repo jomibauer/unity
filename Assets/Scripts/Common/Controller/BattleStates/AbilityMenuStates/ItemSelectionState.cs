@@ -9,10 +9,9 @@ public class ItemSelectionState : BaseAbilityMenuState
         if (menuOptions == null)
         {
             menuTitle = "Items";
-            menuOptions = new List<string>(3);
-            menuOptions.Add("Potion");
-            menuOptions.Add("Trap");
-            menuOptions.Add("Sword");
+            menuOptions = new List<string>();
+            List<InventoryItem> items = unitController.GetSelectedUnitInventory();
+            items.ForEach(i => menuOptions.Add(i.displayName));
         }
         
         abilityMenuPanelController.Show(menuTitle, menuOptions);

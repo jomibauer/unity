@@ -5,13 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class Unit : MonoBehaviour
 {
+    [SerializeField] public string unit_name;
     [SerializeField] UnitController unitController;
     SpriteRenderer spriteRenderer;
     [SerializeField] Tilemap tilemap;
     [SerializeField] public string unitClass;
     Weapon weapon;
-    //inventory might need to be an array of structs or something so we can keep track of item types before loading them for use.\
-    string[] inventory = new string[5];
+    Inventory inventory;
     public Stats stats;
     public UnitStats unitStats;
     public LevelComponent levelComponent;
@@ -29,14 +29,18 @@ public class Unit : MonoBehaviour
     {
         movePoint.parent = null;
         path = new List<Tile>();
+
         isActive = true;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //data = Resources.Load<UnitData>($"Units/{unitClass}");
-        stats = GetComponent<Stats>();
-        unitStats.LoadStats();
+        
         levelComponent = GetComponent<LevelComponent>();
-        HP = stats[StatTypes.MHP];
         weapon = GetComponentInChildren<Weapon>();
+        inventory = GetComponentInChildren<Inventory>();
+        stats = GetComponent<Stats>();
+
+        unitStats.LoadStats();
+        HP = stats[StatTypes.MHP];
     }
 
     void Update()
@@ -169,6 +173,11 @@ public class Unit : MonoBehaviour
     public int GetWeaponWeight()
     {
         return weapon.stats[WeaponStatTypes.WGT];
+    }
+
+    public List<InventoryItem> GetInventoryItems()
+    {
+        return inventory.GetItems();
     }
 
 }
