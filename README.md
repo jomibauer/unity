@@ -1,3 +1,9 @@
+Health Bar
+---
+- work is on `develop` branch
+**Future Changes**
+- Now that the prefab is working, I want to add it to the skirmish states.  Add two to a new canvas called "SkirmishPlayCanvas" and have them load up unit HP whenever a skirmish happens.  Disable them whenever a skirmish isnt happening.
+
 Inventory
 ---
 
