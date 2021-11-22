@@ -573,6 +573,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1625946013580056135, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625946013580056135, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 31.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625946013580056135, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -20.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625946013580056135, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431373574604830217, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431373574604830217, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431373574604830217, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2431373574604830218, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -665,6 +693,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6078638043343696711, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 6221119079571879514, guid: 1c9423c1020f14a42b398716a3a1f62f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
 --- !u!1001 &2581008247125955275

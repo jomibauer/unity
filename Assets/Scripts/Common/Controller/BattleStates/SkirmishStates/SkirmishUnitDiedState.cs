@@ -10,6 +10,15 @@ public class SkirmishUnitDiedState : BattleState
         base.Enable();
         deadUnit = skirmishController.GetDeadUnit();
         unitController.KillUnit(deadUnit);
+        StartCoroutine(KillUnitAndChangeState());
+    }
+
+    IEnumerator KillUnitAndChangeState()
+    {
+        deadUnit = skirmishController.GetDeadUnit();
+        unitController.KillUnit(deadUnit);
+        yield return null;
         owner.ChangeState<AwardExpState>();
+        
     }
 }

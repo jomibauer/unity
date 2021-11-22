@@ -46,6 +46,7 @@
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\TargetSelectionState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\RectTransformAnimationExtensions.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Features\Feature.cs" />
+     <Compile Include="Assets\Scripts\Temp\HealthbarTests.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\MoveTargetState.cs" />
      <Compile Include="Assets\Scripts\Common\Pooling\Poolable.cs" />
      <Compile Include="Assets\Scripts\Enums\EquipSlots.cs" />
@@ -80,6 +81,7 @@
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishPlayState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\AbilityMenuStates\WeaponSelectionState.cs" />
      <Compile Include="Assets\Scripts\Common\Notification\NotificationCenter.cs" />
+     <Compile Include="Assets\Scripts\Common\Animation\ImageAnimation.cs" />
      <Compile Include="Assets\Scripts\Grid\Pathfinding\Pathfinding.cs" />
      <Compile Include="Assets\Scripts\Common\Notification\Observer.cs" />
      <Compile Include="Assets\Scripts\Common\Pooling\GameObjectPoolController.cs" />
@@ -107,7 +109,9 @@
      <Compile Include="Assets\Scripts\Common\Model\Skirmish\Skirmish.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Turn.cs" />
      <Compile Include="Assets\Scripts\Enums\StatTypeBook.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\TransformAnimationExtensions.cs" />
+     <Compile Include="Assets\Scripts\Unit\UnitFactory.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishInitState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattleState.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\AddValueModifier.cs" />
@@ -141,7 +145,7 @@
      <Compile Include="Assets\Scripts\Camera\CameraRig.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\AwardExpState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\Vector3Tweener.cs" />
-     <Compile Include="Assets\Scripts\Unit\UnitFactory.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\HealthBarBorder.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\UnityEditors\2020.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

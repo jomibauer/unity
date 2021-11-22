@@ -5,13 +5,14 @@ using UnityEngine;
 public struct NotificationBook
 {
     //Remember to note the listener and poster of the notifications when you add one to the book.
-    //public static string AWARD_EXP = "AWARD_EXP"; // listener: ExperienceManager, poster: AwardExpState
     public static string CANCEL = "CANCEL"; // listener: InputController, poster: base BattleState class
     public static string CONFIRM = "CONFIRM"; // listener: InputController, poster: base BattleState class
     public static string CONVERSATION_COMPLETE = "CONVERSATION_COMPLETE"; // listener: ConversationController, observers managed by CutSceneState, poster: ConversationController
     public static string DEBUG_ARRAY = "DEBUG_ARRAY"; // listener: SelectedUnitListener, poster: BattleController
     public static string HIDE_SKIRMISH_PREVIEW_PANE = "HIDE_SKIRMISH_PREVIEW_PANE";
     public static string INFO = "INFO"; // listener: InputController, poster: base BattleState class
+    public static string INPUT_OFF = "INPUT_OFF"; // listener: InputController, poster: base BattleState class, in Disable method
+    public static string INPUT_ON = "INPUT_ON"; // listener: InputController, poster: Any Gamestate that requires input.
     public static string MOVE = "MOVE"; // listener: InputController, poster: base BattleState class
     public static string PAUSE = "PAUSE"; // listener: InputController, poster: base BattleState class
     public static string SELECTED_UNIT = "SELECTED_UNIT"; // listener: SelectedUnitListener, poster: ??

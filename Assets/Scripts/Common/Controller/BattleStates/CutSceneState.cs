@@ -24,6 +24,7 @@ public class CutSceneState : BattleState
     {
         base.Enable ();
         conversationController.Show(data);
+        this.PostNotification(NotificationBook.INPUT_ON);
     }
     protected override void AddObservers ()
     {

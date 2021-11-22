@@ -13,15 +13,18 @@ public class PathfindingState : BattleState
         base.Enable ();
         gridCursor.DisableSprite();
         pathfindStart = unitController.GetSelectedUnitTile();
+        SelectTile(pathfindStart);
         cursorTile = gridCursor.GetTile();
         moveRange = unitController.GetSelectedUnit().GetMoveRange();
         gridController.DrawRange(pathfindStart, moveRange);
-        path = gridController.SetNewPathAndDraw(pathfindStart, cursorTile);
+        path = gridController.SetNewPath(pathfindStart, cursorTile);
+        gridController.DrawPath(path);
         
         if(turn.hasUnitMoved)
         {
             owner.ChangeState<CommandSelectionState>();
         }
+        this.PostNotification(NotificationBook.INPUT_ON);
     }
     protected override void OnMove(object sender, object e)
     {
@@ -31,24 +34,31 @@ public class PathfindingState : BattleState
         //if it is, we can safely move the cursor to the tile
         cursorTile = t;
         SelectTile(cursorTile);
-        //check the tile is not already on our path(e.g. we made a circle) or if we've travelled across too many squares while staying in our moveRange
-        //if either is true, redraw the path
-        if (path.Contains((PathNode)cursorTile) || path.Count > moveRange)
+
+        //if we move into the tile we're starting from, reset the path.
+        if(cursorTile == pathfindStart) 
         {
-            path = gridController.SetNewPathAndDraw(pathfindStart, cursorTile);
+            path = new List<PathNode>();
+        }
+        //check the tile is not already on our path(e.g. we made a circle) or if we've travelled across too many squares while staying in our moveRange
+        //if either is true, get a more efficient path to the tile
+        else if (path.Contains((PathNode)cursorTile) || path.Count > moveRange)
+        {
+            path = gridController.SetNewPath(pathfindStart, cursorTile);
         } 
-        //otherwise, add the tile to our path, then draw the new path
+        //otherwise, add the tile to our path, 
         else
         {
             path.Add((PathNode)cursorTile);
-            gridController.DrawPath(path);
+            
         }
+        //then draw the new path
+        gridController.DrawPath(path);
         
     }
 
     protected override void OnConfirm(object sender, object e)
     {
-        //List<PathNode> pathNodes = gridController.GetPath(pathfindStart, cursorTile);
         
         gridController.ClearPathTilemapAndPathfinding();
         gridController.SetOriginTile(pathfindStart);

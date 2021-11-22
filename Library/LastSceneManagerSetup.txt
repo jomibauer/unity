@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Battle - Notification.unity
+- path: Assets/Scenes/HealthbarTest.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

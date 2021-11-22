@@ -16,6 +16,7 @@ public class TargetSelectionState : BattleState
         attackRange = gridController.GetAttackRangeAndDraw(unitController.GetSelectedUnit());
         selection = 0;
         Next();
+        this.PostNotification(NotificationBook.INPUT_ON);
     }
 
     public override void Disable()

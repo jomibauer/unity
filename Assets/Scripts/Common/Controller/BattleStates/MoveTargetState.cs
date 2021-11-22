@@ -9,6 +9,7 @@ public class MoveTargetState : BattleState
     {
         base.Enable();
         gridCursor.EnableSprite();
+        this.PostNotification(NotificationBook.INPUT_ON);
     }
     protected override void OnMove(object sender, object e)
     {

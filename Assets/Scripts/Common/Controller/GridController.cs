@@ -142,13 +142,12 @@ public class GridController : MonoBehaviour
         return range;
     }
 
-    internal List<PathNode> SetNewPathAndDraw(Tile startTile, Tile endTile)
+    internal List<PathNode> SetNewPath(Tile startTile, Tile endTile)
     {
         List<PathNode> path = new List<PathNode>();
         if(startTile != endTile)
         {
             path = pathfinding.FindPath(startTile.x, startTile.y, endTile.x, endTile.y);
-            DrawPath(path);
         }
 
         return path;
