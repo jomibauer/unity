@@ -11,4 +11,11 @@ public static class ListExtensions
         source[indexB] = tmp;
         return source;
     }
+
+    public static TSource Pop<TSource>(this IList<TSource> source, int popIndex)
+    {
+        TSource res = source[popIndex];
+        source.RemoveAt(popIndex);
+        return res;
+    }
 }

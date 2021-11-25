@@ -95,7 +95,7 @@ public class TargetSelectionState : BattleState
 
     internal void GetSkirmishPreview()
     {
-        this.PostNotification(NotificationBook.SKIRMISH_PANE_POPULATE, skirmish);
+        this.PostNotification(NotificationBook.SKIRMISH_PREVIEW_PANE_POPULATE, skirmish);
         //Something here to figure out where the pane should go.  I don't think it matters now, because the camera has no boundaries on it.
         //eventually when it gets to the point where I limit the camera to the gridmap, I'll need to do some stuff here to figure out the
         // selected unit's position relative to the camera.

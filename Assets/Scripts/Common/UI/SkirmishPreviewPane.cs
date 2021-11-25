@@ -28,7 +28,7 @@ public class SkirmishPreviewPane : MonoBehaviour
     {
         panel = GetComponent<UIPanel>();
         panel.SetPosition("HideLeft", false);
-        this.AddObserver(OnSkirmishPanePopulate, NotificationBook.SKIRMISH_PANE_POPULATE);
+        this.AddObserver(OnSkirmishPanePopulate, NotificationBook.SKIRMISH_PREVIEW_PANE_POPULATE);
         this.AddObserver(OnShowSkirmishPreviewPane, NotificationBook.SHOW_SKIRMISH_PREVIEW_PANE);
         this.AddObserver(OnHideSkirmishPreviewPane, NotificationBook.HIDE_SKIRMISH_PREVIEW_PANE);
         receiverMultiplier.enabled = false;

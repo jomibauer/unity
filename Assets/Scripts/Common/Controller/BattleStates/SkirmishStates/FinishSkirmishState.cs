@@ -13,6 +13,7 @@ public class FinishSkirmishState : BattleState
 
     IEnumerator FinishSkirmish()
     {
+        this.PostNotification(NotificationBook.HIDE_SKIRMISH_PLAY_VIEW);
         skirmishController.Clear();
         turn.Clear();
         unitController.DeactivateUnit(unitController.GetSelectedUnit());

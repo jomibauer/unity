@@ -11,19 +11,22 @@ public class PathfindingState : BattleState
     public override void Enable()
     {
         base.Enable ();
-        gridCursor.DisableSprite();
+        gridCursor.DisableSprite(); 
+        if(turn.hasUnitMoved)
+        {
+            owner.ChangeState<CommandSelectionState>();
+        }
+
         pathfindStart = unitController.GetSelectedUnitTile();
-        SelectTile(pathfindStart);
+        
         cursorTile = gridCursor.GetTile();
+        SelectTile(cursorTile);
         moveRange = unitController.GetSelectedUnit().GetMoveRange();
         gridController.DrawRange(pathfindStart, moveRange);
         path = gridController.SetNewPath(pathfindStart, cursorTile);
         gridController.DrawPath(path);
         
-        if(turn.hasUnitMoved)
-        {
-            owner.ChangeState<CommandSelectionState>();
-        }
+       
         this.PostNotification(NotificationBook.INPUT_ON);
     }
     protected override void OnMove(object sender, object e)
