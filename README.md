@@ -3,7 +3,10 @@ Health Bar
 - work is on `develop` branch
 
 **Future Changes**
-- Now that the prefab is working, I want to add it to the skirmish states.  Add two to a new canvas called "SkirmishPlayCanvas" and have them load up unit HP whenever a skirmish happens.  Disable them whenever a skirmish isnt happening.
+  SKIRMISH PLAY VIEW TIMING
+- Skirmish play view timing is a little rough, but I think it's best to wait to fix this after implementing skirmish animations, as I will likely have to overhaul whatever fix I apply here.
+  SKIRMISH PLAY VIEW INFO CLEAR TIMING
+- Skirmish play view is clearing before the Hide animation finishes so the player can see the pane info change to "HP", empty strings, etc.  I think I need to use coroutines so we can await the end of the animation before clearing, but I'll figure it out later.
 
 Inventory
 ---
