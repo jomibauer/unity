@@ -107,6 +107,17 @@ public class GridController : MonoBehaviour
 
     }
 
+    internal void DrawRange_search(List<TileInfo> tiles)
+    {
+        for(int i = tiles.Count - 1; i >= 0; --i)
+        {
+            rangeTilemap.SetTile(new Vector3Int(tiles[i].position.x, tiles[i].position.y, 0), rangeTile);
+        }
+    }
+
+    //Need to add Movement types to units.  In the tutorial, it's done with a component, but I think for how simple movement types work here, it might be better to use a enum in a 
+    //field on the Unit object.  Then we can just use different search types based on the unit's movementType field value.
+
     internal int[] GetAxisBounds(int rangeFrom, int moveRange)
     {
         int min = rangeFrom - moveRange >= 0 ? rangeFrom - moveRange : 0;
@@ -141,6 +152,7 @@ public class GridController : MonoBehaviour
         }
         return range;
     }
+    
 
     internal List<PathNode> SetNewPath(Tile startTile, Tile endTile)
     {

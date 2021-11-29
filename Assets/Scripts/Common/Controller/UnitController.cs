@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -174,6 +175,11 @@ public class UnitController : MonoBehaviour
         if(unit == null) { return null; }
 
         return unit.GetInventoryItems();
+    }
+
+    public Unit SelectUnitByName(string name)
+    {
+        return units.FirstOrDefault(u => u.unit_name == name);
     }
 
 }

@@ -14,7 +14,7 @@ public class TargetSelectionState : BattleState
         base.Enable();
         gridCursor.EnableSprite();
         attackRange = gridController.GetAttackRangeAndDraw(unitController.GetSelectedUnit());
-        selection = 0;
+        selection = -1;
         Next();
         this.PostNotification(NotificationBook.INPUT_ON);
     }
@@ -53,11 +53,10 @@ public class TargetSelectionState : BattleState
 
     public void Next ()
     {
+        attackRange.Print();
         for (int i = selection + 1; i < selection + attackRange.Count; ++i)
         {
-            
             int index = i % attackRange.Count;
-
             if(EnemyInTile(attackRange[index]))
             { 
                 selection = index;

@@ -129,11 +129,20 @@ public class Pathfinding : MonoBehaviour
 
     //in this function, diagonal boxes cost 14 to move into, but adjacent squares cost 10.  I don't like how that'll affect units range of movement, so an easy way to fix 
     //it for now is to simply raise its cost to 20.
-    private int CalculateDistance(PathNode currentNode, PathNode target)
+    private int CalculateDistanceFlying(PathNode currentNode, PathNode target)
     {
         int distX = Mathf.Abs(currentNode.xPos - target.xPos);
         int distY = Mathf.Abs(currentNode.yPos - target.yPos);
 
+        if (distX > distY) { return 25 * distY + 10 * (distX-distY); }
+        return 25 * distX + 10 * (distY-distX);
+    }
+
+    private int CalculateDistance(PathNode currentNode, PathNode target)
+    {
+        int distX = Mathf.Abs(currentNode.xPos - target.xPos);
+        int distY = Mathf.Abs(currentNode.yPos - target.yPos);
+        
         if (distX > distY) { return 25 * distY + 10 * (distX-distY); }
         return 25 * distX + 10 * (distY-distX);
     }
