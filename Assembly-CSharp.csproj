@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\MultValueModifier.cs" />
      <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\SkirmishStatsPane.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Conversation\SpeakerData.cs" />
+     <Compile Include="Assets\Scripts\Enums\MovementTypes.cs" />
      <Compile Include="Assets\Scripts\View Model Component\ConversationPanel.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\InitBattleState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\TransformScaleTweener.cs" />
@@ -91,6 +92,8 @@
      <Compile Include="Assets\Scripts\Enums\TerrainTypes.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\InputController.cs" />
      <Compile Include="Assets\Scripts\View Model Component\WeaponStats.cs" />
+     <Compile Include="Assets\Scripts\Grid\MovementCostBook.cs" />
+     <Compile Include="Assets\Scripts\Grid\Movement.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Actor\Equipment.cs" />
      <Compile Include="Assets\Scripts\Common\Extensions\EnumerableExtensions.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\MaxValueModifier.cs" />

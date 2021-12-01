@@ -7,6 +7,8 @@ public class PathfindingState : BattleState
     Tile pathfindStart;
     Tile cursorTile;
     int moveRange;
+    float pathScore;
+    MovementTypes movementType;
     List<PathNode> path;
     public override void Enable()
     {
@@ -22,8 +24,11 @@ public class PathfindingState : BattleState
         cursorTile = gridCursor.GetTile();
         SelectTile(cursorTile);
         moveRange = unitController.GetSelectedUnit().GetMoveRange();
-        gridController.DrawRange(pathfindStart, moveRange);
-        path = gridController.SetNewPath(pathfindStart, cursorTile);
+        /* gridController.DrawRange(pathfindStart, moveRange); */
+        gridController.DrawMovementRangeFor(unitController.GetSelectedUnit());
+        movementType = unitController.GetSelectedUnit().movementType;
+        path = gridController.SetNewPath(pathfindStart, cursorTile, movementType);
+        pathScore = gridController.GetPathScore(path, movementType);
         gridController.DrawPath(path);
         
        
@@ -31,9 +36,11 @@ public class PathfindingState : BattleState
     }
     protected override void OnMove(object sender, object e)
     {
+        
         Tile t = (Tile)e + pos;
         //check the tile is on the map and in range
-        if (!gridController.CheckTile(t) || !gridController.CheckTileIsInRange(t, pathfindStart, moveRange)) { return; }
+        //if (!gridController.CheckTile(t) || !gridController.CheckTileIsInRange(t, pathfindStart, moveRange)) { return; }
+        if (!gridController.CheckTile(t) || !gridController.CheckTileIsInRange_search(t)) { return; }
         //if it is, we can safely move the cursor to the tile
         cursorTile = t;
         SelectTile(cursorTile);
@@ -45,14 +52,17 @@ public class PathfindingState : BattleState
         }
         //check the tile is not already on our path(e.g. we made a circle) or if we've travelled across too many squares while staying in our moveRange
         //if either is true, get a more efficient path to the tile
-        else if (path.Contains((PathNode)cursorTile) || path.Count > moveRange)
+        //else if (path.Contains((PathNode)cursorTile) || path.Count > moveRange)
+        else if (path.Contains((PathNode)cursorTile) || pathScore > moveRange)
         {
-            path = gridController.SetNewPath(pathfindStart, cursorTile);
+            path = gridController.SetNewPath(pathfindStart, cursorTile, movementType);
+            pathScore = gridController.GetPathScore(path, movementType);
         } 
         //otherwise, add the tile to our path, 
         else
         {
             path.Add((PathNode)cursorTile);
+            pathScore += gridController.GetPathScore((PathNode)cursorTile, movementType);
             
         }
         //then draw the new path

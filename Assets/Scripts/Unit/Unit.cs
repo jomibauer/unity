@@ -20,6 +20,7 @@ public class Unit : MonoBehaviour
     public bool hasUnitActed = false;
     public bool isActive;
     public Directions direction;
+    public MovementTypes movementType;
     public Tile currentTile;
     public Tile targetTile;
     public List<Tile> path;

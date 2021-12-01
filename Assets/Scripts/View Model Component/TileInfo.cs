@@ -12,8 +12,7 @@ public class TileInfo
     [HideInInspector]
     public TileInfo prev;
     [HideInInspector]
-    public int distance;
-    
+    public float distance;
 
     public TileInfo(int x, int y, TerrainTypes terrain, GameObject content =null)
     {

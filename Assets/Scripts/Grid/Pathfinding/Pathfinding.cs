@@ -37,7 +37,8 @@ public class Pathfinding : MonoBehaviour
     public List<PathNode> FindPath(int startX,
                                    int startY,
                                    int endX,
-                                   int endY)
+                                   int endY,
+                                   MovementTypes movementType)
     {
         //Dump();
         PathNode startNode = pathNodes[startX, startY];
@@ -78,7 +79,8 @@ public class Pathfinding : MonoBehaviour
             {
                 for (int y = -1; y < 2; y++)
                 {
-                    if (x==0 && y == 0) { continue; }
+                    //we omit the starting square and diagonal neighbors with this line
+                    if ((x==0 && y == 0) || Mathf.Abs(x) == Mathf.Abs(y)) { continue; }
                     if(gridMap.CheckTile(new Tile(currentNode.xPos + x, currentNode.yPos + y)) == false)
                     {
                         continue;
@@ -92,12 +94,12 @@ public class Pathfinding : MonoBehaviour
                 if(closedList.Contains(neighborNodes[i])) { continue; }
                 if(gridMap.CheckWalkable(neighborNodes[i].xPos, neighborNodes[i].yPos) == false) { continue; }
 
-                int movementCost = currentNode.gValue + CalculateDistance(currentNode, neighborNodes[i]);
+                int movementCost = currentNode.gValue + CalculateDistance(currentNode, neighborNodes[i], movementType);
 
                 if (openList.Contains(neighborNodes[i]) == false || movementCost < neighborNodes[i].gValue)
                 {
                     neighborNodes[i].gValue = movementCost;
-                    neighborNodes[i].hValue = CalculateDistance(neighborNodes[i], endNode);
+                    neighborNodes[i].hValue = CalculateDistance(neighborNodes[i], endNode, movementType);
                     neighborNodes[i].parentNode = currentNode;
 
                     if(openList.Contains(neighborNodes[i]) == false)
@@ -127,24 +129,16 @@ public class Pathfinding : MonoBehaviour
         return path;
     }
 
-    //in this function, diagonal boxes cost 14 to move into, but adjacent squares cost 10.  I don't like how that'll affect units range of movement, so an easy way to fix 
-    //it for now is to simply raise its cost to 20.
-    private int CalculateDistanceFlying(PathNode currentNode, PathNode target)
+    private int CalculateDistance(PathNode currentNode, PathNode target, MovementTypes movementType)
     {
         int distX = Mathf.Abs(currentNode.xPos - target.xPos);
         int distY = Mathf.Abs(currentNode.yPos - target.yPos);
-
-        if (distX > distY) { return 25 * distY + 10 * (distX-distY); }
-        return 25 * distX + 10 * (distY-distX);
-    }
-
-    private int CalculateDistance(PathNode currentNode, PathNode target)
-    {
-        int distX = Mathf.Abs(currentNode.xPos - target.xPos);
-        int distY = Mathf.Abs(currentNode.yPos - target.yPos);
-        
-        if (distX > distY) { return 25 * distY + 10 * (distX-distY); }
-        return 25 * distX + 10 * (distY-distX);
+        //we account for terrain types when calculating distance so the script finds the most cost effective path
+        TerrainTypes targetTerrain = gridMap.tileInfoMap[new Tile(target.xPos, target.yPos)].GetTerrain();
+        float terrainCost = MovementCostBook.Lookup[movementType][targetTerrain] * 10;
+        // casting back to int shouldn't cause any rounding issues because we multiplied our movement costs by ten
+        if (distX > distY) { return (int)(25 * distY + terrainCost * (distX-distY)); }
+        return (int)(25 * distX + terrainCost * (distY-distX));
     }
 }
 

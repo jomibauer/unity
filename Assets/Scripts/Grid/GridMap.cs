@@ -49,15 +49,19 @@ public class GridMap : MonoBehaviour
         this.tileSet = levelData.tileSet;
     }
 
-    public void DrawSelf()
+    internal float CalcPathScore(List<PathNode> path, MovementTypes movementType)
     {
-        for(int i = 0; i < length; i++) 
+        float pathScore = 0;
+        foreach(PathNode p in path)
         {
-            for(int j = 0; j < height; j++)
-            {
-                UpdateTile(i, j);
-            }
+            pathScore += MovementCostBook.Lookup[movementType][tileInfoMap[new Tile(p.xPos, p.yPos)].GetTerrain()];
         }
+
+        return pathScore;
+    }
+    internal float CalcPathScore(PathNode pathNode, MovementTypes movementType)
+    {
+        return MovementCostBook.Lookup[movementType][tileInfoMap[new Tile(pathNode.xPos, pathNode.yPos)].GetTerrain()];;
     }
     
     public void UpdateTile(int x, int y)
@@ -131,29 +135,34 @@ public class GridMap : MonoBehaviour
 
         for(int i = height-1; i >= 0; i--)
         {
+            //we use real row index because we're reading the csv rows backwards into our grid.  So the bottom left corner of the csv -- which is something like row 10, col 0 --
+            // becomes 0,0 on our actual grid
             int realRowIndex = Mathf.Abs(i - (height - 1));
             string[] gridRow = readGrid[i].Split(',');
             string[] contentRow = readContent[i].Split(',');
+
             for(int j = 0 ; j <= length-1; j++)
             {
 
-                //if the contents.csv has a value in a given cell, load the prefab with that name.
+                //if the contents.csv has a value in a given cell, load the prefab with that value as a name.
                 GameObject contents = null;
                 if(contentRow[j] != "")
                 {
                     string contentPrefabPath = $"Assets/Resources/Units/{contentRow[j]}.prefab";
                     contents = AssetDatabase.LoadAssetAtPath<GameObject>(contentPrefabPath);
                 }
-                res[new Tile(realRowIndex, j)] = new TileInfo(realRowIndex, j, (TerrainTypes)Convert.ToInt32(gridRow[j]), contents);
+                
+                res[new Tile(j, realRowIndex)] = new TileInfo(j, realRowIndex, (TerrainTypes)Convert.ToInt32(gridRow[j]), contents);
             }
         }
 
         return res;
     }
 
-    #region SecondPathfinding Implementation
-    public List<TileInfo> Search(TileInfo start, Func<TileInfo, TileInfo, bool> addTile)
+    #region Second Pathfinding Implementation
+    public List<TileInfo> Search(Unit unit, Func<TileInfo, TileInfo, Unit, bool> addTile)
     {
+        TileInfo start = GetTileData(unit.GetCurrentTile());
         List<TileInfo> retValue = new List<TileInfo>();
         retValue.Add(start);
 
@@ -162,21 +171,21 @@ public class GridMap : MonoBehaviour
         Queue<TileInfo> checkNow = new Queue<TileInfo>();
         start.distance = 0;
         checkNow.Enqueue(start);
-
         while (checkNow.Count > 0)
         {
             TileInfo t = checkNow.Dequeue();
             for(int i = 0; i < 4; i++)
             {
                 TileInfo next = GetTileData(t.position + dirs[i]);
-                if(next == null || next.distance <= t.distance + 1)
+                float movementCost = MovementCostBook.Lookup[unit.movementType][t.GetTerrain()];
+                if(next == null || next.distance <= t.distance + movementCost)
                 {
                     continue;
                 }
 
-                if(addTile(t, next))
+                if(addTile(t, next, unit))
                 {
-                    next.distance = t.distance + 1;
+                    next.distance = t.distance + movementCost;
                     next.prev = t;
                     checkNext.Enqueue(next);
                     retValue.Add(next);
@@ -189,7 +198,6 @@ public class GridMap : MonoBehaviour
             }
 
         }
-
 
         return retValue;
     }
