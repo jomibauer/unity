@@ -11,6 +11,7 @@ public class SkirmishInitState : BattleState
         if (skirmishController.GetSkirmish() == null) { throw new Exception("No skirmish on the skirmishController when trying to initialize skirmish."); }
         skirmishController.InitRounds();
         this.PostNotification(NotificationBook.HIDE_SKIRMISH_PREVIEW_PANE, null);
+        this.PostNotification(NotificationBook.SHOW_SKIRMISH_PLAY_VIEW, skirmishController.GetSkirmish());
         StartCoroutine(StartSkirmish());
         //owner.ChangeState<MoveTargetState>();
     }

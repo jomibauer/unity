@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class AwardExpState : BattleState
 {
-    //Dont think I should do this with listeners.  IDK how I would time when the notifications got posted.  Maybe I need some persistent gameobject that tracks skirmish data
-    //(EXP Manager? could need a skirmish controller), then this state just polls that object and then displays the exp growth anim, then transistions back to move target or 
-    //to level up.
     public override void Enable()
     {
         base.Enable();
@@ -16,7 +13,18 @@ public class AwardExpState : BattleState
     IEnumerator AwardAndExit()
     {
         yield return null;
+        
+        Skirmish skirmish = skirmishController.GetSkirmish();
+        //I need a faction system next.  it'll make this clearer.
+        if (unitController.GetSelectedUnit() != null)
+        {
+            ExperienceManager.AwardExp(skirmish, skirmish.initiator, skirmish.receiver);
+        }else{
+            ExperienceManager.AwardExp(skirmish, skirmish.receiver, skirmish.initiator);
+        }
+        
         Debug.LogWarning("EXP AWARDED");
+
         unitController.RefreshUnits();
 
         owner.ChangeState<FinishSkirmishState>();

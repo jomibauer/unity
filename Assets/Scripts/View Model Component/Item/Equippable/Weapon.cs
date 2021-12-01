@@ -15,24 +15,19 @@ public class Weapon : Equippable
     void Start()
     {
         defaultSlot = EquipSlots.Weapon;
-        Debug.Log($"WeaponStats are loaded into weapon:{stats != null}");
         Equip("Iron_lance");
     }
     
     public void Load(string line)
     {
-        Debug.Log(line);
+        //this gets done with the weapon data argument version.  Keeping this incase i ever need to use strings again.
         string[] _stats = line.Split(',');
 
-        /* stats[WeaponStatTypes.LVL] = Convert.ToInt32(_stats[0]); */
         stats[WeaponStatTypes.DAM] = Convert.ToInt32(_stats[1]);
         stats[WeaponStatTypes.HIT] = Convert.ToInt32(_stats[2]);
         stats[WeaponStatTypes.CRT] = Convert.ToInt32(_stats[3]);
         stats[WeaponStatTypes.WGT] = Convert.ToInt32(_stats[4]);
         stats[WeaponStatTypes.DUR] = Convert.ToInt32(_stats[5]);
-/*         stats[WeaponStatTypes.RNG] = Convert.ToInt32(_stats[6]);
-        stats[WeaponStatTypes.SPC] = Convert.ToInt32(_stats[7]);
-        stats[WeaponStatTypes.ELE] = Convert.ToInt32(_stats[8]); */
     }
 
     void Load(WeaponData weaponData)
@@ -52,9 +47,7 @@ public class Weapon : Equippable
 
     public void Equip(string weapon)
     {
-        Debug.Log(weapon);
         WeaponData _data = Resources.Load<WeaponData>("Items/Weapons/" + weapon);
-        Debug.Log($"Weapon weapondata: {_data}");
         this.Load(_data);
         //IDK if this is the best way.  An optimization might be to copy the pattern in Equippable.  Rather than adding and destroying the features every time, I could add only once, 
         // then activate and deactivate whenever necessary. this makes sense because it's likely we'll be switching up weapons on the same unit, so keeping the features on but deactivating

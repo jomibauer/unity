@@ -14,6 +14,7 @@ public class SkirmishPreviewPane : MonoBehaviour
     [SerializeField] Text initiatorDamage;
     [SerializeField] Text initiatorHit;
     [SerializeField] Text initiatorCrit;
+    [SerializeField] Image initiatorMultiplier;
 
     [SerializeField] Text receiverName;
     [SerializeField] Text receiverMaxHP;
@@ -21,14 +22,17 @@ public class SkirmishPreviewPane : MonoBehaviour
     [SerializeField] Text receiverDamage;
     [SerializeField] Text receiverHit;
     [SerializeField] Text receiverCrit;
+    [SerializeField] Image receiverMultiplier;
     // Start is called before the first frame update
     void Start()
     {
         panel = GetComponent<UIPanel>();
         panel.SetPosition("HideLeft", false);
-        this.AddObserver(OnSkirmishPanePopulate, NotificationBook.SKIRMISH_PANE_POPULATE);
+        this.AddObserver(OnSkirmishPanePopulate, NotificationBook.SKIRMISH_PREVIEW_PANE_POPULATE);
         this.AddObserver(OnShowSkirmishPreviewPane, NotificationBook.SHOW_SKIRMISH_PREVIEW_PANE);
         this.AddObserver(OnHideSkirmishPreviewPane, NotificationBook.HIDE_SKIRMISH_PREVIEW_PANE);
+        receiverMultiplier.enabled = false;
+        initiatorMultiplier.enabled = false;
     }
 
     private void OnSkirmishPanePopulate(object sender, object sk)
@@ -41,7 +45,7 @@ public class SkirmishPreviewPane : MonoBehaviour
         initiatorDamage.text = skirmish.initiatorStats.dam.ToString();
         if(skirmish.initiatorStats.turns == 2)
         {
-            initiatorDamage.text += "x2";
+            initiatorMultiplier.enabled = true;
         }
         initiatorHit.text = skirmish.initiatorStats.hit.ToString();
         initiatorCrit.text = skirmish.initiatorStats.crit.ToString();
@@ -52,7 +56,7 @@ public class SkirmishPreviewPane : MonoBehaviour
         receiverDamage.text = skirmish.receiverStats.dam.ToString();
         if(skirmish.receiverStats.turns == 2)
         {
-            receiverDamage.text += "x2";
+            receiverMultiplier.enabled = true;
         }
         receiverHit.text = skirmish.receiverStats.hit.ToString();
         receiverCrit.text = skirmish.receiverStats.crit.ToString();
@@ -71,6 +75,8 @@ public class SkirmishPreviewPane : MonoBehaviour
             Tweener t = panel.SetPosition("HideLeft", true);
             t.easingControl.equation = EasingEquations.EaseInOutBack;
         }
+        receiverMultiplier.enabled = false;
+        initiatorMultiplier.enabled = false;
     }
 
     private void OnShowSkirmishPreviewPane(object sender, object pos)

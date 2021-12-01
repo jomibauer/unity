@@ -17,7 +17,7 @@ public class Observer : MonoBehaviour
     
     public virtual void Disable ()
     {
-
+        this.PostNotification(NotificationBook.INPUT_OFF);
         RemoveObservers();
     }
 

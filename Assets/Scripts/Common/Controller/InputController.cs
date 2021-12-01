@@ -40,9 +40,30 @@ public class InputController : MonoBehaviour
     Repeater _hor = new Repeater("Horizontal");
     Repeater _ver = new Repeater("Vertical");
 
+    bool inputOff = false;
+    void Start()
+    {
+        this.AddObserver(OnInputOff, NotificationBook.INPUT_OFF);
+        this.AddObserver(OnInputOn, NotificationBook.INPUT_ON);
+    }
+
+    private void OnInputOn(object arg1, object arg2)
+    {
+        Debug.LogWarning("Input On");
+        inputOff = false;
+    }
+
+    private void OnInputOff(object arg1, object arg2)
+    {
+        Debug.LogError("Input Off");
+        inputOff = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(inputOff) { return; }
+
         int x = _hor.Update();
         int y = _ver.Update();
         if(x != 0 || y!= 0)

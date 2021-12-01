@@ -16,6 +16,7 @@ public class TargetSelectionState : BattleState
         attackRange = gridController.GetAttackRangeAndDraw(unitController.GetSelectedUnit());
         selection = 0;
         Next();
+        this.PostNotification(NotificationBook.INPUT_ON);
     }
 
     public override void Disable()
@@ -52,9 +53,10 @@ public class TargetSelectionState : BattleState
 
     public void Next ()
     {
-        for (int i = selection + 1; i < selection + attackRange.Count; ++i)
+        attackRange.Print();
+        Debug.Log(selection);
+        for (int i = selection + 1; i < selection + attackRange.Count + 1; ++i)
         {
-            
             int index = i % attackRange.Count;
 
             if(EnemyInTile(attackRange[index]))
@@ -72,7 +74,8 @@ public class TargetSelectionState : BattleState
 
     public void Previous ()
     {
-        for (int i = selection - 1 + attackRange.Count; i > selection; --i)
+
+        for (int i = selection - 1 + attackRange.Count; i > selection + 1; --i)
         {
             int index = i % attackRange.Count;
             if(EnemyInTile(attackRange[index]))
@@ -94,7 +97,7 @@ public class TargetSelectionState : BattleState
 
     internal void GetSkirmishPreview()
     {
-        this.PostNotification(NotificationBook.SKIRMISH_PANE_POPULATE, skirmish);
+        this.PostNotification(NotificationBook.SKIRMISH_PREVIEW_PANE_POPULATE, skirmish);
         //Something here to figure out where the pane should go.  I don't think it matters now, because the camera has no boundaries on it.
         //eventually when it gets to the point where I limit the camera to the gridmap, I'll need to do some stuff here to figure out the
         // selected unit's position relative to the camera.

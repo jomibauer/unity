@@ -47,8 +47,10 @@
      <Compile Include="Assets\Scripts\Common\Animation\RectTransformAnimationExtensions.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Features\Feature.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\MoveTargetState.cs" />
+     <Compile Include="Assets\Scripts\Temp\HealthbarTests.cs" />
      <Compile Include="Assets\Scripts\Common\Pooling\Poolable.cs" />
      <Compile Include="Assets\Scripts\Enums\EquipSlots.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\SkirmishBattlerPane.cs" />
      <Compile Include="Assets\Scripts\View Model Component\AbilityMenuEntry.cs" />
      <Compile Include="Assets\Scripts\Exceptions\ValueChangeException.cs" />
      <Compile Include="Assets\Scripts\Temp\PanelTests.cs" />
@@ -63,15 +65,18 @@
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\Modifier.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishUnitDiedState.cs" />
      <Compile Include="Assets\Scripts\Common\UI\UIPanel.cs" />
+     <Compile Include="Assets\Scripts\Enums\Directions.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\CutSceneState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\FinishSkirmishState.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\MultValueModifier.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\SkirmishStatsPane.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Conversation\SpeakerData.cs" />
+     <Compile Include="Assets\Scripts\Enums\MovementTypes.cs" />
      <Compile Include="Assets\Scripts\View Model Component\ConversationPanel.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\InitBattleState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\TransformScaleTweener.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\EasingEquations.cs" />
-     <Compile Include="Assets\TileSet\TileSet.cs" />
+     <Compile Include="Assets\Resources\Tilesets\TileSet.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Item\Equippable\Equippable.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\GridController.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Actor\UnitStats.cs" />
@@ -80,11 +85,15 @@
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishPlayState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\AbilityMenuStates\WeaponSelectionState.cs" />
      <Compile Include="Assets\Scripts\Common\Notification\NotificationCenter.cs" />
+     <Compile Include="Assets\Scripts\Common\Animation\ImageAnimation.cs" />
      <Compile Include="Assets\Scripts\Grid\Pathfinding\Pathfinding.cs" />
      <Compile Include="Assets\Scripts\Common\Notification\Observer.cs" />
      <Compile Include="Assets\Scripts\Common\Pooling\GameObjectPoolController.cs" />
+     <Compile Include="Assets\Scripts\Enums\TerrainTypes.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\InputController.cs" />
      <Compile Include="Assets\Scripts\View Model Component\WeaponStats.cs" />
+     <Compile Include="Assets\Scripts\Grid\MovementCostBook.cs" />
+     <Compile Include="Assets\Scripts\Grid\Movement.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Actor\Equipment.cs" />
      <Compile Include="Assets\Scripts\Common\Extensions\EnumerableExtensions.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\MaxValueModifier.cs" />
@@ -92,6 +101,7 @@
      <Compile Include="Assets\Scripts\Common\Model\Conversation\ConversationData.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\ConversationController.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\AbilityMenuStates\CommandSelectionState.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\HealthBarBlink.cs" />
      <Compile Include="Assets\Scripts\InputDemo.cs" />
      <Compile Include="Assets\Scripts\Grid\GridMap.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Stats.cs" />
@@ -107,22 +117,29 @@
      <Compile Include="Assets\Scripts\Common\Model\Skirmish\Skirmish.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Turn.cs" />
      <Compile Include="Assets\Scripts\Enums\StatTypeBook.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\TransformAnimationExtensions.cs" />
+     <Compile Include="Assets\Scripts\Unit\UnitFactory.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishInitState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattleState.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\AddValueModifier.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Features\StatModifierFeature.cs" />
      <Compile Include="Assets\Scripts\Grid\Tile.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Items\WeaponData.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\NamePane.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\AbilityMenuStates\CategorySelectionState.cs" />
      <Compile Include="Assets\Scripts\Temp\AnchorTests.cs" />
+     <Compile Include="Assets\Scripts\Common\Extensions\DirectionsExtensions.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Item\Consumable.cs" />
+     <Compile Include="Assets\Scripts\Common\Controller\SkirmishPlayViewController.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\ClampValueModifier.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Actor\LevelComponent.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\RectTransformAnchorPositionTweener.cs" />
      <Compile Include="Assets\Scripts\Common\State Machine\GameState.cs" />
      <Compile Include="Assets\Scripts\Common\Extensions\ListExtensions.cs" />
+     <Compile Include="Assets\Scripts\View Model Component\TileInfo.cs" />
      <Compile Include="Assets\Scripts\Common\UI\SkirmishPreviewPane.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\HealthBarPane.cs" />
      <Compile Include="Assets\Resources\Animations\Extra\AnimatedTile.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Item\Equippable\Weapon.cs" />
      <Compile Include="Assets\Scripts\Common\UI\LayoutAnchor.cs" />
@@ -141,7 +158,6 @@
      <Compile Include="Assets\Scripts\Camera\CameraRig.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\AwardExpState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\Vector3Tweener.cs" />
-     <Compile Include="Assets\Scripts\Unit\UnitFactory.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\UnityEditors\2020.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -712,6 +728,9 @@
     <Reference Include="System.Xml.Serialization">
         <HintPath>C:\Program Files\UnityEditors\2020.3.21f1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras">
+        <HintPath>C:\Users\JonathanBauer\Documents\unity\gregdev_tut\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Animation.Editor">
         <HintPath>C:\Users\JonathanBauer\Documents\unity\gregdev_tut\Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
     </Reference>
@@ -768,6 +787,9 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
         <HintPath>C:\Users\JonathanBauer\Documents\unity\gregdev_tut\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
+        <HintPath>C:\Users\JonathanBauer\Documents\unity\gregdev_tut\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
         <HintPath>C:\Users\JonathanBauer\Documents\unity\gregdev_tut\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>

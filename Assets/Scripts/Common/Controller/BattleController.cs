@@ -17,7 +17,6 @@ public class BattleController : StateMachine
 
     void Start()
     {
-
         ChangeState<InitBattleState>();
     } 
 

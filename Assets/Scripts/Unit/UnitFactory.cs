@@ -19,7 +19,6 @@ public class UnitFactory : MonoBehaviour
         unit.unitStats.LoadStats();
         unit.HP = unit.stats[StatTypes.MHP];
         unit.unitClass = unit.unitStats.unit_class;
-        Debug.Log(unit.unitClass);
 
         unit.spriteRenderer = unit.GetComponent<SpriteRenderer>();
         Sprite map_sprite = Resources.Load<Sprite>($"Sprites/Units/Map/{unit.unitClass}");

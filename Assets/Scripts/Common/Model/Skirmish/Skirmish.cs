@@ -11,6 +11,7 @@ public struct SkirmishStatSet
     public int turns;
     public int HP;
     public int MaxHP;
+    public string unit_name;
 
     public SkirmishStatSet(int hit, int dam, int crit, int turns, Unit unit)
     {
@@ -20,6 +21,7 @@ public struct SkirmishStatSet
         this.turns = turns;
         this.HP = unit.HP;
         this.MaxHP = unit.stats[StatTypes.MHP];
+        this.unit_name = unit.unit_name;
     }
 
 }

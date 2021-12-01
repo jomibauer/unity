@@ -14,6 +14,7 @@ public class SelectActionState : BattleState
         pathOrigin = gridController.GetOriginTile();
         selectedUnit = unitController.GetSelectedUnit();
         cursorTile = gridCursor.GetTile();
+        this.PostNotification(NotificationBook.INPUT_ON);
     }
 
     protected override void OnConfirm(object sender, object e)

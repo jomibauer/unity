@@ -11,6 +11,7 @@ public abstract class BaseAbilityMenuState : BattleState
         base.Enable ();
         SelectTile(turn.actor.targetTile);
         LoadMenu();
+        this.PostNotification(NotificationBook.INPUT_ON);
     }
     public override void Disable ()
     {

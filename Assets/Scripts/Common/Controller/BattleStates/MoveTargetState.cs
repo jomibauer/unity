@@ -9,6 +9,7 @@ public class MoveTargetState : BattleState
     {
         base.Enable();
         gridCursor.EnableSprite();
+        this.PostNotification(NotificationBook.INPUT_ON);
     }
     protected override void OnMove(object sender, object e)
     {
@@ -53,8 +54,8 @@ public class MoveTargetState : BattleState
 
     protected override void OnInfo(object sender, object e)
     {
-        //Tile t = (Tile)e;
-        Debug.Log("Info");
+        Unit u = SelectUnitAt(gridCursor.GetTile());
+        Debug.Log(u.currentTile);
     }
 
     protected override void OnPause(object sender, object e)

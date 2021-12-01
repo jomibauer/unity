@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 10
   length: 10
-  tileSet: {fileID: 11400000, guid: 0d1a1ea168323564fbca0fdd4b1da799, type: 2}
+  tileSet: {fileID: 11400000, guid: a0156b443c867db4d9180ce4b1059044, type: 2}
