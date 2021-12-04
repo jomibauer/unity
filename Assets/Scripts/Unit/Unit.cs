@@ -114,6 +114,11 @@ public class Unit : MonoBehaviour
         return this.unitStats.unit_class;
     }
 
+    public Factions GetFaction()
+    {
+        return this.unitStats.faction;
+    }
+
     public Tile GetCurrentTile()
     {
         return currentTile;

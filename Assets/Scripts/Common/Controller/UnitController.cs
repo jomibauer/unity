@@ -10,6 +10,7 @@ public class UnitController : MonoBehaviour
     public Dictionary<Tile, Unit> unitMap;
     [SerializeField]
     public List<Unit> units;
+    public Dictionary<Factions, List<Unit>> factionsUnitList;
     UnitMover unitMover;
     Unit selectedUnit;
     public Tilemap tilemap;
@@ -19,18 +20,24 @@ public class UnitController : MonoBehaviour
         units = new List<Unit>(FindObjectsOfType<Unit>());
         unitMap = new Dictionary<Tile, Unit>();
         unitMover = GetComponentInChildren<UnitMover>();
+        factionsUnitList = new Dictionary<Factions, List<Unit>>();
+        factionsUnitList.Add(Factions.player, new List<Unit>());
+        factionsUnitList.Add(Factions.enemy, new List<Unit>());
+        factionsUnitList.Add(Factions.friendly_other, new List<Unit>());
+        factionsUnitList.Add(Factions.unfriendly_other, new List<Unit>());
+
         this.AddObserver(OnUnitTileUpdate, NotificationBook.UNIT_TILE_UPDATE);
     }
 
     
 
-    internal void InitUnitPositions()
+    internal void InitUnits()
     {
         foreach(var unit in units)
         {
             UpdateUnitLocation(unit);
             UpdateUnitMap(unit.GetCurrentTile(), unit);
-            Debug.Log(unitMap[unit.GetCurrentTile()]);
+            factionsUnitList[unit.GetFaction()].Add(unit);
         }
     }
 

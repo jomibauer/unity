@@ -12,6 +12,7 @@ public static class UnitParser
     {
         CreateDirectories();
         ParsePlayerUnitStats();
+        ParseEnemyUnitStats();
         ParseGrowthStats();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -32,6 +33,16 @@ public static class UnitParser
         for (int i = 1; i<readText.Length; i++)
         {
             ParseUnitStats(readText[i], Factions.player);
+        }
+    }
+
+    public static void ParseEnemyUnitStats()
+    {
+        string readPath = $"{Application.dataPath}/Resources/Data/units/enemies/enemy_stats.csv";
+        string[] readText = File.ReadAllLines(readPath);
+        for (int i = 1; i<readText.Length; i++)
+        {
+            ParseUnitStats(readText[i], Factions.enemy);
         }
     }
 

@@ -15,7 +15,7 @@ public class InitBattleState : BattleState
     {
         gridController.InitMapAndPathfinding(levelData);
         yield return new WaitForEndOfFrame();
-        unitController.InitUnitPositions();
+        unitController.InitUnits();
         yield return new WaitForEndOfFrame();
         unitController.units.Print();
         //Tile t = new Tile(0, 0);
