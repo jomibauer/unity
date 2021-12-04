@@ -26,7 +26,7 @@ public class PathfindingState : BattleState
         moveRange = unitController.GetSelectedUnit().GetMoveRange();
         /* gridController.DrawRange(pathfindStart, moveRange); */
         gridController.DrawMovementRangeFor(unitController.GetSelectedUnit());
-        movementType = unitController.GetSelectedUnit().movementType;
+        movementType = unitController.GetSelectedUnit().GetMovementType();
         path = gridController.SetNewPath(pathfindStart, cursorTile, movementType);
         pathScore = gridController.GetPathScore(path, movementType);
         gridController.DrawPath(path);
@@ -76,14 +76,14 @@ public class PathfindingState : BattleState
         gridController.ClearPathTilemapAndPathfinding();
         gridController.SetOriginTile(pathfindStart);
 
-        unitController.MoveSelectedUnit(path);
+        unitController.InitUnitPath(path);
 
         turn.hasUnitMoved = true;
         turn.actor.hasUnitMoved = true;
 
-        SelectTile(unitController.GetSelectedUnitTile());
         
-        owner.ChangeState<CommandSelectionState>();
+        
+        owner.ChangeState<TraversalState>();
     }
 
     protected override void OnCancel(object sender, object e)

@@ -9,25 +9,26 @@ public class UnitController : MonoBehaviour
 {
     public Dictionary<Tile, Unit> unitMap;
     [SerializeField]
-    List<Unit> units;
+    public List<Unit> units;
+    UnitMover unitMover;
     Unit selectedUnit;
-    //just adding this field to make it easier for units to get the tilemap from one place... might be a simpler way.
     public Tilemap tilemap;
     // Start is called before the first frame update
-    void Awake()
-    {
-        
-    }
     void Start()
     {
         units = new List<Unit>(FindObjectsOfType<Unit>());
         unitMap = new Dictionary<Tile, Unit>();
+        unitMover = GetComponentInChildren<UnitMover>();
+        this.AddObserver(OnUnitTileUpdate, NotificationBook.UNIT_TILE_UPDATE);
     }
+
+    
 
     internal void InitUnitPositions()
     {
         foreach(var unit in units)
         {
+            UpdateUnitLocation(unit);
             UpdateUnitMap(unit.GetCurrentTile(), unit);
             Debug.Log(unitMap[unit.GetCurrentTile()]);
         }
@@ -116,14 +117,39 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    public void MoveSelectedUnit(List<PathNode> pathNodes)
+    public void InitUnitPath(List<PathNode> pathNodes)
     {
         selectedUnit.InitPath(pathNodes);
     }
 
+    public bool UnitFinishedMoving()
+    {
+        return selectedUnit.currentTile == selectedUnit.targetTile && selectedUnit.transform.position == selectedUnit.movePoint.position;
+    }
+    public void MoveSelectedUnit()
+    {
+        selectedUnit.Move();
+        UpdateUnitLocation(selectedUnit);
+    }
+    public void UpdateUnitLocation(Unit unit)
+    {
+        // Converts worldposition into a Tile value, then set Unit's current position to the new Tile.
+        Vector3Int cellPosition = tilemap.WorldToCell(unit.transform.position);
+        Tile newTile = new Tile(cellPosition.x, cellPosition.y);
+        //this is wasteful.  I should think on how I can do this only once I've finished moving, update the unit map more lazily.
+        // potentially we could call this in move to next tile, maybe a solution there.
+        UpdateUnitMap(newTile, unit);
+        unit.currentTile = newTile;
+    }
+    private void OnUnitTileUpdate(object sender, object u)
+    {
+        Unit unit = u as Unit;
+        UpdateUnitLocation(unit);
+    }
     public void TeleportUnit(Unit unit, Tile destinationTile)
     {
-        unit.TeleportTo(destinationTile);
+        Vector3 destination = tilemap.CellToWorld(new Vector3Int(destinationTile.x, destinationTile.y, 0));
+        unit.TeleportTo(destination);
     }
     public void DeselectUnit()
     {
@@ -156,8 +182,8 @@ public class UnitController : MonoBehaviour
 
     public void KillUnit(Unit toBeKilled)
     {
-        
-        toBeKilled.TeleportTo(new Tile(-10,-10));
+        Vector3 offTheGrid = tilemap.CellToWorld(new Vector3Int(-10, -10, 0));
+        toBeKilled.TeleportTo(offTheGrid);
         unitMap[toBeKilled.GetCurrentTile()] = null;
         toBeKilled.Kill(); 
     }
@@ -180,6 +206,11 @@ public class UnitController : MonoBehaviour
     public Unit SelectUnitByName(string name)
     {
         return units.FirstOrDefault(u => u.unit_name == name);
+    }
+
+    public void ToggleUnitMover()
+    {
+        unitMover.enabled = !unitMover.enabled;
     }
 
 }

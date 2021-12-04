@@ -153,7 +153,7 @@ public class GridController : MonoBehaviour
                 }
                 //when obstacles are implemented, I'll need to rethink this...  Maybe I'll need to just be pathfinding everywhere and seeing where I can get?
                 if(CheckTileIsInRange(temp, rangeStart, weaponRng)){
-                    rangeTilemap.SetTile(new Vector3Int(temp.x, temp.y, 0), rangeTile);
+                    rangeTilemap.SetTile(new Vector3Int(temp.x, temp.y, 0), atkRangeTile);
                     atkRange.Add(new Tile(temp.x, temp.y));
                 }
             }

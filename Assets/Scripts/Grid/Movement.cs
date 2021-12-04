@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     {
         List<TerrainTypes> forbidden = new List<TerrainTypes> { TerrainTypes.in_wall };
         //forbid certain tiles depending on movement type
-        switch (unit.movementType)
+        switch (unit.GetMovementType())
         {
             case MovementTypes.foot: case MovementTypes.foot_heavy: case MovementTypes.foot_light:
                 forbidden.Add(TerrainTypes.gap);
@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
 
     protected virtual bool InRange(TileInfo from, TileInfo to, Unit unit)
     {
-        return (from.distance + MovementCostBook.Lookup[unit.movementType][from.GetTerrain()]) <= unit.GetMoveRange();
+        return (from.distance + MovementCostBook.Lookup[unit.GetMovementType()][from.GetTerrain()]) <= unit.GetMoveRange();
     }
 
     protected virtual void Filter (List<TileInfo> tiles)

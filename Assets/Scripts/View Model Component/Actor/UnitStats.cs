@@ -21,6 +21,8 @@ public class UnitStats : MonoBehaviour
     public int[] startingStats = new int[ statOrder.Length ];
     public int[] growths = new int[ statOrder.Length ];
     public string unit_name;
+    public MovementTypes movementType;
+    public Factions faction;
     public string unit_class;
     public Stats stats;
     #endregion
@@ -29,6 +31,7 @@ public class UnitStats : MonoBehaviour
     void Start()
     {
         stats = gameObject.GetComponentInParent<Stats>();
+        
         //this.AddObserver(OnLvlChangeNotification, Stats.DidChangeNotification(StatTypes.LVL), stats);
     }
     void OnDestroy()

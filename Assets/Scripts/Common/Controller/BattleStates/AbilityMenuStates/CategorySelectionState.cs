@@ -37,6 +37,7 @@ public class CategorySelectionState : BaseAbilityMenuState
   
   protected override void Cancel ()
   {
+        Debug.Log("cancel");
         owner.ChangeState<CommandSelectionState>();
   }
   void Attack ()

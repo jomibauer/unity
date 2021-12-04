@@ -9,6 +9,17 @@ public class MoveTargetState : BattleState
     {
         base.Enable();
         gridCursor.EnableSprite();
+        Tile t = gridCursor.GetTile();
+        SelectTile(t);
+        Unit selectedUnit = GetUnitAt(t);
+        if(selectedUnit)
+        {
+            this.PostNotification(NotificationBook.UNIT_INFO, selectedUnit);
+        }
+        else if (gridController.CheckTile(t))
+        {
+            this.PostNotification(NotificationBook.TILE_INFO, t);
+        }
         this.PostNotification(NotificationBook.INPUT_ON);
     }
     protected override void OnMove(object sender, object e)

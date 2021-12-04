@@ -13,7 +13,7 @@
         
         parsers.Add("weapons.csv", ItemParser.ParseWeapons);
         parsers.Add("inventories.csv", ItemParser.ParseInventories);
-        parsers.Add("units_starting_stats.csv", UnitParser.ParseStartingStats);
+        parsers.Add("units_stats.csv", UnitParser.ParsePlayerUnitStats);
         parsers.Add("unit_growths.csv", UnitParser.ParseGrowthStats);
       }
       static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)

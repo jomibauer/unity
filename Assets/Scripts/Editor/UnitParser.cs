@@ -11,7 +11,7 @@ public static class UnitParser
     public static void Parse()
     {
         CreateDirectories();
-        ParseStartingStats();
+        ParsePlayerUnitStats();
         ParseGrowthStats();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -25,34 +25,35 @@ public static class UnitParser
         }
     }
 
-    public static void ParseStartingStats()
+    public static void ParsePlayerUnitStats()
     {
-        string readPath = $"{Application.dataPath}/Resources/Data/units_starting_stats.csv";
+        string readPath = $"{Application.dataPath}/Resources/Data/units/units_stats.csv";
         string[] readText = File.ReadAllLines(readPath);
         for (int i = 1; i<readText.Length; i++)
         {
-            ParseStartingStats(readText[i]);
+            ParseUnitStats(readText[i], Factions.player);
         }
     }
 
-    static void ParseStartingStats(string line)
+    static void ParseUnitStats(string line, Factions faction)
     {
         string[] elements = line.Split(',');
         GameObject obj = GetOrCreate(elements[0]);
         UnitStats u_stats = obj.GetComponent<UnitStats>();
         u_stats.unit_name = elements[0];
         u_stats.unit_class = elements[1];
-        for (int i = 2; i < UnitStats.statOrder.Length + 2; i++)
+        u_stats.movementType = (MovementTypes)Convert.ToInt32(elements[2]);
+        for (int i = 3; i < UnitStats.statOrder.Length + 3; i++)
         {
-            u_stats.startingStats[i-2] = Convert.ToInt32(elements[i]);
+            u_stats.startingStats[i-3] = Convert.ToInt32(elements[i]);
         }
+        u_stats.faction = faction;
         EditorUtility.SetDirty(u_stats);
     }
 
     public static void ParseGrowthStats()
     {
-
-        string readPath = $"{Application.dataPath}/Resources/Data/unit_growths.csv";
+        string readPath = $"{Application.dataPath}/Resources/Data/units/unit_growths.csv";
         string[] readText = File.ReadAllLines(readPath);
         Debug.Log(readText);
         for (int i = 1; i<readText.Length; i++)

@@ -21,15 +21,19 @@ public class CommandSelectionState : BaseAbilityMenuState
 
     protected override void Confirm ()
     {
+        
         switch (abilityMenuPanelController.selection)
         {
             case 0: // Action
+                Debug.Log("action");
                 owner.ChangeState<CategorySelectionState>();
                 break;
             case 1: // Item
+                Debug.Log("item");
                 owner.ChangeState<ItemSelectionState>();
                 break;
             case 2: // Wait
+                Debug.Log("wait!");
                 turn.actor.hasUnitActed = true;
                 turn.actor.hasUnitMoved = true;
                 owner.ChangeState<MoveTargetState>();

@@ -42,6 +42,11 @@ public struct NotificationBook
         public static string SKIRMISH_PREVIEW_PANE_POPULATE = "SKIRMISH_PREVIEW_PANE_POPULATE"; // listener: SkirmishPreviewPane, poster: TargetSelectionState
     #endregion 
 
+    #region Traversal
+        public static string FINISHED_MOVING = "FINISHED_MOVING"; // listener : TraversalState, poster: UnitMover
+        public static string UNIT_TILE_UPDATE = "UNIT_TILE_UPDATE"; // listener: UnitController, poster: Unit
+    #endregion
+
     #region MISC
     //could be useful in the future.
     public static string SKIRMISH_START = "SKIRMISH_START"; // not used    

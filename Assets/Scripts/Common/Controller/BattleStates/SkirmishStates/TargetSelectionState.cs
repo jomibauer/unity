@@ -53,8 +53,6 @@ public class TargetSelectionState : BattleState
 
     public void Next ()
     {
-        attackRange.Print();
-        Debug.Log(selection);
         for (int i = selection + 1; i < selection + attackRange.Count + 1; ++i)
         {
             int index = i % attackRange.Count;

@@ -177,7 +177,7 @@ public class GridMap : MonoBehaviour
             for(int i = 0; i < 4; i++)
             {
                 TileInfo next = GetTileData(t.position + dirs[i]);
-                float movementCost = MovementCostBook.Lookup[unit.movementType][t.GetTerrain()];
+                float movementCost = MovementCostBook.Lookup[unit.GetMovementType()][t.GetTerrain()];
                 if(next == null || next.distance <= t.distance + movementCost)
                 {
                     continue;
