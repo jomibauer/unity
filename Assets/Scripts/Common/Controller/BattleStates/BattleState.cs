@@ -16,7 +16,7 @@ public abstract class BattleState : GameState
     public Tile pos {get { return owner.pos; } set { owner.pos = value; }}
     public AbilityMenuPanelController abilityMenuPanelController { get { return owner.abilityMenuPanelController; }}
     public Turn turn { get { return owner.turn; }}
-    public List<Unit> units { get { return owner.units; }}
+    //public List<Unit> units { get { return owner.units; }}
 
     protected virtual void Awake()
     {

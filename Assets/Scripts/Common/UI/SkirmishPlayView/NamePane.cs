@@ -6,11 +6,16 @@ using UnityEngine.UI;
 public class NamePane : MonoBehaviour
 {
     [SerializeField] Text nameField;
+    Image background;
 
-
-    public void Load(string name)
+    void Start()
+    {
+        background = GetComponent<Image>();
+    }
+    public void Load(string name, Factions faction)
     {
         nameField.text = name;
+        background.sprite = Resources.Load<Sprite>($"Sprites/UI/Skirmish/skirmish_play_{faction.ToString()}_name");
     }
 
     public void Clear()

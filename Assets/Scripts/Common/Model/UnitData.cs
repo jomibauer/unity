@@ -12,7 +12,6 @@ public class UnitData : ScriptableObject
     public int move;
     public int defense;
 
-    // Start is called before the first frame update
     public void Load(string line)
     {
         Debug.Log(line);

@@ -26,7 +26,7 @@ public class InfoImgListener : MonoBehaviour
     {
         image.enabled=true;
         Unit unit = (Unit)u;
-        path = $"Sprites/Units/InfoPane/{unit.GetClass()}";
+        path = $"Sprites/Units/InfoPane/{unit.GetSpriteName()}";
         image.sprite = (Sprite)Resources.Load<Sprite>(path);
     }
 }

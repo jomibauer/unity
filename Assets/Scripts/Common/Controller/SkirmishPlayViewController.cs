@@ -11,7 +11,9 @@ public class SkirmishPlayViewController : MonoBehaviour
 
     void Start()
     {
-        //Add observers here for the start and end of a skirmish.  Maybe look into SKIRMISH START, might need to add another.
+        rightPane.SetPosition("Hide", false);
+        leftPane.SetPosition("Hide", false);
+        //Add observers here for talking to the skirmish states.  
         this.AddObserver(OnShowSkirmishPlayView, NotificationBook.SHOW_SKIRMISH_PLAY_VIEW);
         this.AddObserver(OnHideSkirmishPlayView, NotificationBook.HIDE_SKIRMISH_PLAY_VIEW);
 
@@ -20,8 +22,7 @@ public class SkirmishPlayViewController : MonoBehaviour
         this.AddObserver(OnHealthChangeFinished, NotificationBook.HEALTH_CHANGE_FINISHED);
 
         this.AddObserver(OnSkirmishStart, NotificationBook.SKIRMISH_START);
-        rightPane.SetPosition("Hide");
-        leftPane.SetPosition("Hide");
+
     }
 
     private void OnHealthChangeFinished(object arg1, object arg2)

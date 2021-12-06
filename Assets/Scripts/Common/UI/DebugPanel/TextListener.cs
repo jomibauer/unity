@@ -20,29 +20,16 @@ public class TextListener : MonoBehaviour
         text.text="";
         Unit unit = (Unit)u;
 
-       /* // string[] stats = unit.data.ToString().Split(',');
-        for(int i = 0; i < (int)StatTypes.Count; i++ )
-        {
-            text.text += unit.stats[] + "\n";
-        } */
         text.text += unit.HP + "/" + unit.stats[StatTypes.MHP] + "\n";
         text.text += $"STR: {unit.stats[StatTypes.STR]} \n";
         text.text += $"DEF: {unit.stats[StatTypes.DEF]} \n";
         text.text += $"SPD: {unit.stats[StatTypes.SPD]} \n"; 
         text.text += $"MOV: {unit.stats[StatTypes.MOV]} \n";
-        
-        text.text += $"EXP: {unit.levelComponent.EXP}";
     }
 
     private void OnTileInfo(object sender, object t)
     {
-        Tile tile = (Tile)t;
-        text.text = tile.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        TileInfo tile = (TileInfo)t;
+        text.text = tile.GetTerrain().ToString();
     }
 }

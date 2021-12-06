@@ -17,6 +17,7 @@ public class InitBattleState : BattleState
         yield return new WaitForEndOfFrame();
         unitController.InitUnits();
         yield return new WaitForEndOfFrame();
+        gridController.InitUnitMap(unitController.GetUnits());
         unitController.units.Print();
         //Tile t = new Tile(0, 0);
         //for now we're just selecting Blobby, but I guess we'll want to make this select our 'Lord' unit
@@ -24,7 +25,6 @@ public class InitBattleState : BattleState
         Debug.Log(u.GetCurrentTile());
         Tile t = unitController.SelectUnitByName("Blobby").GetCurrentTile();
         
-        owner.units = unitController.GetUnits();
         yield return new WaitForEndOfFrame();
         TeleportSelectTile(u.GetCurrentTile());
         owner.ChangeState<MoveTargetState>();

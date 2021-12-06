@@ -18,7 +18,7 @@ public class MoveTargetState : BattleState
         }
         else if (gridController.CheckTile(t))
         {
-            this.PostNotification(NotificationBook.TILE_INFO, t);
+            this.PostNotification(NotificationBook.TILE_INFO, gridController.GetTileInfo(t));
         }
         this.PostNotification(NotificationBook.INPUT_ON);
     }
@@ -33,7 +33,7 @@ public class MoveTargetState : BattleState
         }
         else if (gridController.CheckTile(t))
         {
-            this.PostNotification(NotificationBook.TILE_INFO, t);
+            this.PostNotification(NotificationBook.TILE_INFO, gridController.GetTileInfo(t));
         }
     }
 

@@ -28,6 +28,7 @@ public class TargetSelectionState : BattleState
     protected override void OnConfirm(object sender, object arg)
     {
         if (skirmish == null) { throw new Exception("SkirmishInit with null skirmish.  did you add a skirmish to the skirmish controller?"); }
+        
         owner.ChangeState<SkirmishInitState>();
     }
 

@@ -36,7 +36,7 @@ public class CommandSelectionState : BaseAbilityMenuState
                 Debug.Log("wait!");
                 turn.actor.hasUnitActed = true;
                 turn.actor.hasUnitMoved = true;
-                owner.ChangeState<MoveTargetState>();
+                owner.ChangeState<CompleteTurnState>();
                 break;
         }
     }

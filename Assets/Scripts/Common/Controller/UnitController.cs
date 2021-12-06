@@ -36,7 +36,7 @@ public class UnitController : MonoBehaviour
         foreach(var unit in units)
         {
             UpdateUnitLocation(unit);
-            UpdateUnitMap(unit.GetCurrentTile(), unit);
+            unitMap[unit.GetCurrentTile()] = unit;
             factionsUnitList[unit.GetFaction()].Add(unit);
         }
     }
@@ -72,18 +72,18 @@ public class UnitController : MonoBehaviour
         {
             unit.hasUnitActed = false;
             unit.hasUnitMoved = false;
-            //might be unnecessary, but it's good to refresh I think.
-            UpdateUnitMap(unit.currentTile, unit);
+
         }
     }
 
-    public void UpdateUnitMap(Tile tile, Unit unit)
+
+    public void UpdateUnitMap(Tile oldLocation, Unit unit)
     {
         Unit toBeSelected;
-        unitMap.TryGetValue(tile, out toBeSelected);
-        if (toBeSelected == unit) { return; }
-        unitMap.Remove(unit.GetCurrentTile());
-        unitMap[tile] = unit;
+        unitMap.TryGetValue(oldLocation, out toBeSelected);
+        if (toBeSelected != null) { unitMap.Remove(oldLocation); }
+        
+        unitMap[unit.GetCurrentTile()] = unit;
     }
 
     public Unit SelectUnitAt(Tile tile)
@@ -143,9 +143,7 @@ public class UnitController : MonoBehaviour
         // Converts worldposition into a Tile value, then set Unit's current position to the new Tile.
         Vector3Int cellPosition = tilemap.WorldToCell(unit.transform.position);
         Tile newTile = new Tile(cellPosition.x, cellPosition.y);
-        //this is wasteful.  I should think on how I can do this only once I've finished moving, update the unit map more lazily.
-        // potentially we could call this in move to next tile, maybe a solution there.
-        UpdateUnitMap(newTile, unit);
+
         unit.currentTile = newTile;
     }
     private void OnUnitTileUpdate(object sender, object u)
@@ -182,42 +180,42 @@ public class UnitController : MonoBehaviour
         return selectedUnit.GetCurrentTile();
     }
 
-   public void DeactivateUnit(Unit unit)
-   {
-       unit.DeactivateUnit();
-   }
-
-    public void KillUnit(Unit toBeKilled)
+    public void DeactivateUnit(Unit unit)
     {
-        Vector3 offTheGrid = tilemap.CellToWorld(new Vector3Int(-10, -10, 0));
-        toBeKilled.TeleportTo(offTheGrid);
-        unitMap[toBeKilled.GetCurrentTile()] = null;
-        toBeKilled.Kill(); 
+        unit.DeactivateUnit();
     }
 
-    public List<InventoryItem> GetSelectedUnitInventory()
-    {
-        List<InventoryItem> ls = selectedUnit.GetInventoryItems();
-        ls.Print();
-        return selectedUnit.GetInventoryItems();
-    }
+        public void KillUnit(Unit toBeKilled)
+        {
+            Vector3 offTheGrid = tilemap.CellToWorld(new Vector3Int(-10, -10, 0));
+            toBeKilled.TeleportTo(offTheGrid);
+            unitMap[toBeKilled.GetCurrentTile()] = null;
+            toBeKilled.Kill(); 
+        }
 
-    public List<InventoryItem> GetUnitInventoryAt(Tile unitLocation)
-    {
-        Unit unit = unitMap[unitLocation];
-        if(unit == null) { return null; }
+        public List<InventoryItem> GetSelectedUnitInventory()
+        {
+            List<InventoryItem> ls = selectedUnit.GetInventoryItems();
+            ls.Print();
+            return selectedUnit.GetInventoryItems();
+        }
 
-        return unit.GetInventoryItems();
-    }
+        public List<InventoryItem> GetUnitInventoryAt(Tile unitLocation)
+        {
+            Unit unit = unitMap[unitLocation];
+            if(unit == null) { return null; }
 
-    public Unit SelectUnitByName(string name)
-    {
-        return units.FirstOrDefault(u => u.unit_name == name);
-    }
+            return unit.GetInventoryItems();
+        }
 
-    public void ToggleUnitMover()
-    {
-        unitMover.enabled = !unitMover.enabled;
-    }
+        public Unit SelectUnitByName(string name)
+        {
+            return units.FirstOrDefault(u => u.unit_name == name);
+        }
+
+        public void ToggleUnitMover()
+        {
+            unitMover.enabled = !unitMover.enabled;
+        }
 
 }

@@ -39,7 +39,7 @@ public static class LevelParser
 
     //then we need to load the level tileset.
 
-     private static void ParseLevels()
+    private static void ParseLevels()
     {
         string readPath = $"{Application.dataPath}/Resources/Data/levels/levels.csv";
         string[] readText = File.ReadAllLines(readPath);

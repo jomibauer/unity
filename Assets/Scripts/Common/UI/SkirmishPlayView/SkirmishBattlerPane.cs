@@ -9,20 +9,25 @@ public class SkirmishBattlerPane : MonoBehaviour
     [SerializeField] SkirmishStatsPane skirmishStatsPane;
     UIPanel panel;
 
+    //Note: for this to load properly, you need sprites saved following a certain convention in the correct place.
+    // in Resources/Sprites/UI/Skirmish/ you need the following png files:
+    // - skirmish_play_{faction}_health
+    // - skirmish_play_{faction}_name
+    // with one file for each faction from the Factions enum.
     void Start()
     {
         this.panel = GetComponent<UIPanel>();
     }
     public void Load(SkirmishStatSet stats)
     {
-        namePane.Load(stats.unit_name);
+        namePane.Load(stats.unit_name, stats.faction);
         skirmishStatsPane.Load(stats);
-        healthBarPane.Load(stats.HP, stats.MaxHP);
+        healthBarPane.Load(stats.HP, stats.MaxHP, stats.faction);
     }
 
-    public Tweener SetPosition(string pos)
+    public Tweener SetPosition(string pos, bool animate=true)
     {
-        return this.panel.SetPosition(pos, true);
+        return this.panel.SetPosition(pos, animate);
     }
     public IEnumerator DamageBy(int amount)
     {

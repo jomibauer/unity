@@ -23,15 +23,16 @@ public class PathfindingState : BattleState
         
         cursorTile = gridCursor.GetTile();
         SelectTile(cursorTile);
+
         moveRange = unitController.GetSelectedUnit().GetMoveRange();
-        /* gridController.DrawRange(pathfindStart, moveRange); */
         gridController.DrawMovementRangeFor(unitController.GetSelectedUnit());
         movementType = unitController.GetSelectedUnit().GetMovementType();
+
         path = gridController.SetNewPath(pathfindStart, cursorTile, movementType);
         pathScore = gridController.GetPathScore(path, movementType);
+
         gridController.DrawPath(path);
         
-       
         this.PostNotification(NotificationBook.INPUT_ON);
     }
     protected override void OnMove(object sender, object e)
@@ -39,7 +40,6 @@ public class PathfindingState : BattleState
         
         Tile t = (Tile)e + pos;
         //check the tile is on the map and in range
-        //if (!gridController.CheckTile(t) || !gridController.CheckTileIsInRange(t, pathfindStart, moveRange)) { return; }
         if (!gridController.CheckTile(t) || !gridController.CheckTileIsInRange_search(t)) { return; }
         //if it is, we can safely move the cursor to the tile
         cursorTile = t;
@@ -51,8 +51,7 @@ public class PathfindingState : BattleState
             path = new List<PathNode>();
         }
         //check the tile is not already on our path(e.g. we made a circle) or if we've travelled across too many squares while staying in our moveRange
-        //if either is true, get a more efficient path to the tile
-        //else if (path.Contains((PathNode)cursorTile) || path.Count > moveRange)
+        //if either is true, get a more efficient/direct path to the tile
         else if (path.Contains((PathNode)cursorTile) || pathScore > moveRange)
         {
             path = gridController.SetNewPath(pathfindStart, cursorTile, movementType);
@@ -81,8 +80,6 @@ public class PathfindingState : BattleState
         turn.hasUnitMoved = true;
         turn.actor.hasUnitMoved = true;
 
-        
-        
         owner.ChangeState<TraversalState>();
     }
 

@@ -41,6 +41,11 @@ public class GridController : MonoBehaviour
         return gridMap.CalcPathScore(path, movementType);
     }
 
+    public TileInfo GetTileInfo(Tile tile)
+    {
+        return gridMap.tileInfoMap[tile];
+    }
+
     internal bool CheckTileIsInRange_search(Tile target)
     {
         foreach(TileInfo tile in range)
@@ -55,6 +60,14 @@ public class GridController : MonoBehaviour
         gridMap.Load(levelData);
         DrawGridMap();
         pathfinding.Init(gridMap);
+    }
+
+    public void InitUnitMap(List<Unit> units)
+    {
+        foreach(Unit u in units)
+        {
+            gridMap.SetUnitLocation(u);
+        }
     }
     public void DrawGridMap()
     {
@@ -107,6 +120,13 @@ public class GridController : MonoBehaviour
         return originTile;
     }
     #endregion
+
+    public void ClearSelectedTilesForNewTurn()
+    {
+        selectedTile = new Tile();
+        originTile = new Tile();
+
+    }
 
     #region Pathfinding
 
@@ -192,7 +212,10 @@ public class GridController : MonoBehaviour
     }
     #endregion
 
-
+    public void UpdateUnitMapLocation(Tile tile, Unit unit)
+    {
+        gridMap.UpdateUnitLocation(tile, unit);
+    }
 
 
 }

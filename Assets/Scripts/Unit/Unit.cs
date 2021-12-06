@@ -109,9 +109,14 @@ public class Unit : MonoBehaviour
         return this.unitStats.movementType;
     }
 
-    public string GetClass()
+    public string GetClassName()
     {
-        return this.unitStats.unit_class;
+        return this.unitStats.unit_class.className;
+    }
+
+    public string GetSpriteName()
+    {
+        return this.unitStats.color + this.unitStats.unit_class.dataName;
     }
 
     public Factions GetFaction()

@@ -27,10 +27,10 @@ public class UnitFactory : MonoBehaviour
         unit.HP = unit.stats[StatTypes.MHP];
 
         unit.spriteRenderer = unit.GetComponent<SpriteRenderer>();
-        Sprite map_sprite = Resources.Load<Sprite>($"Sprites/Units/Map/{unit.unitStats.unit_class}");
+        Sprite map_sprite = Resources.Load<Sprite>($"Sprites/Units/Map/{unit.unitStats.color}{unit.unitStats.unit_class.dataName}");
         unit.spriteRenderer.sprite = map_sprite;
         Animator animator = unit.GetComponent<Animator>();
-        animator.runtimeAnimatorController = Resources.Load($"Animations/units/slimes/{unit.unitStats.unit_class}") as RuntimeAnimatorController;
+        animator.runtimeAnimatorController = Resources.Load($"Animations/units/slimes/{unit.unitStats.color}{unit.unitStats.unit_class.dataName}") as RuntimeAnimatorController;
         unit.levelComponent = unit.GetComponent<LevelComponent>();
         unit.weapon = unit.GetComponentInChildren<Weapon>();
         unit.inventory = unit.GetComponentInChildren<Inventory>();
