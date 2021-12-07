@@ -25,7 +25,6 @@ public class AwardExpState : BattleState
         
         Debug.LogWarning("EXP AWARDED");
 
-        unitController.RefreshUnits();
 
         owner.ChangeState<FinishSkirmishState>();
     }

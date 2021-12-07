@@ -12,6 +12,7 @@ public struct SkirmishStatSet
     public int HP;
     public int MaxHP;
     public string unit_name;
+    public Factions faction;
 
     public SkirmishStatSet(int hit, int dam, int crit, int turns, Unit unit)
     {
@@ -22,6 +23,7 @@ public struct SkirmishStatSet
         this.HP = unit.HP;
         this.MaxHP = unit.stats[StatTypes.MHP];
         this.unit_name = unit.unit_name;
+        this.faction = unit.GetFaction();
     }
 
 }

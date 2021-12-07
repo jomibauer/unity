@@ -15,6 +15,8 @@ public class GridMap : MonoBehaviour
     int[,] grid;
     public Dictionary<Tile, TileInfo> tileInfoMap;
     public Tilemap tilemap;
+
+    GridCursor gridCursor;
     
 
     Tile[] dirs = new Tile[4]
@@ -24,6 +26,11 @@ public class GridMap : MonoBehaviour
       new Tile(1, 0),
       new Tile(-1, 0)
     };
+
+    void Start()
+    {
+        gridCursor = FindObjectOfType<GridCursor>();
+    }
 
     public void Dump()
     {
@@ -177,7 +184,7 @@ public class GridMap : MonoBehaviour
             for(int i = 0; i < 4; i++)
             {
                 TileInfo next = GetTileData(t.position + dirs[i]);
-                float movementCost = MovementCostBook.Lookup[unit.movementType][t.GetTerrain()];
+                float movementCost = MovementCostBook.Lookup[unit.GetMovementType()][t.GetTerrain()];
                 if(next == null || next.distance <= t.distance + movementCost)
                 {
                     continue;
@@ -218,4 +225,18 @@ public class GridMap : MonoBehaviour
         }
     }
     #endregion
+
+    public void UpdateUnitLocation(Tile oldLocation, Unit unit)
+    {
+     
+        tileInfoMap[oldLocation].SetUnit(null);
+        SetUnitLocation(unit);
+    
+    }
+
+    public void SetUnitLocation(Unit unit)
+    {
+        tileInfoMap[unit.GetCurrentTile()].SetUnit(unit);
+        //Debug.Log($"{unit} at {unit.GetCurrentTile()}");
+    }
 }

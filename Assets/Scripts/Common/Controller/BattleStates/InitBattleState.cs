@@ -14,15 +14,17 @@ public class InitBattleState : BattleState
     IEnumerator Init()
     {
         gridController.InitMapAndPathfinding(levelData);
-        unitController.InitUnitPositions();
         yield return new WaitForEndOfFrame();
+        unitController.InitUnits();
+        yield return new WaitForEndOfFrame();
+        gridController.InitUnitMap(unitController.GetUnits());
+        unitController.units.Print();
         //Tile t = new Tile(0, 0);
         //for now we're just selecting Blobby, but I guess we'll want to make this select our 'Lord' unit
         Unit u = unitController.SelectUnitByName("Blobby");
         Debug.Log(u.GetCurrentTile());
         Tile t = unitController.SelectUnitByName("Blobby").GetCurrentTile();
         
-        owner.units = unitController.GetUnits();
         yield return new WaitForEndOfFrame();
         TeleportSelectTile(u.GetCurrentTile());
         owner.ChangeState<MoveTargetState>();

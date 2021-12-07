@@ -11,7 +11,9 @@ public class SkirmishPlayViewController : MonoBehaviour
 
     void Start()
     {
-        //Add observers here for the start and end of a skirmish.  Maybe look into SKIRMISH START, might need to add another.
+        rightPane.SetPosition("Hide", false);
+        leftPane.SetPosition("Hide", false);
+        //Add observers here for talking to the skirmish states.  
         this.AddObserver(OnShowSkirmishPlayView, NotificationBook.SHOW_SKIRMISH_PLAY_VIEW);
         this.AddObserver(OnHideSkirmishPlayView, NotificationBook.HIDE_SKIRMISH_PLAY_VIEW);
 
@@ -20,8 +22,7 @@ public class SkirmishPlayViewController : MonoBehaviour
         this.AddObserver(OnHealthChangeFinished, NotificationBook.HEALTH_CHANGE_FINISHED);
 
         this.AddObserver(OnSkirmishStart, NotificationBook.SKIRMISH_START);
-        rightPane.SetPosition("Hide");
-        leftPane.SetPosition("Hide");
+
     }
 
     private void OnHealthChangeFinished(object arg1, object arg2)
@@ -44,34 +45,40 @@ public class SkirmishPlayViewController : MonoBehaviour
         // or if there is a situation in which a faction is acting on a friendly unit, then the initiator should always be on the right. 
         rightPane.Load(skirmish.initiatorStats);
         leftPane.Load(skirmish.receiverStats);
-        ShowPanes();
+        StartCoroutine(ShowPanes());
+        
         
     }
     private void OnHideSkirmishPlayView(object sender, object n_u)
     {
         //this is clearing the pane info and resetting it before the panes are hidden.  Need to figure out how to 
-        HidePanes();
-        rightPane.Clear();
-        leftPane.Clear();
+        StartCoroutine(HidePanes());
+
         rightPane.enabled = false;
         leftPane.enabled = false;
     }
 
-    //I should make the show and hide functions coroutines.
-    private void ShowPanes()
+    private IEnumerator ShowPanes()
     {
         Tweener t1 = leftPane.SetPosition("Show");
         Tweener t2 = rightPane.SetPosition("Show");
         t1.easingControl.equation = EasingEquations.EaseInOutBack;
         t2.easingControl.equation = EasingEquations.EaseInOutBack;
+        yield return new WaitForSeconds(2);
+        this.PostNotification(NotificationBook.SKIRMISH_SETUP_COMPLETE);
     }
 
-    private void HidePanes()
+    private IEnumerator HidePanes()
     {
         Tweener t1 = leftPane.SetPosition("Hide");
         Tweener t2 = rightPane.SetPosition("Hide");
         t1.easingControl.equation = EasingEquations.EaseInOutBack;
         t2.easingControl.equation = EasingEquations.EaseInOutBack;
+        yield return new WaitForSeconds(2);
+        //I'm clearing the panes inside the coroutine so the panes have to wait til the animation finishes to remove the info.  This way, the panes don't change back to having no info til
+        // they're offscreen and the player cant see them.
+        rightPane.Clear();
+        leftPane.Clear();
     }
 
     private void OnLeftPaneHealthChange(object sender, object am)

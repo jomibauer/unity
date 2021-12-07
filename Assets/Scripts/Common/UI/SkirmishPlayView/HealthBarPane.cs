@@ -9,9 +9,14 @@ public class HealthBarPane : MonoBehaviour
     [SerializeField] HealthBar healthBar;
     [SerializeField] Text numberRepresentation;
     [SerializeField] public float healthMoveSpeed = .1f;
+    Image background;
     int currentHealth;
     int maxHealth;
 
+    void Start()
+    {
+        background = GetComponent<Image>();
+    }
     public void Clear()
     {
         this.currentHealth = 0;
@@ -19,12 +24,13 @@ public class HealthBarPane : MonoBehaviour
         this.numberRepresentation.text = "HP";
     }
 
-    public void Load(int currentHP, int maxHP)
+    public void Load(int currentHP, int maxHP, Factions faction)
     {
         this.currentHealth = currentHP;
         this.maxHealth = maxHP;
         healthBar.Load(maxHP, currentHP);
         numberRepresentation.text = currentHealth.ToString();
+        background.sprite = Resources.Load<Sprite>($"Sprites/UI/Skirmish/skirmish_play_{faction.ToString()}_health");
     }
 
     public IEnumerator IncrementHealthBy(int value)

@@ -28,12 +28,14 @@ public struct NotificationBook
     #endregion
 
     #region Skirmish Play View
+        public static string SKIRMISH_START = "SKIRMISH_START"; // listener: SkirmishPlayViewController, poster: SkirmishPlayState  
         public static string HEALTH_CHANGE_FINISHED = "HEALTH_CHANGE_FINISHED";
         public static string HIDE_SKIRMISH_PLAY_VIEW = "HIDE_SKIRMISH_PLAY_VIEW"; // listener: SkirmishPlayViewController, poster:
         public static string LEFT_PANE_HEALTH_CHANGE = "LEFT_PANE_HEALTH_CHANGE"; // listener: SkirmishPlayViewController, poster:
         public static string PLAY_NEXT_ROUND = "PLAY_NEXT_ROUND"; // listener: SkirmishPlayState, poster: SkirmishPlayViewController
         public static string RIGHT_PANE_HEALTH_CHANGE = "RIGHT_PANE_HEALTH_CHANGE"; // listener: SkirmishPlayViewController, poster:
         public static string SHOW_SKIRMISH_PLAY_VIEW = "SHOW_SKIRMISH_PLAY_VIEW"; // listener: SkirmishPlayViewController, poster: SkirmishInitState
+        public static string SKIRMISH_SETUP_COMPLETE = "SKIMRISH_SETUP_COMPLETE"; //listener: SkirmishInitState, poster: SkirmishPlayViewController
     #endregion
 
     #region Skirmish Preview
@@ -42,9 +44,14 @@ public struct NotificationBook
         public static string SKIRMISH_PREVIEW_PANE_POPULATE = "SKIRMISH_PREVIEW_PANE_POPULATE"; // listener: SkirmishPreviewPane, poster: TargetSelectionState
     #endregion 
 
+    #region Traversal
+        public static string FINISHED_MOVING = "FINISHED_MOVING"; // listener : TraversalState, poster: UnitMover
+        public static string UNIT_TILE_UPDATE = "UNIT_TILE_UPDATE"; // listener: UnitController, poster: Unit
+    #endregion
+
     #region MISC
     //could be useful in the future.
-    public static string SKIRMISH_START = "SKIRMISH_START"; // not used    
+      
     public static string EQUIPPED_ITEM = "EQUIPPED_ITEM"; // listener: nothing yet, poster: Equipment base class
     public static string UNEQUIPPED_ITEM = "UNEQUIPPED_ITEM"; // listener: nothing yet, poster: Equipment base class
 

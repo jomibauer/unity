@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkirmishPlayState : BattleState
 {
     List<Round> rounds;
-    bool unitDied = false;
+    bool unitDied;
     Unit initiator;
     Unit receiver;
 
@@ -22,6 +22,7 @@ public class SkirmishPlayState : BattleState
     public override void Enable()
     {
         base.Enable();
+        unitDied = false;
         initiator = skirmishController.GetInitiator();
         receiver = skirmishController.GetReceiver();
         rounds = skirmishController.GetRounds();
@@ -40,6 +41,7 @@ public class SkirmishPlayState : BattleState
         Debug.Log($"Rounds: {rounds.Count}");
         if(rounds.Count == 0) 
         { 
+            Debug.Log("SkirmishFinished");
             if (unitDied)
             {
                 skirmishController.SetDeadUnit(receiver.HP < 1 ? receiver: initiator);
@@ -49,6 +51,7 @@ public class SkirmishPlayState : BattleState
             }
             else
             {
+                Debug.Log("ChangingState");
                 owner.ChangeState<AwardExpState>();
                 return;
             }
