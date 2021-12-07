@@ -147,7 +147,6 @@
      <Compile Include="Assets\Scripts\View Model Component\Item\Merchandise.cs" />
      <Compile Include="Assets\Scripts\Player\GridCursor.cs" />
      <Compile Include="Assets\Scripts\Enums\WeaponStatTypes.cs" />
-     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SelectActionState.cs" />
      <Compile Include="Assets\Scripts\Common\Notification\InfoEventArgs.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Items\InventoryData.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\UnitController.cs" />
@@ -158,6 +157,7 @@
      <Compile Include="Assets\Scripts\Camera\CameraRig.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\AwardExpState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\Vector3Tweener.cs" />
+     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SelectActionState.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\UnityEditors\2020.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
