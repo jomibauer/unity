@@ -83,4 +83,10 @@ public abstract class BattleState : GameState
         gridCursor.TeleportCursor(pos);
     }
 
+    protected virtual IEnumerator NotImplementedSoSwapToMoveTarget()
+    {
+        yield return new WaitForSeconds(3);
+        owner.ChangeState<MoveTargetState>();
+    }
+
 }

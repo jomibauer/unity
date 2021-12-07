@@ -24,6 +24,21 @@ public class CompleteTurnState : BattleState
         
         gridController.ClearSelectedTilesForNewTurn();
         unitController.DeselectUnit();
+
+        List<Unit> playerUnits = unitController.factionsUnitList[Factions.player];
+        bool playerPhaseIsFinished = true;
+        for(int i = 0; i < playerUnits.Count; ++i)
+        {
+            if(playerUnits[i].IsActive())
+            {
+                playerPhaseIsFinished = false;
+                break;
+            }
+        }
+        if (playerPhaseIsFinished)
+        {
+            owner.ChangeState<ExitPlayerPhaseState>();
+        }
         owner.ChangeState<MoveTargetState>();
     }
 }

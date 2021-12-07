@@ -228,8 +228,10 @@ public class GridMap : MonoBehaviour
 
     public void UpdateUnitLocation(Tile oldLocation, Unit unit)
     {
+     
         tileInfoMap[oldLocation].SetUnit(null);
-        tileInfoMap[unit.GetCurrentTile()].SetUnit(unit);
+        SetUnitLocation(unit);
+    
     }
 
     public void SetUnitLocation(Unit unit)
