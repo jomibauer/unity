@@ -41,6 +41,11 @@ public class GridController : MonoBehaviour
         return gridMap.CalcPathScore(path, movementType);
     }
 
+    public TileInfo GetTileInfo(Tile tile)
+    {
+        return gridMap.tileInfoMap[tile];
+    }
+
     internal bool CheckTileIsInRange_search(Tile target)
     {
         foreach(TileInfo tile in range)
@@ -55,6 +60,14 @@ public class GridController : MonoBehaviour
         gridMap.Load(levelData);
         DrawGridMap();
         pathfinding.Init(gridMap);
+    }
+
+    public void InitUnitMap(List<Unit> units)
+    {
+        foreach(Unit u in units)
+        {
+            gridMap.SetUnitLocation(u);
+        }
     }
     public void DrawGridMap()
     {
@@ -108,6 +121,13 @@ public class GridController : MonoBehaviour
     }
     #endregion
 
+    public void ClearSelectedTilesForNewTurn()
+    {
+        selectedTile = new Tile();
+        originTile = new Tile();
+
+    }
+
     #region Pathfinding
 
     public void DrawMovementRangeFor(Unit unit)
@@ -153,7 +173,7 @@ public class GridController : MonoBehaviour
                 }
                 //when obstacles are implemented, I'll need to rethink this...  Maybe I'll need to just be pathfinding everywhere and seeing where I can get?
                 if(CheckTileIsInRange(temp, rangeStart, weaponRng)){
-                    rangeTilemap.SetTile(new Vector3Int(temp.x, temp.y, 0), rangeTile);
+                    rangeTilemap.SetTile(new Vector3Int(temp.x, temp.y, 0), atkRangeTile);
                     atkRange.Add(new Tile(temp.x, temp.y));
                 }
             }
@@ -192,7 +212,10 @@ public class GridController : MonoBehaviour
     }
     #endregion
 
-
+    public void UpdateUnitMapLocation(Tile tile, Unit unit)
+    {
+        gridMap.UpdateUnitLocation(tile, unit);
+    }
 
 
 }

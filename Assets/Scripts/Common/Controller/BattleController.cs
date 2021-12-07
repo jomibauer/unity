@@ -13,7 +13,8 @@ public class BattleController : StateMachine
     public LevelData levelData;
     public AbilityMenuPanelController abilityMenuPanelController;
     public Turn turn = new Turn();
-    public List<Unit> units;
+    //commenting this out to see if we can get away with it.  A list of every unit is available in the unitController, so id prefer if we just use that list if possible.
+    //public List<Unit> units;
 
     void Start()
     {

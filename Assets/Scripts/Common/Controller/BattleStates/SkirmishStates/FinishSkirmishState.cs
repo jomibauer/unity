@@ -16,9 +16,8 @@ public class FinishSkirmishState : BattleState
         this.PostNotification(NotificationBook.HIDE_SKIRMISH_PLAY_VIEW);
         skirmishController.Clear();
         turn.Clear();
-        unitController.DeactivateUnit(unitController.GetSelectedUnit());
-        unitController.DeselectUnit();
+
         yield return null;
-        owner.ChangeState<MoveTargetState>();
+        owner.ChangeState<CompleteTurnState>();
     }
 }

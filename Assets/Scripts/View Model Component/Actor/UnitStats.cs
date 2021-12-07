@@ -18,10 +18,14 @@ public class UnitStats : MonoBehaviour
         StatTypes.CON,
         StatTypes.MOV
     };
-    public int[] startingStats = new int[ statOrder.Length ];
+    public int[] statCaps = new int[ statOrder.Length];
+    public int[] unitStats = new int[ statOrder.Length ];
     public int[] growths = new int[ statOrder.Length ];
     public string unit_name;
-    public string unit_class;
+    public string color;
+    public MovementTypes movementType;
+    public Factions faction;
+    public ClassData unit_class;
     public Stats stats;
     #endregion
 
@@ -29,6 +33,7 @@ public class UnitStats : MonoBehaviour
     void Start()
     {
         stats = gameObject.GetComponentInParent<Stats>();
+        
         //this.AddObserver(OnLvlChangeNotification, Stats.DidChangeNotification(StatTypes.LVL), stats);
     }
     void OnDestroy()
@@ -73,7 +78,7 @@ public class UnitStats : MonoBehaviour
         for (int i = 0; i < statOrder.Length; ++i)
         {
             StatTypes type = statOrder[i];
-            stats.SetValue(type, startingStats[i], false);
+            stats.SetValue(type, unitStats[i], false);
         }
         stats.SetValue(StatTypes.HP, stats[StatTypes.MHP], false);
     }

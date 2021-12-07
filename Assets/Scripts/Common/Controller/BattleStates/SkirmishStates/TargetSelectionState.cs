@@ -28,6 +28,7 @@ public class TargetSelectionState : BattleState
     protected override void OnConfirm(object sender, object arg)
     {
         if (skirmish == null) { throw new Exception("SkirmishInit with null skirmish.  did you add a skirmish to the skirmish controller?"); }
+        
         owner.ChangeState<SkirmishInitState>();
     }
 
@@ -53,8 +54,6 @@ public class TargetSelectionState : BattleState
 
     public void Next ()
     {
-        attackRange.Print();
-        Debug.Log(selection);
         for (int i = selection + 1; i < selection + attackRange.Count + 1; ++i)
         {
             int index = i % attackRange.Count;
@@ -92,7 +91,10 @@ public class TargetSelectionState : BattleState
 
     bool EnemyInTile(Tile tile)
     {
-        return unitController.GetUnitAt(tile) != null;
+        // Looks for a unit in a tile.  If there is one, returns true if the unit is not on the player or friendly other faction.
+        //Depending on how AI works we may use this function for their targeting too.  In which case, we'll need a little more logic in here, but it shouldnt be too bad.
+        Unit target = unitController.GetUnitAt(tile);
+        return target != null? target.GetFaction() != Factions.player && target.GetFaction() != Factions.friendly_other: false;
     }
 
     internal void GetSkirmishPreview()

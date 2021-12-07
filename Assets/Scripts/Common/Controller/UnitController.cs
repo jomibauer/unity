@@ -9,27 +9,35 @@ public class UnitController : MonoBehaviour
 {
     public Dictionary<Tile, Unit> unitMap;
     [SerializeField]
-    List<Unit> units;
+    public List<Unit> units;
+    public Dictionary<Factions, List<Unit>> factionsUnitList;
+    UnitMover unitMover;
     Unit selectedUnit;
-    //just adding this field to make it easier for units to get the tilemap from one place... might be a simpler way.
     public Tilemap tilemap;
     // Start is called before the first frame update
-    void Awake()
-    {
-        
-    }
     void Start()
     {
         units = new List<Unit>(FindObjectsOfType<Unit>());
         unitMap = new Dictionary<Tile, Unit>();
+        unitMover = GetComponentInChildren<UnitMover>();
+        factionsUnitList = new Dictionary<Factions, List<Unit>>();
+        factionsUnitList.Add(Factions.player, new List<Unit>());
+        factionsUnitList.Add(Factions.enemy, new List<Unit>());
+        factionsUnitList.Add(Factions.friendly_other, new List<Unit>());
+        factionsUnitList.Add(Factions.unfriendly_other, new List<Unit>());
+
+        this.AddObserver(OnUnitTileUpdate, NotificationBook.UNIT_TILE_UPDATE);
     }
 
-    internal void InitUnitPositions()
+    
+
+    internal void InitUnits()
     {
         foreach(var unit in units)
         {
-            UpdateUnitMap(unit.GetCurrentTile(), unit);
-            Debug.Log(unitMap[unit.GetCurrentTile()]);
+            UpdateUnitLocation(unit);
+            unitMap[unit.GetCurrentTile()] = unit;
+            factionsUnitList[unit.GetFaction()].Add(unit);
         }
     }
 
@@ -43,39 +51,22 @@ public class UnitController : MonoBehaviour
         return units;
     }
 
-    internal void CheckUnitsAndResetState()
+    internal void ResetUnitsOnFaction(Factions faction)
     {
-        foreach(var unit in units)
-        {
-            if (unit.IsActive())
-            {
-                return;
-            }
-        }
-        foreach(var unit in units)
+        foreach(var unit in factionsUnitList[faction])
         {
             unit.ActivateUnit();
         }
     }
 
-    public void RefreshUnits()
-    {
-        foreach (var unit in units)
-        {
-            unit.hasUnitActed = false;
-            unit.hasUnitMoved = false;
-            //might be unnecessary, but it's good to refresh I think.
-            UpdateUnitMap(unit.currentTile, unit);
-        }
-    }
 
-    public void UpdateUnitMap(Tile tile, Unit unit)
+    public void UpdateUnitMap(Tile oldLocation, Unit unit)
     {
         Unit toBeSelected;
-        unitMap.TryGetValue(tile, out toBeSelected);
-        if (toBeSelected == unit) { return; }
-        unitMap.Remove(unit.GetCurrentTile());
-        unitMap[tile] = unit;
+        unitMap.TryGetValue(oldLocation, out toBeSelected);
+        if (toBeSelected != null) { unitMap.Remove(oldLocation); }
+        
+        unitMap[unit.GetCurrentTile()] = unit;
     }
 
     public Unit SelectUnitAt(Tile tile)
@@ -116,14 +107,37 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    public void MoveSelectedUnit(List<PathNode> pathNodes)
+    public void InitUnitPath(List<PathNode> pathNodes)
     {
         selectedUnit.InitPath(pathNodes);
     }
 
+    public bool UnitFinishedMoving()
+    {
+        return selectedUnit.currentTile == selectedUnit.targetTile && selectedUnit.transform.position == selectedUnit.movePoint.position;
+    }
+    public void MoveSelectedUnit()
+    {
+        selectedUnit.Move();
+        UpdateUnitLocation(selectedUnit);
+    }
+    public void UpdateUnitLocation(Unit unit)
+    {
+        // Converts worldposition into a Tile value, then set Unit's current position to the new Tile.
+        Vector3Int cellPosition = tilemap.WorldToCell(unit.transform.position);
+        Tile newTile = new Tile(cellPosition.x, cellPosition.y);
+
+        unit.currentTile = newTile;
+    }
+    private void OnUnitTileUpdate(object sender, object u)
+    {
+        Unit unit = u as Unit;
+        UpdateUnitLocation(unit);
+    }
     public void TeleportUnit(Unit unit, Tile destinationTile)
     {
-        unit.TeleportTo(destinationTile);
+        Vector3 destination = tilemap.CellToWorld(new Vector3Int(destinationTile.x, destinationTile.y, 0));
+        unit.TeleportTo(destination);
     }
     public void DeselectUnit()
     {
@@ -149,15 +163,15 @@ public class UnitController : MonoBehaviour
         return selectedUnit.GetCurrentTile();
     }
 
-   public void DeactivateUnit(Unit unit)
-   {
-       unit.DeactivateUnit();
-   }
+    public void DeactivateUnit(Unit unit)
+    {
+        unit.DeactivateUnit();
+    }
 
     public void KillUnit(Unit toBeKilled)
     {
-        
-        toBeKilled.TeleportTo(new Tile(-10,-10));
+        Vector3 offTheGrid = tilemap.CellToWorld(new Vector3Int(-10, -10, 0));
+        toBeKilled.TeleportTo(offTheGrid);
         unitMap[toBeKilled.GetCurrentTile()] = null;
         toBeKilled.Kill(); 
     }
@@ -180,6 +194,11 @@ public class UnitController : MonoBehaviour
     public Unit SelectUnitByName(string name)
     {
         return units.FirstOrDefault(u => u.unit_name == name);
+    }
+
+    public void ToggleUnitMover()
+    {
+        unitMover.enabled = !unitMover.enabled;
     }
 
 }

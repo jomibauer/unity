@@ -6,10 +6,7 @@ using UnityEngine.Tilemaps;
 public class Unit : MonoBehaviour
 {
     [SerializeField] public string unit_name;
-    [SerializeField] UnitController unitController;
     public SpriteRenderer spriteRenderer;
-    [SerializeField] public Tilemap tilemap;
-    [SerializeField] public string unitClass;
     public Weapon weapon;
     public Inventory inventory;
     public Stats stats;
@@ -20,20 +17,20 @@ public class Unit : MonoBehaviour
     public bool hasUnitActed = false;
     public bool isActive;
     public Directions direction;
-    public MovementTypes movementType;
     public Tile currentTile;
     public Tile targetTile;
     public List<Tile> path;
     public int moveSpeed = 5;
     public Transform movePoint;
+    public TileConverter tileConverter;
 
     void Start()
     {
         UnitFactory factory = FindObjectOfType<UnitFactory>();
         factory.InitUnit(this);
+       
     }
-
-    void Update()
+    public void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
         
@@ -41,20 +38,9 @@ public class Unit : MonoBehaviour
         {
             MoveToNextTileInPath();  
         }
-        UpdateCurrentTile();
+        
     }
-    #region utility
-    public void UpdateCurrentTile()
-    {
-        // Converts worldposition into a Tile value, then set Unit's current position to the new Tile.
-        Vector3Int cellPosition = tilemap.WorldToCell(transform.position);
-        Tile newTile = new Tile(cellPosition.x, cellPosition.y);
-        //this is wasteful.  I should think on how I can do this only once I've finished moving, update the unit map more lazily.
-        // potentially we could call this in move to next tile, maybe a solution there.
-        unitController.UpdateUnitMap(newTile, this);
-        currentTile = newTile;
-    }
-    #endregion
+
 
     #region moving the sprite
     private bool ReadyToMoveToNextNode()
@@ -74,12 +60,18 @@ public class Unit : MonoBehaviour
         path.RemoveAt(0);
         
     }
-    public void TeleportTo(Tile destinationTile)
-    {
-        Vector3 destination = tilemap.CellToWorld(new Vector3Int(destinationTile.x, destinationTile.y, 0));
+    public void TeleportTo(Vector3 destination)
+    {   
         transform.position = new Vector3(destination.x + 0.5f, destination.y + 0.5f, 0f);
         movePoint.position = transform.position;
-        UpdateCurrentTile();
+        this.PostNotification(NotificationBook.UNIT_TILE_UPDATE, this);
+    }
+    public void TeleportTo(Tile destinationTile)
+    {   
+        Vector3 destination = tileConverter.TileToWorld(destinationTile);
+        transform.position = new Vector3(destination.x + 0.5f, destination.y + 0.5f, 0f);
+        movePoint.position = transform.position;
+        this.PostNotification(NotificationBook.UNIT_TILE_UPDATE, this);
     }
     #endregion 
 
@@ -106,9 +98,30 @@ public class Unit : MonoBehaviour
         RefreshPath(tilePath);
     }
 
+    #region Utility
     public int GetMoveRange()
     {
         return stats[StatTypes.MOV];
+    }
+
+    public MovementTypes GetMovementType()
+    {
+        return this.unitStats.movementType;
+    }
+
+    public string GetClassName()
+    {
+        return this.unitStats.unit_class.className;
+    }
+
+    public string GetSpriteName()
+    {
+        return this.unitStats.color + this.unitStats.unit_class.dataName;
+    }
+
+    public Factions GetFaction()
+    {
+        return this.unitStats.faction;
     }
 
     public Tile GetCurrentTile()
@@ -169,5 +182,6 @@ public class Unit : MonoBehaviour
     {
         return inventory.GetItems();
     }
+    #endregion
 
 }

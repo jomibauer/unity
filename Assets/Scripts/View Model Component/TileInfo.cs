@@ -13,6 +13,7 @@ public class TileInfo
     public TileInfo prev;
     [HideInInspector]
     public float distance;
+    public Unit unitContent;
 
     public TileInfo(int x, int y, TerrainTypes terrain, GameObject content =null)
     {
@@ -20,6 +21,7 @@ public class TileInfo
         this.terrain = terrain;
         this.content = content;
         this.prev = null;
+        this.unitContent = null;
         this.distance = int.MaxValue;   
     }
     public TerrainTypes GetTerrain()
@@ -40,5 +42,15 @@ public class TileInfo
     public void SetContent(GameObject gameObject)
     {
         this.content = gameObject;
+    }
+
+    public Unit GetUnit()
+    {
+        return unitContent;
+    }
+
+    public void SetUnit(Unit unit)
+    {
+        this.unitContent = unit;
     }
 }
