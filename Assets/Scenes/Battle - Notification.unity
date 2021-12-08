@@ -353,6 +353,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eed9a52d4ec603c428af680791f8750c, type: 3}
+--- !u!1 &272839357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8197724056818275622, guid: 03802e0dac145dc4d8041a34d675a12c, type: 3}
+  m_PrefabInstance: {fileID: 1799380971}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &272839358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272839357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998b9b0545213c149947256b28c557f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 645756857}
 --- !u!1 &295175580 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2431373574486709280, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
@@ -482,6 +500,17 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &645756857 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7271546551667131451, guid: 03802e0dac145dc4d8041a34d675a12c, type: 3}
+  m_PrefabInstance: {fileID: 1799380971}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f88ea3f62a6f442be998a13febdf7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832362510 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2431373574915464226, guid: 0808095ebb9f00e4e92a006bed4bb300, type: 3}
@@ -796,6 +825,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7271546551667131451, guid: 03802e0dac145dc4d8041a34d675a12c, type: 3}
+      propertyPath: positionList.Array.data[0].offset.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271546551667131451, guid: 03802e0dac145dc4d8041a34d675a12c, type: 3}
+      propertyPath: positionList.Array.data[0].offset.y
+      value: 85
+      objectReference: {fileID: 0}
     - target: {fileID: 8197724056818275622, guid: 03802e0dac145dc4d8041a34d675a12c, type: 3}
       propertyPath: m_Name
       value: SkirmishPlayView
@@ -883,6 +920,10 @@ PrefabInstance:
     - target: {fileID: 8197724056818275674, guid: 03802e0dac145dc4d8041a34d675a12c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549659507955816579, guid: 03802e0dac145dc4d8041a34d675a12c, type: 3}
+      propertyPath: expMoveSpeed
+      value: 0.07
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03802e0dac145dc4d8041a34d675a12c, type: 3}

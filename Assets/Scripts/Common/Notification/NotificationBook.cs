@@ -28,6 +28,8 @@ public struct NotificationBook
     #endregion
 
     #region Skirmish Play View
+        public static string AWARD_EXP_FINISHED = "AWARD_EXP_FINISHED"; // listener: AwardExpState, poster: ExpBar 
+        public static string AWARD_EXP_START = "AWARD_EXP_START"; // listener: ExpBar, poster: AwardExpState
         public static string SKIRMISH_START = "SKIRMISH_START"; // listener: SkirmishPlayViewController, poster: SkirmishPlayState  
         public static string HEALTH_CHANGE_FINISHED = "HEALTH_CHANGE_FINISHED";
         public static string HIDE_SKIRMISH_PLAY_VIEW = "HIDE_SKIRMISH_PLAY_VIEW"; // listener: SkirmishPlayViewController, poster:
@@ -36,6 +38,7 @@ public struct NotificationBook
         public static string RIGHT_PANE_HEALTH_CHANGE = "RIGHT_PANE_HEALTH_CHANGE"; // listener: SkirmishPlayViewController, poster:
         public static string SHOW_SKIRMISH_PLAY_VIEW = "SHOW_SKIRMISH_PLAY_VIEW"; // listener: SkirmishPlayViewController, poster: SkirmishInitState
         public static string SKIRMISH_SETUP_COMPLETE = "SKIMRISH_SETUP_COMPLETE"; //listener: SkirmishInitState, poster: SkirmishPlayViewController
+        public static string SKIRMISH_SET_EXP = "SKIRMISH_SET_EXP"; // listener: ExpBarPane, poster:
     #endregion
 
     #region Skirmish Preview
@@ -51,7 +54,6 @@ public struct NotificationBook
 
     #region MISC
     //could be useful in the future.
-      
     public static string EQUIPPED_ITEM = "EQUIPPED_ITEM"; // listener: nothing yet, poster: Equipment base class
     public static string UNEQUIPPED_ITEM = "UNEQUIPPED_ITEM"; // listener: nothing yet, poster: Equipment base class
 

@@ -7,6 +7,7 @@ public class SkirmishPlayViewController : MonoBehaviour
 {
     [SerializeField] public SkirmishBattlerPane rightPane;
     [SerializeField] public SkirmishBattlerPane leftPane;
+    [SerializeField] public ExpBarPane expPane;
 
 
     void Start()
@@ -40,7 +41,7 @@ public class SkirmishPlayViewController : MonoBehaviour
         Skirmish skirmish = sk as Skirmish;
         rightPane.enabled = true;
         leftPane.enabled = true;
-
+        expPane.Load(skirmish.initiator);
         // Right now the initiator is always on the right but I will want to change this when I implement factions so that the player is on the right always, 
         // or if there is a situation in which a faction is acting on a friendly unit, then the initiator should always be on the right. 
         rightPane.Load(skirmish.initiatorStats);
