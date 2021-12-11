@@ -53,18 +53,18 @@ public static class UnitParser
         UnitStats u_stats = obj.GetComponent<UnitStats>();
         u_stats.unit_name = elements[0];
         u_stats.color = elements[1];
-        
+        u_stats.LoadExpAndLevel(Convert.ToInt32(elements[4]), Convert.ToInt32(elements[3]));
 
         //this is a little cheap n nasty.  It does the job, but the for loop is pretty ugly, and I feel like I can probably separate the class and stat concerns a bit better.
         ClassData classStats = Resources.Load<ClassData>($"Classes/{elements[2]}");
         u_stats.unit_class = classStats;
         u_stats.movementType = classStats.movementType;
         u_stats.unitStats[u_stats.unitStats.Length - 1] = classStats.MOV;
-        for (int i = 3; i < UnitStats.statOrder.Length + 2; i++)
+        for (int i = 5; i < UnitStats.statOrder.Length + 4; i++)
         {
-            u_stats.unitStats[i-3] = Convert.ToInt32(elements[i]);
-            if(i - 3 > classStats.statCaps.Length -1) {continue;}
-            u_stats.statCaps[i-3] = classStats.statCaps[i-3];
+            u_stats.unitStats[i-5] = Convert.ToInt32(elements[i]);
+            if(i - 5 > classStats.statCaps.Length -1) {continue;}
+            u_stats.statCaps[i-5] = classStats.statCaps[i-5];
         }
         u_stats.faction = faction;
 

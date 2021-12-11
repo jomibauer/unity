@@ -44,10 +44,13 @@
      <Compile Include="Assets\Scripts\Common\Model\UnitData.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\AbilityMenuStates\ActionSelectionState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\TargetSelectionState.cs" />
+     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattlePhaseStates\EnemyPhaseState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\RectTransformAnimationExtensions.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Features\Feature.cs" />
-     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\MoveTargetState.cs" />
+     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattlePhaseStates\PlayerPhase\MoveTargetState.cs" />
      <Compile Include="Assets\Scripts\Temp\HealthbarTests.cs" />
+     <Compile Include="Assets\Scripts\Unit\TileConverter.cs" />
+     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattlePhaseStates\CompleteTurnState.cs" />
      <Compile Include="Assets\Scripts\Common\Pooling\Poolable.cs" />
      <Compile Include="Assets\Scripts\Enums\EquipSlots.cs" />
      <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\SkirmishBattlerPane.cs" />
@@ -61,6 +64,7 @@
      <Compile Include="Assets\Scripts\Enums\StatTypes.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\AbilityMenuStates\ItemSelectionState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\TransformPositionTweener.cs" />
+     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattlePhaseStates\PlayerPhase\RangeCheckState.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Item\Inventory\InventoryItem.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\Modifier.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishUnitDiedState.cs" />
@@ -69,6 +73,7 @@
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\CutSceneState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\FinishSkirmishState.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\MultValueModifier.cs" />
+     <Compile Include="Assets\Scripts\Common\Controller\TraversalState.cs" />
      <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\SkirmishStatsPane.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Conversation\SpeakerData.cs" />
      <Compile Include="Assets\Scripts\Enums\MovementTypes.cs" />
@@ -80,6 +85,7 @@
      <Compile Include="Assets\Scripts\View Model Component\Item\Equippable\Equippable.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\GridController.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Actor\UnitStats.cs" />
+     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattlePhaseStates\PlayerPhase\ExitPlayerPhaseState.cs" />
      <Compile Include="Assets\Scripts\Unit\Unit.cs" />
      <Compile Include="Assets\Scripts\Common\Model\LevelData.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishPlayState.cs" />
@@ -106,11 +112,12 @@
      <Compile Include="Assets\Scripts\Grid\GridMap.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Stats.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\EasingControl.cs" />
-     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\PathfindingState.cs" />
+     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattlePhaseStates\PlayerPhase\PathfindingState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\SkirmishController.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\TransformLocalPositionTweener.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Skirmish\Round.cs" />
      <Compile Include="Assets\Scripts\Common\Notification\NotificationBook.cs" />
+     <Compile Include="Assets\Scripts\Enums\Factions.cs" />
      <Compile Include="Assets\Scripts\Common\Notification\NotificationExtensions.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\ExperienceManager.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\Tweener.cs" />
@@ -118,12 +125,15 @@
      <Compile Include="Assets\Scripts\Common\Model\Turn.cs" />
      <Compile Include="Assets\Scripts\Enums\StatTypeBook.cs" />
      <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\HealthBar.cs" />
+     <Compile Include="Assets\Scripts\Temp\AbilityMenuTest.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\TransformAnimationExtensions.cs" />
+     <Compile Include="Assets\Scripts\Common\Model\ClassData.cs" />
      <Compile Include="Assets\Scripts\Unit\UnitFactory.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\SkirmishInitState.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\BattleState.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\AddValueModifier.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Features\StatModifierFeature.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\DebugPanel\NameClassListener.cs" />
      <Compile Include="Assets\Scripts\Grid\Tile.cs" />
      <Compile Include="Assets\Scripts\Common\Model\Items\WeaponData.cs" />
      <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\NamePane.cs" />
@@ -133,6 +143,7 @@
      <Compile Include="Assets\Scripts\View Model Component\Item\Consumable.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\SkirmishPlayViewController.cs" />
      <Compile Include="Assets\Scripts\Exceptions\Modifiers\ClampValueModifier.cs" />
+     <Compile Include="Assets\Scripts\Unit\UnitMover.cs" />
      <Compile Include="Assets\Scripts\View Model Component\Actor\LevelComponent.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\RectTransformAnchorPositionTweener.cs" />
      <Compile Include="Assets\Scripts\Common\State Machine\GameState.cs" />
@@ -151,13 +162,15 @@
      <Compile Include="Assets\Scripts\Common\Model\Items\InventoryData.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\UnitController.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\AbilityMenuStates\BaseAbilityMenuState.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\ExpBar.cs" />
      <Compile Include="Assets\Scripts\Common\UI\DebugPanel\StateListener.cs" />
      <Compile Include="Assets\Scripts\Common\UI\DebugPanel\SelectedUnitListener.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\AbilityMenuPanelController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraRig.cs" />
      <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SkirmishStates\AwardExpState.cs" />
      <Compile Include="Assets\Scripts\Common\Animation\Vector3Tweener.cs" />
-     <Compile Include="Assets\Scripts\Common\Controller\BattleStates\SelectActionState.cs" />
+     <Compile Include="Assets\Scripts\Common\UI\SkirmishPlayView\ExpBarPane.cs" />
+     <Compile Include="Assets\Scripts\Temp\ExpBarTest.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\UnityEditors\2020.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
