@@ -23,18 +23,23 @@ public class UnitStats : MonoBehaviour
     public int[] growths = new int[ statOrder.Length ];
     public string unit_name;
     public string color;
+    public Dictionary<StatTypes, int> levelUpRes;
     public MovementTypes movementType;
     public Factions faction;
     public ClassData unit_class;
     public Stats stats;
+
+    //fields just for loading unit xp and lvl from the unit data into the level component, not meant to be used outside the unit factory
+    int LOAD_XP;
+    int LOAD_LVL;
     #endregion
 
     #region Monobehaviour
     void Start()
     {
         stats = gameObject.GetComponentInParent<Stats>();
-        
-        //this.AddObserver(OnLvlChangeNotification, Stats.DidChangeNotification(StatTypes.LVL), stats);
+        levelUpRes = new Dictionary<StatTypes, int>();
+        this.AddObserver(OnLvlChangeNotification, Stats.DidChangeNotification(StatTypes.LVL), stats);
     }
     void OnDestroy()
     {
@@ -82,11 +87,28 @@ public class UnitStats : MonoBehaviour
         }
         stats.SetValue(StatTypes.HP, stats[StatTypes.MHP], false);
     }
+
+    public void LoadExpAndLevel(int exp, int lvl)
+    {
+        LOAD_XP = exp;
+        LOAD_LVL = lvl;
+    }
+
+    public int GetLoadExp()
+    {
+        return LOAD_XP;
+    }
+    public int GetLoadLevel()
+    {
+        return LOAD_LVL;
+    }
+
     #endregion
 
     #region Event Handlers
     protected virtual void OnLvlChangeNotification (object sender, object args)
     {
+        Debug.Log("levelDidChange");
         int oldValue = (int)args;
         int newValue = stats[StatTypes.LVL];
         for (int i = oldValue; i < newValue; ++i)
@@ -98,6 +120,7 @@ public class UnitStats : MonoBehaviour
     #region Private
     void LevelUp ()
     {
+        //record any stat changes in this array to tell the skirmishPlayViewController
         //pick a random stat to give a random growth a boost.
         StatTypes luckyStat = statOrder[UnityEngine.Random.Range(0, statOrder.Length - 3)];
         for (int i = 0; i < statOrder.Length; ++i)
@@ -114,9 +137,12 @@ public class UnitStats : MonoBehaviour
             if (growth >= GetSoftRng())
             {
                 value++;
-            }
+                //if a stat moves up, put 1 in the levelUpResult array
+                levelUpRes[type] = 1;
+            } else {levelUpRes[type] = 0;}
             stats.SetValue(type, value, false);
         }
+        Debug.Log("levelUp");
     }
 
     int GetSoftRng()

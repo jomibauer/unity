@@ -45,6 +45,7 @@ public class Skirmish
     public bool didKill;
     #endregion
 
+    //Type can be "MELEE" so far
     public Skirmish(Unit initiator, Unit receiver, string skirmishType)
     {
         

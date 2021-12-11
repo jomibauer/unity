@@ -9,34 +9,32 @@ public class ExpBarPane : MonoBehaviour
     [SerializeField] ExpBar expBar;
     [SerializeField] UIPanel panel;
     [SerializeField] Text expText;
-    [SerializeField] public float expMoveSpeed = .1f;
+    [SerializeField] public float expMoveSpeed = .07f;
     public int currentExp;
     public int remainingExp;
     // Start is called before the first frame update
     void Start()
     {
         this.panel.SetPosition("Hide", false);
-        this.AddObserver(OnAwardExpStart, NotificationBook.AWARD_EXP_START);
+        
         //this.AddObserver(OnSkirmishSetExp, NotificationBook.SKIRMISH_SET_EXP);
     }
 
+    
+
     public void Load(Unit unit)
     {
+        
         this.currentExp = unit.levelComponent.EXP;
+        this.expBar.Load(currentExp);
+        this.expText.text = currentExp.ToString();
+        Debug.LogWarning($"loaded: {currentExp}");
     }
 
-    public void Reset()
+    public void Clear()
     {
         this.currentExp = 0;
         this.expBar.Reset();
-    }
-
-    private void OnAwardExpStart(object sender, object xp)
-    {
-        Debug.Log("AWARD EXP START");
-        int exp = (int)xp;
-        ShowPane();
-        StartCoroutine(AwardExp(exp));
     }
 
     public void ShowPane(bool animate = true)
@@ -53,26 +51,19 @@ public class ExpBarPane : MonoBehaviour
         t.easingControl.equation = EasingEquations.EaseInOutBack;
     }
 
-    private IEnumerator AwardExp(int exp)
+    public int IncrementBar()
     {
-        remainingExp = exp;
-        yield return new WaitForSeconds(1f);
-        for(int i = 0; i < exp; ++i)
-        {
-            if(currentExp == 100)
-            {
-                LevelUp();
-            }
-            currentExp += 1;
-            remainingExp -= 1;
-            this.expText.text = currentExp.ToString();
-            this.expBar.Raise();
-            yield return new WaitForSeconds(expMoveSpeed);
-        }
-        // this needs a bit more fleshing out when we can level up.  Leaving this bare, but we're going to have to change state and 
-        // remember how much exp is left to give.  I think we might be able to do this on the AwardExpState, but it might be smarter to do 
-        // it with the level component.
-        StartCoroutine(FinishAwardingExp());
+        currentExp += 1;
+        this.expText.text = currentExp.ToString();
+        this.expBar.Raise();
+        return currentExp;
+    }
+
+    public void ResetExp()
+    {
+        this.currentExp -= 100;
+        this.expBar.Reset();
+        this.expText.text = "0";
     }
 
     private IEnumerator FinishAwardingExp()
@@ -83,8 +74,4 @@ public class ExpBarPane : MonoBehaviour
         this.PostNotification(NotificationBook.AWARD_EXP_FINISHED);
     }
 
-    private void LevelUp()
-    {
-        
-    }
 }

@@ -13,10 +13,9 @@ public class ExpBarTest : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 10, 100, 30), "Show"))
+        if (GUI.Button(new Rect(10, 10, 100, 30), "AwardExp"))
         {
-            Tweener t = panel.SetPosition("Show", true);
-            t.easingControl.equation = EasingEquations.EaseInOutBack;
+            
         }
 
         if (GUI.Button(new Rect(10, 50, 100, 30), "Hide"))

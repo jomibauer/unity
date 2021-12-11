@@ -17,6 +17,15 @@ public struct NotificationBook
         public static string UNIT_INFO = "UNIT_INFO"; // listener: InfoImgListener & TextListener, poster: MoveTargetState
     #endregion
 
+    #region Experience/Level up
+        public static string AWARD_EXP_FINISHED = "AWARD_EXP_FINISHED"; // listener: AwardExpState, poster: ExpBar 
+        public static string AWARD_EXP_INIT = "AWARD_EXP_INIT"; // listener: SkirmishPlayViewController, poster: awardExpState
+        public static string AWARD_EXP_SET_EXP = "SKIRMISH_SET_EXP"; // listener: ExpBarPane, poster: AwardExpState
+        public static string AWARD_EXP_START = "AWARD_EXP_START"; // listener: ExpBar, poster: AwardExpState
+        public static string LEVEL_UP_PACKAGE = "LEVEL_UP_PACKAGE"; // listener: SkirmishPlayViewController, poster: UnitStats component
+        
+    #endregion
+
     #region Input
         public static string CANCEL = "CANCEL"; // listener: InputController, poster: base BattleState class
         public static string CONFIRM = "CONFIRM"; // listener: InputController, poster: base BattleState class
@@ -28,8 +37,6 @@ public struct NotificationBook
     #endregion
 
     #region Skirmish Play View
-        public static string AWARD_EXP_FINISHED = "AWARD_EXP_FINISHED"; // listener: AwardExpState, poster: ExpBar 
-        public static string AWARD_EXP_START = "AWARD_EXP_START"; // listener: ExpBar, poster: AwardExpState
         public static string SKIRMISH_START = "SKIRMISH_START"; // listener: SkirmishPlayViewController, poster: SkirmishPlayState  
         public static string HEALTH_CHANGE_FINISHED = "HEALTH_CHANGE_FINISHED";
         public static string HIDE_SKIRMISH_PLAY_VIEW = "HIDE_SKIRMISH_PLAY_VIEW"; // listener: SkirmishPlayViewController, poster:
@@ -38,7 +45,6 @@ public struct NotificationBook
         public static string RIGHT_PANE_HEALTH_CHANGE = "RIGHT_PANE_HEALTH_CHANGE"; // listener: SkirmishPlayViewController, poster:
         public static string SHOW_SKIRMISH_PLAY_VIEW = "SHOW_SKIRMISH_PLAY_VIEW"; // listener: SkirmishPlayViewController, poster: SkirmishInitState
         public static string SKIRMISH_SETUP_COMPLETE = "SKIMRISH_SETUP_COMPLETE"; //listener: SkirmishInitState, poster: SkirmishPlayViewController
-        public static string SKIRMISH_SET_EXP = "SKIRMISH_SET_EXP"; // listener: ExpBarPane, poster:
     #endregion
 
     #region Skirmish Preview
