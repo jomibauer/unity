@@ -30,8 +30,8 @@ public class UnitStats : MonoBehaviour
     public Stats stats;
 
     //fields just for loading unit xp and lvl from the unit data into the level component, not meant to be used outside the unit factory
-    int LOAD_XP;
-    int LOAD_LVL;
+    [SerializeField]int LOAD_XP;
+    [SerializeField]int LOAD_LVL;
     #endregion
 
     #region Monobehaviour

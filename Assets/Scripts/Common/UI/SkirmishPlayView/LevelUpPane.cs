@@ -100,6 +100,9 @@ public class LevelUpPane : MonoBehaviour
 
     public IEnumerator PlayLevelUp()
     {
+        IterateStatBy(lvlText, 1);
+        yield return new WaitForSeconds(0.75f);
+        lvlText.color = Color.white;
         foreach(var key in textReference.Keys)
         {
             if (levelPackage[key] == 0) { continue; }

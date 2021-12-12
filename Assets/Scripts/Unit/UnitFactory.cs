@@ -24,6 +24,7 @@ public class UnitFactory : MonoBehaviour
         unit.unitStats = unit.GetComponentInChildren<UnitStats>();
 
         unit.unitStats.LoadStats();
+        
         unit.HP = unit.stats[StatTypes.MHP];
 
         unit.spriteRenderer = unit.GetComponent<SpriteRenderer>();
