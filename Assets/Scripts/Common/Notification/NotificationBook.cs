@@ -17,6 +17,15 @@ public struct NotificationBook
         public static string UNIT_INFO = "UNIT_INFO"; // listener: InfoImgListener & TextListener, poster: MoveTargetState
     #endregion
 
+    #region Experience/Level up
+        public static string AWARD_EXP_FINISHED = "AWARD_EXP_FINISHED"; // listener: AwardExpState, poster: ExpBar 
+        public static string AWARD_EXP_INIT = "AWARD_EXP_INIT"; // listener: SkirmishPlayViewController, poster: awardExpState
+        public static string AWARD_EXP_SET_EXP = "SKIRMISH_SET_EXP"; // listener: ExpBarPane, poster: AwardExpState
+        public static string AWARD_EXP_START = "AWARD_EXP_START"; // listener: ExpBar, poster: AwardExpState
+        public static string LEVEL_UP_PACKAGE = "LEVEL_UP_PACKAGE"; // listener: SkirmishPlayViewController, poster: UnitStats component
+        
+    #endregion
+
     #region Input
         public static string CANCEL = "CANCEL"; // listener: InputController, poster: base BattleState class
         public static string CONFIRM = "CONFIRM"; // listener: InputController, poster: base BattleState class
@@ -51,7 +60,6 @@ public struct NotificationBook
 
     #region MISC
     //could be useful in the future.
-      
     public static string EQUIPPED_ITEM = "EQUIPPED_ITEM"; // listener: nothing yet, poster: Equipment base class
     public static string UNEQUIPPED_ITEM = "UNEQUIPPED_ITEM"; // listener: nothing yet, poster: Equipment base class
 

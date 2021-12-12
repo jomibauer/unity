@@ -24,6 +24,7 @@ public class UnitFactory : MonoBehaviour
         unit.unitStats = unit.GetComponentInChildren<UnitStats>();
 
         unit.unitStats.LoadStats();
+        
         unit.HP = unit.stats[StatTypes.MHP];
 
         unit.spriteRenderer = unit.GetComponent<SpriteRenderer>();
@@ -32,6 +33,8 @@ public class UnitFactory : MonoBehaviour
         Animator animator = unit.GetComponent<Animator>();
         animator.runtimeAnimatorController = Resources.Load($"Animations/units/slimes/{unit.unitStats.color}{unit.unitStats.unit_class.dataName}") as RuntimeAnimatorController;
         unit.levelComponent = unit.GetComponent<LevelComponent>();
+        unit.levelComponent.LoadLevelComponent(unit.unitStats.GetLoadExp(), unit.unitStats.GetLoadLevel(), unit.unitStats.unit_class.RNK);
+
         unit.weapon = unit.GetComponentInChildren<Weapon>();
         unit.inventory = unit.GetComponentInChildren<Inventory>();
         unit.inventory.Load(unit.unit_name);

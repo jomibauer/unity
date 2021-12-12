@@ -13,19 +13,23 @@ public class LevelComponent : MonoBehaviour
   public const int maxExperience = 100;
   #endregion
   #region Fields / Properties
-  public int LVL
+  
+  [SerializeField] public int LVL
   {
     get { return stats[StatTypes.LVL]; }
+    set { stats[StatTypes.LVL] = value; }
   }
-  public int EXP
+ 
+  [SerializeField] public int EXP
   {
     get { return stats[StatTypes.EXP]; }
     set { stats[StatTypes.EXP] = value; }
   }
-
-  public int RNK
+  
+  [SerializeField] public int RNK
   {
     get { return stats[StatTypes.RNK]; }
+    set { stats[StatTypes.RNK] = value; }
   }
   Stats stats;
   #endregion
@@ -64,10 +68,18 @@ public class LevelComponent : MonoBehaviour
   }
   #endregion
   #region Public
-  public void Init (int level, int experience)
+  public void Init (int level, int experience, int rank)
   {
     stats.SetValue(StatTypes.LVL, level, false);
     stats.SetValue(StatTypes.EXP, experience, false);
+    stats.SetValue(StatTypes.RNK, rank, false);
+  }
+
+  public void LoadLevelComponent(int exp, int level, int rank)
+  {
+    LVL = level;
+    EXP = exp;
+    RNK = rank;
   }
   #endregion
 }

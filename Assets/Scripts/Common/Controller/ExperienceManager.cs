@@ -45,9 +45,16 @@ public static class ExperienceManager
     rank 1: promoted.  exp level = 20 + ListedLevel.
 
   */
-  public static void AwardExp(Skirmish skirmish, Unit player, Unit opponent)
+  public static int TestAwardExp(Unit recipient, int amount)
+  {
+    recipient.levelComponent.EXP += amount;
+    return amount;
+
+  }
+  public static int AwardExp(Skirmish skirmish, Unit player, Unit opponent)
   {
     if (skirmish == null) { throw new System.Exception("Tried to award exp, but there was no skirmish available in the ExperienceManager."); }
+    if (player.levelComponent.LVL == 20) { return 0; }
     //only implemented weapon attack so far.
     int exp = 1;
 
@@ -82,7 +89,9 @@ public static class ExperienceManager
       exp += killExp;
     }
 
+    
     player.levelComponent.EXP += exp;
+    return exp;
   }
 
 }

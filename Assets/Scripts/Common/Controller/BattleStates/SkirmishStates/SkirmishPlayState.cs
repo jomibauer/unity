@@ -40,21 +40,10 @@ public class SkirmishPlayState : BattleState
     {
         Debug.Log($"Rounds: {rounds.Count}");
         if(rounds.Count == 0) 
-        { 
+        {
             Debug.Log("SkirmishFinished");
-            if (unitDied)
-            {
-                skirmishController.SetDeadUnit(receiver.HP < 1 ? receiver: initiator);
-                skirmishController.SetSkirmishKill();
-                owner.ChangeState<SkirmishUnitDiedState>();
-                return;
-            }
-            else
-            {
-                Debug.Log("ChangingState");
-                owner.ChangeState<AwardExpState>();
-                return;
-            }
+            StartCoroutine(FinishPlaying()); 
+            return;
         }
         Round round = rounds.Pop(0);
 
@@ -94,6 +83,22 @@ public class SkirmishPlayState : BattleState
 
 
         return;
+    }
+
+    private IEnumerator FinishPlaying()
+    {
+        yield return null;
+        if (unitDied)
+        {
+            skirmishController.SetDeadUnit(receiver.HP < 1 ? receiver: initiator);
+            skirmishController.SetSkirmishKill();
+            owner.ChangeState<SkirmishUnitDiedState>();
+        }
+        else
+        {
+            Debug.Log("ChangingState");
+            owner.ChangeState<AwardExpState>();
+        }
     }
 
     IEnumerator PlaySkirmish()
