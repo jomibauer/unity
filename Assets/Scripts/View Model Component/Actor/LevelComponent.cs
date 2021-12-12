@@ -68,10 +68,11 @@ public class LevelComponent : MonoBehaviour
   }
   #endregion
   #region Public
-  public void Init (int level, int experience)
+  public void Init (int level, int experience, int rank)
   {
     stats.SetValue(StatTypes.LVL, level, false);
     stats.SetValue(StatTypes.EXP, experience, false);
+    stats.SetValue(StatTypes.RNK, rank, false);
   }
 
   public void LoadLevelComponent(int exp, int level, int rank)

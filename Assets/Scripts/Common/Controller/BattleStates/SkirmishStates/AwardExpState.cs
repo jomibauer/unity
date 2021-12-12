@@ -10,11 +10,12 @@ public class AwardExpState : BattleState
         base.Enable();
         this.AddObserver(OnAwardExpFinished, NotificationBook.AWARD_EXP_FINISHED); 
 
-        Init();
+        StartCoroutine(Init());
     }
 
-    private void Init()
+    private IEnumerator Init()
     {
+        yield return null;
         Skirmish skirmish = skirmishController.GetSkirmish();
         Unit expRecipient;
         Unit otherUnit;
@@ -28,12 +29,19 @@ public class AwardExpState : BattleState
             expRecipient = skirmish.initiator;
             otherUnit = skirmish.receiver;
         }
-        
-        this.PostNotification(NotificationBook.AWARD_EXP_INIT, expRecipient);
-        //tell levelComponent & modify stats on the actual unit
-        int exp = ExperienceManager.AwardExp(skirmish, expRecipient, otherUnit);
 
-        this.PostNotification(NotificationBook.AWARD_EXP_START, exp);
+        // max level of 20       
+        if (expRecipient.levelComponent.LVL == 20)
+        {
+            owner.ChangeState<FinishSkirmishState>();
+        }
+        else
+        {
+            this.PostNotification(NotificationBook.AWARD_EXP_INIT, expRecipient);
+            //tell levelComponent & modify stats on the actual unit
+            int exp = ExperienceManager.AwardExp(skirmish, expRecipient, otherUnit);
+            this.PostNotification(NotificationBook.AWARD_EXP_START, exp);
+        }
     }
 
     private void OnAwardExpFinished(object sender, object n_u)

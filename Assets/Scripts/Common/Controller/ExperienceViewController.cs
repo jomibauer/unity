@@ -7,6 +7,7 @@ public class ExperienceViewController : MonoBehaviour
 {
     [SerializeField] public ExpBarPane expPane;
     [SerializeField] public LevelUpPane levelUpPane;
+    int level;
     int remainingEXP;
     UnitStats unitStats;
     void Start()
@@ -34,15 +35,20 @@ public class ExperienceViewController : MonoBehaviour
         {
             this.levelUpPane.LoadLevelPackage(unitStats.levelUpRes);
         }
-
+        
         StartCoroutine(PlayAwardExp());
     }
     private void OnAwardExpInit(object sender, object u)
     {
-        Unit unit  = (Unit)u;
-        unitStats = unit.unitStats;
+        LoadExpStatsIntoView(u as Unit);
+    }
+
+    private void LoadExpStatsIntoView(Unit unit)
+    {
+        this.unitStats = unit.unitStats;
         expPane.Load(unit);
         levelUpPane.LoadStats(unit);
+        this.level = unit.levelComponent.LVL;
     }
 
     private IEnumerator PlayAwardExp()
@@ -57,6 +63,9 @@ public class ExperienceViewController : MonoBehaviour
         //start awarding exp
         for (int i = 0; i < remainingEXP; ++i)
         {
+            // check if we're level 20 after leveling up -- don't award any more exp.
+            if(this.level == 20) { break; }
+
             currentExp = expPane.IncrementBar();
             
             // if we reached 100, there should've been a level up, so play reset the bar to 0 and play the level up.
@@ -65,7 +74,9 @@ public class ExperienceViewController : MonoBehaviour
                 expPane.ResetExp();
                 yield return StartCoroutine(PlayLevelUp());
                 // clear out the levelUpResult after playing the level up.
-                unitStats.levelUpRes = new Dictionary<StatTypes, int>();
+                this.unitStats.levelUpRes = new Dictionary<StatTypes, int>();
+                // we increment the ExperienceView's level after leveling up.
+                this.level += 1;
             }
             // award each exp unit at the set speed.
             yield return new WaitForSeconds(moveSpeed);
@@ -74,25 +85,32 @@ public class ExperienceViewController : MonoBehaviour
         // linger on the final exp total for a bit
         yield return new WaitForSeconds(0.7f);
 
-        expPane.HidePane();
+        //then clear it out and tell the BattleController we're done.
+        yield return StartCoroutine(ClearAndResetView());
+        this.PostNotification(NotificationBook.AWARD_EXP_FINISHED);
+    }
+
+    private IEnumerator ClearAndResetView()
+    {
+        this.expPane.HidePane();
         //wait for animation to finish
         yield return new WaitForSeconds(0.5f);
 
         // clear out the UI after hiding the elements then finish awarding EXP.
         this.expPane.Clear();
         this.levelUpPane.Clear();
-        unitStats = null;
-        this.PostNotification(NotificationBook.AWARD_EXP_FINISHED);
+        this.unitStats = null;
+        this.level = 0;
     }
 
     private IEnumerator PlayLevelUp()
     {
-        levelUpPane.ShowPane();
+        this.levelUpPane.ShowPane();
         //wait for it to show
         yield return new WaitForSeconds(1f);
-        yield return StartCoroutine(levelUpPane.PlayLevelUp());
+        yield return StartCoroutine(this.levelUpPane.PlayLevelUp());
         yield return new WaitForSeconds(1f);
-        levelUpPane.HidePane();
+        this.levelUpPane.HidePane();
         //wait for animation to finish
         yield return new WaitForSeconds(0.5f);
     }
@@ -100,6 +118,6 @@ public class ExperienceViewController : MonoBehaviour
     bool WasLevelUp()
     {
         //if theres a levelUpResult with entries, that means theres been an unapplied levelup, so a level up happened.
-        return unitStats.levelUpRes.Count != 0;
+        return this.unitStats.levelUpRes.Count != 0;
     }
 }
