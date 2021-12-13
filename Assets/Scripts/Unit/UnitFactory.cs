@@ -38,5 +38,6 @@ public class UnitFactory : MonoBehaviour
         unit.weapon = unit.GetComponentInChildren<Weapon>();
         unit.inventory = unit.GetComponentInChildren<Inventory>();
         unit.inventory.Load(unit.unit_name);
+        unit.EquipFirstWeapon();
     }
 }

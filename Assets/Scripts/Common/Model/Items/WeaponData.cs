@@ -20,7 +20,7 @@ public class WeaponData : ScriptableObject
     public string element;
     public int hit;
     public int crit;
-    public string type;
+    public WeaponTypes type;
 
     public void Load(string line)
     {
@@ -41,7 +41,7 @@ public class WeaponData : ScriptableObject
         element = stats[7];
         hit = Convert.ToInt32(stats[8]);
         crit = Convert.ToInt32(stats[9]);
-        type = stats[10];
+        type = (WeaponTypes)Convert.ToInt32(stats[10]);
 
     }
 }

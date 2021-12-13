@@ -6,7 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public int openSlots = 5;
-    [SerializeField] List<InventoryItem> items = new List<InventoryItem>();
+    [SerializeField] public List<InventoryItem> items = new List<InventoryItem>();
     [SerializeField] Weapon equippedWeapon;
 
     public void Load(string name)
