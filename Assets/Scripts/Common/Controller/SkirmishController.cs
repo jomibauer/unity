@@ -58,7 +58,7 @@ public class SkirmishController : MonoBehaviour
         skirmish = new Skirmish(initiator, receiver, type);
         this.initiator = skirmish.initiator;
         this.receiver = skirmish.receiver;
-        Debug.Log($"On skirmish start: {initiator} vs {receiver}");
+        Debug.Log($"[SkirmishController.cs]: On skirmish start: {initiator} vs {receiver}");
     }
 
     private Round GetRound(SkirmishStatSet attackerStats, Unit attacker)

@@ -6,23 +6,24 @@ public class WeaponSelectionState : BaseAbilityMenuState
 {
     protected override void LoadMenu ()
     {
+        Unit selectedUnit = unitController.GetSelectedUnit();
+        List<InventoryItem> items = unitController.GetSelectedUnitInventory();
         if (menuOptions == null)
         {
             menuTitle = "Items";
             menuOptions = new List<string>();
-            List<InventoryItem> items = unitController.GetSelectedUnitInventory();
             items.ForEach(i => menuOptions.Add(i.displayName));
-            for(int i = 0; i < menuOptions.Count; i++)
+            
+        }
+        
+        abilityMenuPanelController.Show(menuTitle, menuOptions);
+        for(int i = 0; i < menuOptions.Count; ++i)
             {
-                if(items[i].type != "weapon")
+                if(items[i].type != "weapon" || !selectedUnit.CanUseWeapon(items[i].name))
                 {
                     abilityMenuPanelController.SetLocked(i, true);
                 }
             }
-        }
-        
-        abilityMenuPanelController.Show(menuTitle, menuOptions);
-        
         
     }
     protected override void Cancel()
@@ -34,7 +35,7 @@ public class WeaponSelectionState : BaseAbilityMenuState
     {
         List<InventoryItem> inventory = unitController.GetSelectedUnitInventory();
         unitController.EquipSelectedUnit(inventory[abilityMenuPanelController.selection].name);
-        Debug.Log($"WeaponSelectionState: {menuOptions[abilityMenuPanelController.selection]}");
+        Debug.Log($"[WeaponSelectionState.cs]: {menuOptions[abilityMenuPanelController.selection]}");
         owner.ChangeState<TargetSelectionState>();
     }
 }

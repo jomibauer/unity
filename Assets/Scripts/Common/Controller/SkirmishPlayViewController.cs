@@ -25,39 +25,7 @@ public class SkirmishPlayViewController : MonoBehaviour
 
         this.AddObserver(OnSkirmishStart, NotificationBook.SKIRMISH_START);
 
-/*         this.AddObserver(OnAwardExpStart, NotificationBook.AWARD_EXP_START);
-        this.AddObserver(OnAwardExpSetExp, NotificationBook.AWARD_EXP_SET_EXP);
-        this.AddObserver(OnAwardExpInit, NotificationBook.AWARD_EXP_INIT); */
     }
-
-    /* private void OnAwardExpStart(object sender, object package)
-    {
-        //I need to tinker with the package getting sent.  It's notifying this twice, so I think there should be an if else around the notification logic in the levelComponent/stats (wherever its coming from first, looks like it may actually be the state!)
-        // if theres no package, we arrived here from the levelComponent, and there was no level up.
-        if(package == null)
-        {
-            //just award the exp.
-        }
-        else
-        {
-            Debug.Log(package);
-            //load the level package and do award exp
-            this.levelUpPane.LoadLevelPackage(package as Dictionary<StatTypes, int>);
-        }
-        StartCoroutine(PlayAwardExp());
-
-    }
-    private void OnAwardExpInit(object sender, object u)
-    {
-        Unit unit  = (Unit)u;
-        expPane.Load(unit);
-        levelUpPane.LoadStats(unit);
-    }
-
-    private void OnAwardExpSetExp(object sender, object xp)
-    {
-        this.remainingEXP = (int)xp;
-    } */
 
     private void OnHealthChangeFinished(object sender, object n_u)
     {
@@ -118,12 +86,12 @@ public class SkirmishPlayViewController : MonoBehaviour
 
     private void OnLeftPaneHealthChange(object sender, object am)
     {
-        Debug.Log("SkirmishPlayView: HealthChange");
+        Debug.Log("[SkirmishPlayView.cs]: HealthChange");
         int amount = (am as int[])[0];
 
         if(amount <= 0)
         {
-            Debug.Log("SkirmishPlayView: Damage");
+            Debug.Log("[SkirmishPlayView.cs]: Damage");
             DamagePaneBy(leftPane, Mathf.Abs(amount));
         }
         else 
@@ -134,12 +102,12 @@ public class SkirmishPlayViewController : MonoBehaviour
 
     private void OnRightPaneHealthChange(object sender, object am)
     {
-        Debug.Log("SkirmishPlayView: HealthChange");
+        Debug.Log("[SkirmishPlayView.cs]: HealthChange");
         int amount = (am as int[])[0];
 
         if(amount <= 0)
         {
-            Debug.Log("SkirmishPlayView: Damage");
+            Debug.Log("[SkirmishPlayView.cs]: Damage");
             DamagePaneBy(rightPane, Mathf.Abs(amount));
         }
         else 
@@ -157,47 +125,4 @@ public class SkirmishPlayViewController : MonoBehaviour
     {
         StartCoroutine(pane.HealBy(amount));
     }
-
-  /*   private IEnumerator PlayAwardExp()
-    {
-        int currentExp;
-        float moveSpeed = expPane.expMoveSpeed;
-        Debug.LogWarning($"playing started at: {expPane.currentExp}");
-        expPane.ShowPane();
-        //wait for it to show
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i < remainingEXP; ++i)
-        {
-            currentExp = expPane.IncrementBar();
-            //Debug.Log(currentExp);
-            if(currentExp == 100)
-            {
-                Debug.Log("leveling");
-                expPane.ResetExp();
-                yield return StartCoroutine(PlayLevelUp());
-            }
-            yield return new WaitForSeconds(moveSpeed);
-        }
-        yield return new WaitForSeconds(0.7f);
-        expPane.HidePane();
-        //wait for animation to finish
-        yield return new WaitForSeconds(0.5f);
-        this.expPane.Clear();
-        this.levelUpPane.Clear();
-        this.PostNotification(NotificationBook.AWARD_EXP_FINISHED);
-    } */
-
-
-
-    /* private IEnumerator PlayLevelUp()
-    {
-        levelUpPane.ShowPane();
-        //wait for it to show
-        yield return new WaitForSeconds(0.5f);
-        StartCoroutine(levelUpPane.PlayLevelUp());
-        yield return new WaitForSeconds(1f);
-        levelUpPane.HidePane();
-        //wait for animation to finish
-        yield return new WaitForSeconds(0.5f);
-    } */
 }

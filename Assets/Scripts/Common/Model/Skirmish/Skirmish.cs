@@ -51,8 +51,8 @@ public class Skirmish
         
         this.initiator = initiator;
         this.receiver = receiver;
-        CalcSkirmishStats(initiator, receiver);
         this.range = DistanceBetween(initiator.currentTile, receiver.currentTile);
+        CalcSkirmishStats(initiator, receiver);
         this.skirmishType = skirmishType;
 
     }
@@ -61,14 +61,10 @@ public class Skirmish
     {
         return (tileA.x - tileB.x) + (tileA.y - tileB.y);
     }
-
-    // need to add another check for receiver range to this data.  This checks if they have the right weapon equipped to attack back.
-    // I think these calculations will all need to add an extra arg spot for weapons in order to do this right.  I should check here 
-    // for whether units can attack and set turns=0 so I dont have to worry later about changing the logic to not generate rounds 
-    // later in the skirmish controller.
     public void CalcSkirmishStats(Unit initiator, Unit receiver)
     {
-
+        
+        Debug.Log($"[Skirmish.cs]: skirmish range is {range}");
         initiatorStats = new SkirmishStatSet
             (CalcHit(initiator, receiver)
             , CalcDam(initiator, receiver)
@@ -76,18 +72,49 @@ public class Skirmish
             , CalcTurns(initiator, receiver)
             , initiator);
         //if receiver is in range
-        receiverStats = new SkirmishStatSet
+        if(UnitInRange(receiver))
+        {
+            receiverStats = new SkirmishStatSet
             (CalcHit(receiver, initiator)
             , CalcDam(receiver, initiator)
             , CalcCrit(receiver, initiator)
             , CalcTurns(receiver, initiator)
             , receiver);
+        }
+        else
+        {
+            Debug.Log("[Skirmish.cs]: reciever not in range!");
+            receiverStats = new SkirmishStatSet
+                (0
+                , 0
+                , 0
+                , 0
+                , receiver);
+        }
     }
     public int CalcDam(Unit initiator, Unit receiver)
     {
-        var calculatedDamage = (initiator.stats[StatTypes.STR] + initiator.GetWeaponDamage()) - receiver.stats[StatTypes.DEF];
+        var calculatedDamage = 0;
+        if(initiator.weapon.type == WeaponTypes.song || initiator.weapon.type == WeaponTypes.poem)
+        {
+            calculatedDamage = GetIntDamage(initiator, receiver);
+        }
+        else {
+            calculatedDamage = GetStrDamage(initiator, receiver);
+        }
         return  calculatedDamage >= 0 ? calculatedDamage : 0;
     }
+
+    private int GetStrDamage(Unit initiator, Unit receiver)
+    {
+        return initiator.stats[StatTypes.STR] + initiator.GetWeaponDamage() - receiver.stats[StatTypes.DEF];
+    }
+
+    private int GetIntDamage(Unit initiator, Unit receiver)
+    {
+        return initiator.stats[StatTypes.INT] + initiator.GetWeaponDamage() - receiver.stats[StatTypes.RES];
+    }
+
     public int CalcHit(Unit initiator, Unit receiver)
     {
         var weaponWeightPenalty = initiator.stats[StatTypes.CON] - initiator.GetWeaponWeight() >= 0 ? 0 : initiator.stats[StatTypes.CON] - initiator.GetWeaponWeight() * -1;
@@ -109,6 +136,12 @@ public class Skirmish
         } else {
             return 2;
         }
+    }
+
+    public bool UnitInRange(Unit unit)
+    {
+        int[] attackRange = unit.weapon.attackRange;
+        return attackRange[attackRange.Length-1] >= range;
     }
 
     public void GetExpModifiers()
