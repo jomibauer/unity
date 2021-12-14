@@ -26,9 +26,16 @@ public class GridController : MonoBehaviour
         DrawGridMap();
     }
 
-    internal bool CheckTileIsInRange(Tile target, Tile start, int range)
+    internal bool CheckTileIsInRange(Tile target, Tile start, int[] range)
     {
-        return Mathf.Abs(start.x - target.x) + Mathf.Abs(start.y - target.y) <= range;
+        if(range.Length == 1)
+        {
+            return Mathf.Abs(start.x - target.x) + Mathf.Abs(start.y - target.y) == range[0];
+        }
+        else
+        {
+            return Mathf.Abs(start.x - target.x) + Mathf.Abs(start.y - target.y) <= range[range.Length-1];
+        }
     }
 
     internal float GetPathScore(List<PathNode> path, MovementTypes movementType)
@@ -156,12 +163,12 @@ public class GridController : MonoBehaviour
 
     internal List<Tile> GetAttackRangeAndDraw(Unit unit)
     {
-        //int weaponRng = unit.GetWeapon().GetRange();
-        int weaponRng = 1;
+        int[] weaponRng = unit.GetWeaponRange();
+
         Tile rangeStart = unit.GetCurrentTile();
 
-        int[] xBounds = GetAxisBounds(rangeStart.x, weaponRng);
-        int[] yBounds = GetAxisBounds(rangeStart.y, weaponRng);
+        int[] xBounds = GetAxisBounds(rangeStart.x, weaponRng[weaponRng.Length-1]);
+        int[] yBounds = GetAxisBounds(rangeStart.y, weaponRng[weaponRng.Length-1]);
         List<Tile> atkRange = new List<Tile>();
         Tile temp = new Tile();
         for (int x = xBounds[0]; x <= xBounds[1]; x++){

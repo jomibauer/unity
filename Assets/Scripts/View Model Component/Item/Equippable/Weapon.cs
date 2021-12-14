@@ -10,29 +10,17 @@ public class Weapon : Equippable
     public int[] attackRange;
     List<string[]> features;
     public string element;
-    public string type;
+    public WeaponTypes type;
     public string wpnName;
     void Start()
     {
         defaultSlot = EquipSlots.Weapon;
-        Equip("Iron_lance");
-    }
-    
-    public void Load(string line)
-    {
-        //this gets done with the weapon data argument version.  Keeping this incase i ever need to use strings again.
-        string[] _stats = line.Split(',');
-
-        stats[WeaponStatTypes.DAM] = Convert.ToInt32(_stats[1]);
-        stats[WeaponStatTypes.HIT] = Convert.ToInt32(_stats[2]);
-        stats[WeaponStatTypes.CRT] = Convert.ToInt32(_stats[3]);
-        stats[WeaponStatTypes.WGT] = Convert.ToInt32(_stats[4]);
-        stats[WeaponStatTypes.DUR] = Convert.ToInt32(_stats[5]);
+        //Equip("Iron_lance");
     }
 
     void Load(WeaponData weaponData)
     {
-        
+        this.wpnName = weaponData.wpnName;
         this.lvl = weaponData.level;
         this.type = weaponData.type;
         stats[WeaponStatTypes.DAM] = Convert.ToInt32(weaponData.damage);
@@ -45,10 +33,9 @@ public class Weapon : Equippable
         this.element = weaponData.element;
     }
 
-    public void Equip(string weapon)
+    public void Equip(WeaponData weapon)
     {
-        WeaponData _data = Resources.Load<WeaponData>("Items/Weapons/" + weapon);
-        this.Load(_data);
+        this.Load(weapon);
         //IDK if this is the best way.  An optimization might be to copy the pattern in Equippable.  Rather than adding and destroying the features every time, I could add only once, 
         // then activate and deactivate whenever necessary. this makes sense because it's likely we'll be switching up weapons on the same unit, so keeping the features on but deactivating
         // them could be more efficient.
@@ -67,7 +54,8 @@ public class Weapon : Equippable
         this.attackRange = null;
         this.lvl = null;
         this.element = null;
-        this.type = null;
+        //This could be a problem.  Technically, when clearing out a units weapon, I'm just equipping a sword.
+        this.type = 0;
         this.features = null;
 
         this.stats.Clear();

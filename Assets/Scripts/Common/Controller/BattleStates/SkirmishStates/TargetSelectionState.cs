@@ -27,7 +27,7 @@ public class TargetSelectionState : BattleState
     }
     protected override void OnConfirm(object sender, object arg)
     {
-        if (skirmish == null) { throw new Exception("SkirmishInit with null skirmish.  did you add a skirmish to the skirmish controller?"); }
+        if (skirmish == null) { throw new Exception("[TargetSelectionState]: SkirmishInit with null skirmish.  did you add a skirmish to the skirmish controller?"); }
         
         owner.ChangeState<SkirmishInitState>();
     }
@@ -63,7 +63,7 @@ public class TargetSelectionState : BattleState
                 selection = index;
                 skirmishController.InitNewSkirmish(unitController.GetSelectedUnit(), unitController.GetUnitAt(attackRange[index]), "MELEE");
                 skirmish = skirmishController.GetSkirmish();
-                Debug.Log($"Selecting Target: {skirmish.initiator} vs {skirmish.receiver}");
+                Debug.Log($"[TargetSelectionState.cs]: Selecting Target: {skirmish.initiator} vs {skirmish.receiver}");
                 TeleportSelectTile(attackRange[index]);
                 GetSkirmishPreview();
                 break; 

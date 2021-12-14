@@ -155,9 +155,25 @@ public class Unit : MonoBehaviour
         Destroy(this);
     }
 
+    public void EquipFirstWeapon()
+    {
+        foreach(var item in this.inventory.items)
+        {
+            if(item.type == "weapon")
+            {
+                if(CanUseWeapon(item.name))
+                {
+                    EquipWeapon(item.name);
+                    break;
+                }
+            }
+        }
+    }
+
     public void EquipWeapon(string weapon)
     {
-        this.weapon.Equip(weapon);
+        WeaponData _weapondata = Resources.Load<WeaponData>("Items/Weapons/" + weapon); 
+        this.weapon.Equip(_weapondata);
     }
 
     public int GetWeaponDamage()
@@ -176,6 +192,22 @@ public class Unit : MonoBehaviour
     public int GetWeaponWeight()
     {
         return weapon.stats[WeaponStatTypes.WGT];
+    }
+
+    public int[] GetWeaponRange()
+    {
+        return weapon.attackRange;
+    }
+
+    public bool CanUseWeapon(WeaponData weapon)
+    {
+        return unitStats.unit_class.weaponTypes.Contains(weapon.type);
+    }
+
+    public bool CanUseWeapon(string weapon)
+    {
+        WeaponData _weapon = Resources.Load<WeaponData>("Items/Weapons/" + weapon);
+        return CanUseWeapon(_weapon);
     }
 
     public List<InventoryItem> GetInventoryItems()

@@ -28,7 +28,7 @@ public class ExpBarPane : MonoBehaviour
         this.currentExp = unit.levelComponent.EXP;
         this.expBar.Load(currentExp);
         this.expText.text = currentExp.ToString();
-        Debug.LogWarning($"loaded: {currentExp}");
+        Debug.LogWarning($"[ExpBarPane.cs]: loaded: {currentExp}");
     }
 
     public void Clear()

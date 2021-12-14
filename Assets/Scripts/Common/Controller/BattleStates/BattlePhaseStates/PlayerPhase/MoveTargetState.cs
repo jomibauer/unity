@@ -72,7 +72,7 @@ public class MoveTargetState : BattleState
     protected override void OnInfo(object sender, object e)
     {
         Unit u = SelectUnitAt(gridCursor.GetTile());
-        Debug.Log(u.currentTile);
+        Debug.Log(u.weapon.wpnName);
     }
 
     protected override void OnPause(object sender, object e)
