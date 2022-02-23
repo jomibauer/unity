@@ -36,13 +36,18 @@ public struct NotificationBook
         public static string PAUSE = "PAUSE"; // listener: InputController, poster: base BattleState class
     #endregion
 
+    #region Objectives
+        public static string UNIT_DIED = "UNIT_DIED"; // listener: BaseVictoryConditions, poster: probably the unit died state
+        public static string UNIT_TALKED_TO = "UNIT_TALKED_TO"; // listener: TalkToUnitObjective & child classes, poster: units that get talked to.  NOTE: units posting this should append their name to the notification string.
+    #endregion
+
     #region Skirmish Play View
         public static string SKIRMISH_START = "SKIRMISH_START"; // listener: SkirmishPlayViewController, poster: SkirmishPlayState  
-        public static string HEALTH_CHANGE_FINISHED = "HEALTH_CHANGE_FINISHED";
-        public static string HIDE_SKIRMISH_PLAY_VIEW = "HIDE_SKIRMISH_PLAY_VIEW"; // listener: SkirmishPlayViewController, poster:
-        public static string LEFT_PANE_HEALTH_CHANGE = "LEFT_PANE_HEALTH_CHANGE"; // listener: SkirmishPlayViewController, poster:
+        public static string HEALTH_CHANGE_FINISHED = "HEALTH_CHANGE_FINISHED"; // listener: SkirmishPlayViewController, poster: SkirmishBattlerPane
+        public static string HIDE_SKIRMISH_PLAY_VIEW = "HIDE_SKIRMISH_PLAY_VIEW"; // listener: SkirmishPlayViewController, poster: FinishSkirmishState
+        public static string LEFT_PANE_HEALTH_CHANGE = "LEFT_PANE_HEALTH_CHANGE"; // listener: SkirmishPlayViewController, poster: SkirmishPlayState
         public static string PLAY_NEXT_ROUND = "PLAY_NEXT_ROUND"; // listener: SkirmishPlayState, poster: SkirmishPlayViewController
-        public static string RIGHT_PANE_HEALTH_CHANGE = "RIGHT_PANE_HEALTH_CHANGE"; // listener: SkirmishPlayViewController, poster:
+        public static string RIGHT_PANE_HEALTH_CHANGE = "RIGHT_PANE_HEALTH_CHANGE"; // listener: SkirmishPlayViewController, poster: SkirmishPlayState
         public static string SHOW_SKIRMISH_PLAY_VIEW = "SHOW_SKIRMISH_PLAY_VIEW"; // listener: SkirmishPlayViewController, poster: SkirmishInitState
         public static string SKIRMISH_SETUP_COMPLETE = "SKIMRISH_SETUP_COMPLETE"; //listener: SkirmishInitState, poster: SkirmishPlayViewController
     #endregion

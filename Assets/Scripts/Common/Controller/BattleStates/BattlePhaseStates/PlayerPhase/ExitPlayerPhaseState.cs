@@ -14,6 +14,7 @@ public class ExitPlayerPhaseState : BattleState
     private IEnumerator ResetUnitsAndChangeState()
     {
         yield return null;
+        turn.Clear();
         unitController.ResetUnitsOnFaction(Factions.player);
         owner.ChangeState<EnemyPhaseState>();
     }

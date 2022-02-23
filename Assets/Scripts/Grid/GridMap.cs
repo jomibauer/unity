@@ -47,13 +47,13 @@ public class GridMap : MonoBehaviour
 
     }
 
-    public void Load(LevelData levelData)
+    public void Load(Level level)
     {
-        this.grid = new int[levelData.length, levelData.height];
-        this.height = levelData.height;
-        this.length = levelData.length;
-        this.tileInfoMap = LoadTileInfoMap(levelData.name);
-        this.tileSet = levelData.tileSet;
+        this.grid = new int[level.length, level.height];
+        this.height = level.height;
+        this.length = level.length;
+        this.tileInfoMap = LoadTileInfoMap(level.name);
+        this.tileSet = level.tileSet;
     }
 
     internal float CalcPathScore(List<PathNode> path, MovementTypes movementType)

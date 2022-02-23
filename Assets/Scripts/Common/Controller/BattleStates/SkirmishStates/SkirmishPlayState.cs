@@ -32,13 +32,13 @@ public class SkirmishPlayState : BattleState
 
     private void OnPlayNextRound(object arg1, object arg2)
     {
-        Debug.Log("playing next round");
+        //Debug.Log("playing next round");
         PlaySkirmishNotify();
     }
 
     void PlaySkirmishNotify()
     {
-        Debug.Log($"Rounds: {rounds.Count}");
+        //Debug.Log($"Rounds: {rounds.Count}");
         if(rounds.Count == 0) 
         {
             Debug.Log("SkirmishFinished");
@@ -50,7 +50,7 @@ public class SkirmishPlayState : BattleState
         var damage = 0;
         if(round.hit)
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             damage += round.damage;
             if(round.crit)
             {
@@ -71,7 +71,7 @@ public class SkirmishPlayState : BattleState
         else
         {
             //miss
-            Debug.Log("miss");
+            //Debug.Log("miss");
             PlaySkirmishNotify();
         }
         //This is where we should Post a notification to the BattleAnimator with the turn data I think.
@@ -96,7 +96,7 @@ public class SkirmishPlayState : BattleState
         }
         else
         {
-            Debug.Log("ChangingState");
+           // Debug.Log("ChangingState");
             owner.ChangeState<AwardExpState>();
         }
     }
@@ -140,7 +140,7 @@ public class SkirmishPlayState : BattleState
                 
                 break;
             }
-            Debug.Log("Round");
+           // Debug.Log("Round");
             yield return new WaitForSecondsRealtime(1);
         }
         if (unitDied)

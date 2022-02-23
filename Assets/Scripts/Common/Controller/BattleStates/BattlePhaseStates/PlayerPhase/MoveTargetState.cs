@@ -40,28 +40,37 @@ public class MoveTargetState : BattleState
     protected override void OnConfirm(object sender, object e)
     {
         Unit selectedUnit = SelectUnitAt(gridCursor.GetTile());
-        if(selectedUnit.GetFaction() == Factions.player){
-        //***CONFUSING LOGIC ALERT***
-        //I think these checks ensure that a unit turn ends once they've moved and either acted or waited.  However, right now the unit and turn are keeping track of movements separately.
-        //I'm trying to set them together, but eventually it may make sense to do this in a single method in the unit controller. a little scary as is.
-            if(selectedUnit && !selectedUnit.hasUnitMoved)
+        if(selectedUnit != null)
+        //if we are able to select a unit, do this
+        {
+
+            if(selectedUnit.GetFaction() == Factions.player){
+            //***CONFUSING LOGIC ALERT***
+            //I think these checks ensure that a unit turn ends once they've moved and either acted or waited.  However, right now the unit and turn are keeping track of movements separately.
+            //I'm trying to set them together, but eventually it may make sense to do this in a single method in the unit controller. a little scary as is.
+                if(selectedUnit && !selectedUnit.hasUnitMoved)
+                {
+                    turn.Change(unitController.GetSelectedUnit());
+                    if(turn.hasUnitMoved)
+                    {
+                        owner.ChangeState<CommandSelectionState>();
+                    }
+                    else
+                    {
+                        owner.ChangeState<PathfindingState>();
+                    }
+                }
+            }
+            else
             {
-                turn.Change(unitController.GetSelectedUnit());
-                if(turn.hasUnitMoved)
-                {
-                    owner.ChangeState<CommandSelectionState>();
-                }
-                else
-                {
-                    owner.ChangeState<PathfindingState>();
-                }
+                owner.ChangeState<RangeCheckState>();
             }
         }
         else
+        // if we cant select a unit there, bring up the moveTargetMenu
         {
-            owner.ChangeState<RangeCheckState>();
+            owner.ChangeState<MapMenuState>();
         }
-        //Debug.Log(selectedUnit);
     }
 
     protected override void OnCancel(object sender, object e)
@@ -71,8 +80,10 @@ public class MoveTargetState : BattleState
 
     protected override void OnInfo(object sender, object e)
     {
-        Unit u = SelectUnitAt(gridCursor.GetTile());
-        Debug.Log(u.weapon.wpnName);
+        Unit u = GetUnitAt(gridCursor.GetTile());
+        Debug.Log(u.DebugInfo());
+        Debug.Log(turn.hasUnitMoved);
+        
     }
 
     protected override void OnPause(object sender, object e)
@@ -83,6 +94,7 @@ public class MoveTargetState : BattleState
     protected Unit SelectUnitAt(Tile tile)
     {
         Unit unit = unitController.SelectUnitAt(tile);
+        if(unit == null) { return null; }
         this.PostNotification(NotificationBook.SELECTED_UNIT, unitController.GetSelectedUnit());
         return unit;
     }

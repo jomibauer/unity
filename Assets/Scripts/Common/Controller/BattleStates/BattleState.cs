@@ -11,10 +11,11 @@ public abstract class BattleState : GameState
     public GridController gridController {get { return owner.gridController; }}
     public SkirmishController skirmishController {get { return owner.skirmishController;}}
     public CameraRig cameraRig {get { return owner.cameraRig; }}
-    public LevelData levelData {get { return owner.levelData; }}
+    public LevelController levelController {get { return owner.levelController; }}
     public GridCursor gridCursor {get { return owner.gridCursor; }}
     public Tile pos {get { return owner.pos; } set { owner.pos = value; }}
     public AbilityMenuPanelController abilityMenuPanelController { get { return owner.abilityMenuPanelController; }}
+    public MapMenuController mapMenuController { get { return owner.mapMenuController; }}
     public Turn turn { get { return owner.turn; }}
     //public List<Unit> units { get { return owner.units; }}
 

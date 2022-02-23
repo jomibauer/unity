@@ -108,7 +108,7 @@ public class UnitStats : MonoBehaviour
     #region Event Handlers
     protected virtual void OnLvlChangeNotification (object sender, object args)
     {
-        Debug.Log("levelDidChange");
+       // Debug.Log("levelDidChange");
         int oldValue = (int)args;
         int newValue = stats[StatTypes.LVL];
         for (int i = oldValue; i < newValue; ++i)
@@ -142,7 +142,7 @@ public class UnitStats : MonoBehaviour
             } else {levelUpRes[type] = 0;}
             stats.SetValue(type, value, false);
         }
-        Debug.Log("levelUp");
+        //Debug.Log("levelUp");
     }
 
     int GetSoftRng()

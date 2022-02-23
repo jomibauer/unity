@@ -9,12 +9,14 @@ public class SkirmishPlayViewController : MonoBehaviour
     [SerializeField] public SkirmishBattlerPane leftPane;
     [SerializeField] public ExpBarPane expPane;
     [SerializeField] public LevelUpPane levelUpPane;
+    [SerializeField] GameObject canvas;
     int remainingEXP;
 
     void Start()
     {
         rightPane.SetPosition("Hide", false);
         leftPane.SetPosition("Hide", false);
+        canvas.SetActive(false);
         //Add observers here for talking to the skirmish states.  
         this.AddObserver(OnShowSkirmishPlayView, NotificationBook.SHOW_SKIRMISH_PLAY_VIEW);
         this.AddObserver(OnHideSkirmishPlayView, NotificationBook.HIDE_SKIRMISH_PLAY_VIEW);
@@ -63,6 +65,7 @@ public class SkirmishPlayViewController : MonoBehaviour
 
     private IEnumerator ShowPanes()
     {
+        canvas.SetActive(true);
         Tweener t1 = leftPane.SetPosition("Show");
         Tweener t2 = rightPane.SetPosition("Show");
         t1.easingControl.equation = EasingEquations.EaseInOutBack;
@@ -82,16 +85,17 @@ public class SkirmishPlayViewController : MonoBehaviour
         // they're offscreen and the player cant see them.
         rightPane.Clear();
         leftPane.Clear();
+        canvas.SetActive(false);
     }
 
     private void OnLeftPaneHealthChange(object sender, object am)
     {
-        Debug.Log("[SkirmishPlayView.cs]: HealthChange");
+        //Debug.Log("[SkirmishPlayView.cs]: HealthChange");
         int amount = (am as int[])[0];
 
         if(amount <= 0)
         {
-            Debug.Log("[SkirmishPlayView.cs]: Damage");
+            //Debug.Log("[SkirmishPlayView.cs]: Damage");
             DamagePaneBy(leftPane, Mathf.Abs(amount));
         }
         else 
@@ -102,12 +106,12 @@ public class SkirmishPlayViewController : MonoBehaviour
 
     private void OnRightPaneHealthChange(object sender, object am)
     {
-        Debug.Log("[SkirmishPlayView.cs]: HealthChange");
+        //Debug.Log("[SkirmishPlayView.cs]: HealthChange");
         int amount = (am as int[])[0];
 
         if(amount <= 0)
         {
-            Debug.Log("[SkirmishPlayView.cs]: Damage");
+            //Debug.Log("[SkirmishPlayView.cs]: Damage");
             DamagePaneBy(rightPane, Mathf.Abs(amount));
         }
         else 

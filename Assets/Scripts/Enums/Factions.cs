@@ -4,8 +4,9 @@ using UnityEngine;
 
 public enum Factions
 {
-    player,
-    enemy,
-    friendly_other,
-    unfriendly_other
+    None, // 0
+    player, // 1
+    enemy, // 2
+    friendly_other, // 3
+    unfriendly_other // 4
 }

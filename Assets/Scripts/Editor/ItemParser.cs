@@ -67,6 +67,7 @@ public static class ItemParser
         string fileName = $"{filePath}{weapon.wpnName}.asset";
 
         AssetDatabase.CreateAsset(weapon, fileName);
+        EditorUtility.SetDirty(weapon);
     }
 
     
@@ -76,23 +77,32 @@ public static class ItemParser
         {
             AssetDatabase.CreateFolder("Assets/Resources/Items", "Inventories");
         }
-        string readPath = $"{Application.dataPath}/Resources/Data/inventories.csv";
-        string[] readText = File.ReadAllLines(readPath);
-        for (int i = 1; i<readText.Length; i++)
+        
+        foreach (var faction in EnumExtensions.GetValues<Factions>())
         {
-            ParseInventory(readText[i]);
+            if(faction == Factions.None) { continue; }
+            string readPath = $"{Application.dataPath}/Resources/Data/inventories/{faction}.csv";
+            Debug.Log(readPath);
+            string[] readText = File.ReadAllLines(readPath);
+            for (int i = 1; i<readText.Length; i++)
+            {
+                ParseInventory(readText[i], faction.ToString());
+            }
         }
+        
+        
     }
 
-    static void ParseInventory(string line)
+    static void ParseInventory(string line, string faction)
     {
         InventoryData inventory = ScriptableObject.CreateInstance<InventoryData>();
         inventory.Load(line);
 
-        string filePath = "Assets/Resources/Items/Inventories/";
+        string filePath = $"Assets/Resources/Items/Inventories/{faction}/";
         string fileName = $"{filePath}{inventory.inventoryOwner}.asset";
 
         AssetDatabase.CreateAsset(inventory, fileName);
+        EditorUtility.SetDirty(inventory);
     }
 
     static GameObject GetOrCreate (string itemType, string unitName)

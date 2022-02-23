@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class WeaponSelectionState : BaseAbilityMenuState
 {
+    public override void Disable()
+    {
+        base.Disable();
+        menuOptions = null;
+    }
     protected override void LoadMenu ()
     {
         Unit selectedUnit = unitController.GetSelectedUnit();
         List<InventoryItem> items = unitController.GetSelectedUnitInventory();
+        items.Print();
         if (menuOptions == null)
         {
             menuTitle = "Items";

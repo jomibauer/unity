@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,6 @@ public class LevelData : ScriptableObject
     public int height;
     public int length;
     public TileSet tileSet;
+    
 
-    //public Tilemap tilemap;
 }

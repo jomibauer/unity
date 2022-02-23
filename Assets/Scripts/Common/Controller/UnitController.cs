@@ -12,12 +12,14 @@ public class UnitController : MonoBehaviour
     public List<Unit> units;
     public Dictionary<Factions, List<Unit>> factionsUnitList;
     UnitMover unitMover;
+    UnitFactory unitFactory;
     Unit selectedUnit;
     public Tilemap tilemap;
     // Start is called before the first frame update
     void Start()
     {
-        units = new List<Unit>(FindObjectsOfType<Unit>());
+        unitFactory = FindObjectOfType<UnitFactory>();
+        units = new List<Unit>();
         unitMap = new Dictionary<Tile, Unit>();
         unitMover = GetComponentInChildren<UnitMover>();
         factionsUnitList = new Dictionary<Factions, List<Unit>>();
@@ -29,16 +31,37 @@ public class UnitController : MonoBehaviour
         this.AddObserver(OnUnitTileUpdate, NotificationBook.UNIT_TILE_UPDATE);
     }
 
-    
-
-    internal void InitUnits()
+    //init units using the new levelData unitmaps instead of static unit placements.
+    internal void InitUnits(Dictionary<Factions, Dictionary<Tile, Unit>> unitMaps)
     {
-        foreach(var unit in units)
+        
+        foreach(Factions faction in EnumExtensions.GetValues<Factions>())
+        {
+            if(faction == Factions.None) { continue; }
+            else if (unitMaps[faction] == null || unitMaps[faction].Count == 0) { continue; }
+
+            foreach(Tile tile in unitMaps[faction].Keys)
+            {
+                Debug.LogWarning($"[UnitController.InitUnits]:{unitMaps[faction][tile]}");
+                InitUnit(unitMaps[faction][tile], tile, faction);
+
+            }
+        }
+        /* foreach(var unit in units)
         {
             UpdateUnitLocation(unit);
             unitMap[unit.GetCurrentTile()] = unit;
             factionsUnitList[unit.GetFaction()].Add(unit);
-        }
+        } */
+    }
+
+    internal void InitUnit(Unit unit, Tile tile, Factions faction)
+    {
+        units.Add(unit);
+        unitMap[tile] = unit;
+        factionsUnitList[faction].Add(unit);
+        PlaceUnitAt(tile, unit);
+        unitFactory.InitUnit(unit);
     }
 
     internal void EquipSelectedUnit(string weapon)
@@ -49,6 +72,11 @@ public class UnitController : MonoBehaviour
     public List<Unit> GetUnits()
     {
         return units;
+    }
+
+    public List<Unit> GetUnitsInFaction(Factions type)
+    {
+        return factionsUnitList[type];
     }
 
     internal void ResetUnitsOnFaction(Factions faction)
@@ -129,6 +157,21 @@ public class UnitController : MonoBehaviour
 
         unit.currentTile = newTile;
     }
+
+    public void PlaceUnitAt(Tile tile, Unit unit)
+    {
+        try{
+            unit.currentTile = tile;
+            Vector3 worldPosition = tilemap.CellToWorld(new Vector3Int(tile.x, tile.y, 0));
+            unit.transform.position = new Vector3(worldPosition.x + 0.5f, worldPosition.y + 0.5f, 0);
+        }
+        catch(NullReferenceException e)
+        {
+            Debug.LogError($"Unit: {unit}, Tile: {tile}");
+            throw e;
+        }
+    }
+
     private void OnUnitTileUpdate(object sender, object u)
     {
         Unit unit = u as Unit;
@@ -180,7 +223,7 @@ public class UnitController : MonoBehaviour
     {
         List<InventoryItem> ls = selectedUnit.GetInventoryItems();
         ls.Print();
-        return selectedUnit.GetInventoryItems();
+        return ls;
     }
 
     public List<InventoryItem> GetUnitInventoryAt(Tile unitLocation)

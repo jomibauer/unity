@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ExperienceViewController : MonoBehaviour
@@ -68,7 +69,7 @@ public class ExperienceViewController : MonoBehaviour
 
             currentExp = expPane.IncrementBar();
             
-            // if we reached 100, there should've been a level up, so play reset the bar to 0 and play the level up.
+            // if we reached 100, there should've been a level up, so reset the bar to 0 and play the level up.
             if(currentExp == 100)
             {
                 expPane.ResetExp();
@@ -105,6 +106,7 @@ public class ExperienceViewController : MonoBehaviour
 
     private IEnumerator PlayLevelUp()
     {
+        unitStats.levelUpRes.Keys.ToList().ForEach(key => Debug.Log($"{key}: {unitStats.levelUpRes[key]}"));
         this.levelUpPane.ShowPane();
         //wait for it to show
         yield return new WaitForSeconds(1f);

@@ -34,4 +34,9 @@ public class InventoryItem
         }
 
     }
+
+    public override string ToString()
+    {
+        return name + ", " + displayName;
+    }
 }

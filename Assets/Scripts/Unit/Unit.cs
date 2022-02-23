@@ -5,10 +5,12 @@ using UnityEngine.Tilemaps;
 
 public class Unit : MonoBehaviour
 {
+    public string dataPath;
     [SerializeField] public string unit_name;
     public SpriteRenderer spriteRenderer;
     public Weapon weapon;
     public Inventory inventory;
+    public Behavior behavior;
     public Stats stats;
     public UnitStats unitStats;
     public LevelComponent levelComponent;
@@ -26,8 +28,8 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
-        UnitFactory factory = FindObjectOfType<UnitFactory>();
-        factory.InitUnit(this);
+        /* UnitFactory factory = FindObjectOfType<UnitFactory>();
+        factory.InitUnit(this); */
        
     }
     public void Move()
@@ -215,5 +217,12 @@ public class Unit : MonoBehaviour
         return inventory.GetItems();
     }
     #endregion
-
+    
+    public string DebugInfo()
+    {
+        string toLog = $"Name: {this.unit_name}\n";
+        toLog += $"hasMoved?: {this.hasUnitMoved} hasActed?:{this.hasUnitActed}\n";
+        toLog += $"location: {this.GetCurrentTile()}\n";
+        return toLog;
+    }
 }

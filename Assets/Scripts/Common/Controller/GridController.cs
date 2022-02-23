@@ -62,9 +62,9 @@ public class GridController : MonoBehaviour
         return false;
     }
     #region one off/setups
-    public void InitMapAndPathfinding(LevelData levelData)
+    public void InitMapAndPathfinding(Level level)
     {
-        gridMap.Load(levelData);
+        gridMap.Load(level);
         DrawGridMap();
         pathfinding.Init(gridMap);
     }

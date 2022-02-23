@@ -36,6 +36,7 @@ public class CommandSelectionState : BaseAbilityMenuState
                 Debug.Log("wait!");
                 turn.actor.hasUnitActed = true;
                 turn.actor.hasUnitMoved = true;
+                turn.lockMove = true;
                 owner.ChangeState<CompleteTurnState>();
                 break;
         }

@@ -10,8 +10,9 @@ public class BattleController : StateMachine
     public CameraRig cameraRig;
     public Tile pos;
     public GridCursor gridCursor;
-    public LevelData levelData;
+    public LevelController levelController;
     public AbilityMenuPanelController abilityMenuPanelController;
+    public MapMenuController mapMenuController;
     public Turn turn = new Turn();
     //commenting this out to see if we can get away with it.  A list of every unit is available in the unitController, so id prefer if we just use that list if possible.
     //public List<Unit> units;

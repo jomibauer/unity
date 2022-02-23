@@ -14,7 +14,6 @@ public class SkirmishController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //this.AddObserver(OnSkirmishStart, "SKIRMISH_START");
         skirmish = null;
     }
 

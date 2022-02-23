@@ -72,15 +72,33 @@ public class PathfindingState : BattleState
     protected override void OnConfirm(object sender, object e)
     {
         
+        
         gridController.ClearPathTilemapAndPathfinding();
         gridController.SetOriginTile(pathfindStart);
+        
 
-        unitController.InitUnitPath(path);
+        Tile t = (Tile)e + pos;
+        Debug.Log($"[PathfindingState.cs]: OnConfirm tile is : {t}");
+        // originally, confirming on the pathfindStart tile would get the player stuck in the Traversal state, so this fixes that for now.
+        // there may be a cleverer way to do this, but for some reason I need to set the turn bool stuff after we init the path.  Right now
+        // it means I am repeating a lil bit of code.
+        if(t == pathfindStart)
+        {
+            // initing the path with the tile the unit is standing on.
+            unitController.InitUnitPath(new List<PathNode>() { new PathNode(t.x, t.y) });
+            turn.hasUnitMoved = true;
+            turn.actor.hasUnitMoved = true;
+            owner.ChangeState<CommandSelectionState>();
+        }
+        else
+        {
 
-        turn.hasUnitMoved = true;
-        turn.actor.hasUnitMoved = true;
-
-        owner.ChangeState<TraversalState>();
+            unitController.InitUnitPath(path);
+            turn.hasUnitMoved = true;
+            turn.actor.hasUnitMoved = true;
+            owner.ChangeState<TraversalState>();
+        }
+        
     }
 
     protected override void OnCancel(object sender, object e)
