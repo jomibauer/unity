@@ -27,6 +27,7 @@ public class UnitFactory : MonoBehaviour
 
         unit.unitStats.LoadStats();
         unit.unit_name = unit.unitStats.unit_name;
+        unit.name = unit.unit_name; // unity object name in explorer
         unit.HP = unit.stats[StatTypes.MHP];
 
         unit.levelComponent = unit.GetComponent<LevelComponent>();

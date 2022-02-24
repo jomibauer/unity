@@ -41,7 +41,6 @@ public class TargetSelectionState : BattleState
     protected override void OnMove(object sender, object t)
     {
         Tile tile = (Tile)t;
-        //Debug.Log(tile);
         if (tile.x > 0 || tile.y < 0)
         {
             Next();
@@ -57,13 +56,11 @@ public class TargetSelectionState : BattleState
         for (int i = selection + 1; i < selection + attackRange.Count + 1; ++i)
         {
             int index = i % attackRange.Count;
-
             if(EnemyInTile(attackRange[index]))
             { 
                 selection = index;
                 skirmishController.InitNewSkirmish(unitController.GetSelectedUnit(), unitController.GetUnitAt(attackRange[index]), "MELEE");
                 skirmish = skirmishController.GetSkirmish();
-                Debug.Log($"[TargetSelectionState.cs]: Selecting Target: {skirmish.initiator} vs {skirmish.receiver}");
                 TeleportSelectTile(attackRange[index]);
                 GetSkirmishPreview();
                 break; 
@@ -73,9 +70,8 @@ public class TargetSelectionState : BattleState
 
     public void Previous ()
     {
-
-        for (int i = selection - 1 + attackRange.Count; i > selection + 1; --i)
-        {
+        for (int i = selection - 1 + attackRange.Count; i >= selection + 1; --i)
+        {   
             int index = i % attackRange.Count;
             if(EnemyInTile(attackRange[index]))
             { 

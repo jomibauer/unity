@@ -59,12 +59,12 @@ public class Skirmish
 
     public int DistanceBetween(Tile tileA, Tile tileB)
     {
-        return (tileA.x - tileB.x) + (tileA.y - tileB.y);
+        return Mathf.Abs((tileA.x - tileB.x) + (tileA.y - tileB.y));
     }
     public void CalcSkirmishStats(Unit initiator, Unit receiver)
     {
         
-        Debug.Log($"[Skirmish.cs]: skirmish range is {range}");
+        //Debug.Log($"[Skirmish.cs]: skirmish range is {range}");
         initiatorStats = new SkirmishStatSet
             (CalcHit(initiator, receiver)
             , CalcDam(initiator, receiver)
@@ -83,7 +83,7 @@ public class Skirmish
         }
         else
         {
-            Debug.Log("[Skirmish.cs]: reciever not in range!");
+            //Debug.Log("[Skirmish.cs]: reciever not in range!");
             receiverStats = new SkirmishStatSet
                 (0
                 , 0

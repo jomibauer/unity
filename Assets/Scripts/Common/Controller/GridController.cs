@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -185,6 +186,7 @@ public class GridController : MonoBehaviour
                 }
             }
         }
+        //I think putting these in the correct order would help here. Need to figure out the best way to order these. I think maybe ordering by y then by x should work?
         return atkRange;
     }
     
